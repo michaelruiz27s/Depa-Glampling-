@@ -60,5 +60,447 @@
         </div>
     </section>
 
+    <!-- Suites and Plans Section -->
+    <section id="suites" class="suites-section">
+        <div class="container">
+            <div class="section-header reveal-on-scroll">
+                <span class="section-subtitle">Alojamientos</span>
+                <h2>Suites & Planes Disponibles</h2>
+                <div class="divider"></div>
+                <p>Elige el alojamiento ideal para tu estadía. Contamos con opciones para parejas, grupos familiares y planes por horas.</p>
+            </div>
+
+            <div class="suites-grid">
+                <!-- Suite 1: Casita Mágica -->
+                <div class="suite-card reveal-on-scroll">
+                    <div class="suite-img-wrapper">
+                        <img src="assets/plan-relax-spa.webp" alt="Casita Mágica" class="suite-img" loading="lazy" onclick="openLightbox('assets/plan-relax-spa.webp')">
+                        <div class="suite-tag"><i class="fa-regular fa-clock"></i> Planes por Horas</div>
+                        <div class="suite-zoom-hint" onclick="openLightbox('assets/plan-relax-spa.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver Folleto</div>
+                    </div>
+                    <div class="suite-details">
+                        <div class="suite-header-info">
+                            <h3>Casita Mágica</h3>
+                            <span class="suite-price">Desde $200,000 COP</span>
+                        </div>
+                        <p class="suite-desc">Un rincón mágico perfecto para desconectarte por unas horas. Elige entre nuestros planes Relax, Spa o Full.</p>
+                        
+                        <div class="plan-suboptions">
+                            <div class="plan-suboption"><strong>Plan Relax (4h):</strong> $200,000 COP</div>
+                            <div class="plan-suboption"><strong>Plan Spa (5h):</strong> $359,900 COP</div>
+                            <div class="plan-suboption"><strong>Plan Full (5h):</strong> $399,900 COP</div>
+                        </div>
+
+                        <div class="suite-schedule">
+                            <span><i class="fa-regular fa-clock"></i> Bloques de 4 o 5 Horas</span>
+                            <span><i class="fa-solid fa-moon"></i> Solo por horas / No incluye noche</span>
+                        </div>
+
+                        <ul class="suite-features">
+                            <li><i class="fa-solid fa-vector-square"></i> 30 m² de Privacidad</li>
+                            <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
+                            <li><i class="fa-solid fa-wifi"></i> Wifi  & Mini Sala (Sofá)</li>
+                            <li><i class="fa-solid fa-bell"></i> Servicio a la Habitación</li>
+                        </ul>
+                        <div class="suite-actions">
+                            <a href="#reservas" class="btn-suite-reserve" onclick="selectSuite('Casita Mágica')">Seleccionar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suite 2: Suite Orquídeas -->
+                <div class="suite-card reveal-on-scroll">
+                    <div class="suite-img-wrapper">
+                        <img src="assets/suite-orquideas.webp" alt="Suite Orquídeas" class="suite-img" loading="lazy" onclick="openLightbox('assets/suite-orquideas.webp')">
+                        <div class="suite-tag"><i class="fa-solid fa-users"></i> Hasta 4 Personas</div>
+                        <div class="suite-zoom-hint" onclick="openLightbox('assets/suite-orquideas.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver Folleto</div>
+                    </div>
+                    <div class="suite-details">
+                        <div class="suite-header-info">
+                            <h3>Suite Orquídeas</h3>
+                            <span class="suite-price">Desde $590,000 COP</span>
+                        </div>
+                        <p class="suite-desc">Amplio y lujoso glamping con dos niveles de mallas catamarán y capacidad para acomodar hasta 4 personas.</p>
+                        
+                        <div class="pricing-tabs">
+                            <div class="pricing-col">
+                                <span class="pricing-title">Lunes a Jueves:</span>
+                                <div>2 Pers: $590k | 3 Pers: $710k | 4 Pers: $810k</div>
+                            </div>
+                            <div class="pricing-col">
+                                <span class="pricing-title">FindeS y Festivos:</span>
+                                <div>2 Pers: $650k | 3 Pers: $770k | 4 Pers: $880k</div>
+                            </div>
+                        </div>
+
+                        <div class="suite-schedule">
+                            <span><i class="fa-regular fa-clock"></i> Check-in: 4:00 PM</span>
+                            <span><i class="fa-regular fa-clock"></i> Check-out: 2:00 PM</span>
+                        </div>
+
+                        <ul class="suite-features">
+                            <li><i class="fa-solid fa-vector-square"></i> 60 m² de Privacidad</li>
+                            <li><i class="fa-solid fa-bed"></i> 2 Camas dobles (Máx 4 pers)</li>
+                            <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
+                            <li><i class="fa-solid fa-square"></i> 2 Mallas de Catamarán</li>
+                        </ul>
+                        <div class="suite-actions">
+                            <a href="#reservas" class="btn-suite-reserve" onclick="selectSuite('Suite Orquídeas')">Seleccionar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suite 3: Suite Aves del Paraíso -->
+                <div class="suite-card reveal-on-scroll">
+                    <div class="suite-img-wrapper">
+                        <img src="assets/suite-aves-del-paraiso.webp" alt="Suite Aves del Paraíso" class="suite-img" loading="lazy" onclick="openLightbox('assets/suite-aves-del-paraiso.webp')">
+                        <div class="suite-tag"><i class="fa-solid fa-heart"></i> Exclusivo Parejas</div>
+                        <div class="suite-zoom-hint" onclick="openLightbox('assets/suite-aves-del-paraiso.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver Folleto</div>
+                    </div>
+                    <div class="suite-details">
+                        <div class="suite-header-info">
+                            <h3>Suite Aves del Paraíso</h3>
+                            <span class="suite-price">Desde $420,000 COP</span>
+                        </div>
+                        <p class="suite-desc">Una romántica suite ideal para parejas, rodeada de abundante vegetación y la calma típica del bosque de Dapa.</p>
+                        
+                        <div class="pricing-tabs">
+                            <div class="pricing-col">
+                                <span class="pricing-title">Lunes a Jueves:</span>
+                                <div>$420,000 COP (2 personas)</div>
+                            </div>
+                            <div class="pricing-col">
+                                <span class="pricing-title">FindeS y Festivos:</span>
+                                <div>$490,000 COP (2 personas)</div>
+                            </div>
+                        </div>
+
+                        <div class="suite-schedule">
+                            <span><i class="fa-regular fa-clock"></i> Check-in: 7:00 PM</span>
+                            <span><i class="fa-regular fa-clock"></i> Check-out: 5:00 PM (Día sig.)</span>
+                        </div>
+
+                        <ul class="suite-features">
+                            <li><i class="fa-solid fa-vector-square"></i> 20 m² de Privacidad</li>
+                            <li><i class="fa-solid fa-bed"></i> Cama doble para 2 personas </li>
+                            <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
+                            <li><i class="fa-solid fa-fan"></i> Ventilador & Wifi gratis</li>
+                        </ul>
+                        <div class="suite-actions">
+                            <a href="#reservas" class="btn-suite-reserve" onclick="selectSuite('Suite Aves del Paraíso')">Seleccionar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suite 4: Suite Margaritas -->
+                <div class="suite-card reveal-on-scroll">
+                    <div class="suite-img-wrapper">
+                        <img src="assets/suite-margaritas.webp" alt="Suite Margaritas" class="suite-img" loading="lazy" onclick="openLightbox('assets/suite-margaritas.webp')">
+                        <div class="suite-tag"><i class="fa-solid fa-heart"></i> Exclusivo Parejas</div>
+                        <div class="suite-zoom-hint" onclick="openLightbox('assets/suite-margaritas.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver Folleto</div>
+                    </div>
+                    <div class="suite-details">
+                        <div class="suite-header-info">
+                            <h3>Suite Margaritas</h3>
+                            <span class="suite-price">Desde $420,000 COP</span>
+                        </div>
+                        <p class="suite-desc">Habitación idéntica a Aves del Paraíso. Un refugio privado con jacuzzi de agua caliente e inigualable confort para dos.</p>
+                        
+                        <div class="pricing-tabs">
+                            <div class="pricing-col">
+                                <span class="pricing-title">Lunes a Jueves:</span>
+                                <div>$420,000 COP (2 personas)</div>
+                            </div>
+                            <div class="pricing-col">
+                                <span class="pricing-title">FindeS y Festivos:</span>
+                                <div>$490,000 COP (2 personas)</div>
+                            </div>
+                        </div>
+
+                        <div class="suite-schedule">
+                            <span><i class="fa-regular fa-clock"></i> Check-in: 7:00 PM</span>
+                            <span><i class="fa-regular fa-clock"></i> Check-out: 5:00 PM (Día sig.)</span>
+                        </div>
+
+                        <ul class="suite-features">
+                            <li><i class="fa-solid fa-vector-square"></i> 20 m² de Privacidad</li>
+                            <li><i class="fa-solid fa-bed"></i> Cama doble para 2 personas </li>
+                            <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
+                            <li><i class="fa-solid fa-fan"></i> Ventilador & Wifi gratis</li>
+                        </ul>
+                        <div class="suite-actions">
+                            <a href="#reservas" class="btn-suite-reserve" onclick="selectSuite('Suite Margaritas')">Seleccionar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suite 5: Suite Eugenias -->
+                <div class="suite-card reveal-on-scroll">
+                    <div class="suite-img-wrapper">
+                        <img src="assets/suite-eugenias.webp" alt="Suite Eugenias" class="suite-img" loading="lazy" onclick="openLightbox('assets/suite-eugenias.webp')">
+                        <div class="suite-tag"><i class="fa-solid fa-people-roof"></i> Familiar (Hasta 8 pers.)</div>
+                        <div class="suite-zoom-hint" onclick="openLightbox('assets/suite-eugenias.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver Folleto</div>
+                    </div>
+                    <div class="suite-details">
+                        <div class="suite-header-info">
+                            <h3>Suite Eugenias</h3>
+                            <span class="suite-price">Desde $590,000 COP</span>
+                        </div>
+                        <p class="suite-desc">Nuestra suite más grande y lujosa. Cuenta con piscina privada, chimenea, malla catamarán y espacio para albergar hasta 8 personas.</p>
+                        
+                        <div class="pricing-tabs">
+                            <div class="pricing-col">
+                                <span class="pricing-title">Lunes a Jueves:</span>
+                                <div>2 Pers: $590k | 3 Pers: $710k | 4 Pers: $810k (+ Extra)</div>
+                            </div>
+                            <div class="pricing-col">
+                                <span class="pricing-title">FindeS y Festivos:</span>
+                                <div>2 Pers: $650k | 3 Pers: $770k | 4 Pers: $880k (+ Extra)</div>
+                            </div>
+                        </div>
+
+                        <div class="suite-schedule">
+                            <span><i class="fa-regular fa-clock"></i> Check-in: 5:00 PM</span>
+                            <span><i class="fa-regular fa-clock"></i> Check-out: 3:00 PM</span>
+                        </div>
+
+                        <ul class="suite-features">
+                            <li><i class="fa-solid fa-vector-square"></i> 60 m² de Privacidad</li>
+                            <li><i class="fa-solid fa-swimming-pool"></i> Piscina Privada & Chimenea </li>
+                            <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
+                            <li><i class="fa-solid fa-users"></i> Capacidad Máxima: 8 personas</li>
+                        </ul>
+                        <div class="suite-actions">
+                            <a href="#reservas" class="btn-suite-reserve" onclick="selectSuite('Suite Eugenias')">Seleccionar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suite 6: Pasadía -->
+                <div class="suite-card reveal-on-scroll">
+                    <div class="suite-img-wrapper">
+                        <img src="assets/pasadia.webp" alt="Pasadía" class="suite-img" loading="lazy" onclick="openLightbox('assets/pasadia.webp')">
+                        <div class="suite-tag"><i class="fa-solid fa-sun"></i> Plan Solo Día</div>
+                        <div class="suite-zoom-hint" onclick="openLightbox('assets/pasadia.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver Folleto</div>
+                    </div>
+                    <div class="suite-details">
+                        <div class="suite-header-info">
+                            <h3>Pasadía</h3>
+                            <span class="suite-price">Desde $320,000 COP</span>
+                        </div>
+                        <p class="suite-desc">Disfruta de las instalaciones durante el día. Puedes elegir para tu estadía entre Suite Paraíso y Suite Margaritas.</p>
+                        
+                        <div class="pricing-tabs">
+                            <div class="pricing-col">
+                                <span class="pricing-title">Lunes a Viernes y Dom:</span>
+                                <div>$320,000 COP (2 personas)</div>
+                            </div>
+                            <div class="pricing-col">
+                                <span class="pricing-title">Solo Sábados:</span>
+                                <div>$360,000 COP (2 personas)</div>
+                            </div>
+                        </div>
+
+                        <div class="suite-schedule">
+                            <span><i class="fa-regular fa-clock"></i> Check-in: 10:00 AM</span>
+                            <span><i class="fa-regular fa-clock"></i> Check-out: 5:00 PM (Mismo día)</span>
+                        </div>
+
+                        <ul class="suite-features">
+                            <li><i class="fa-solid fa-utensils"></i> Incluye Almuerzo & Bebida Caliente</li>
+                            <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
+                            <li><i class="fa-solid fa-wifi"></i> Wifi  & Ventilador</li>
+                            <li><i class="fa-solid fa-p"></i> Parqueadero Privado</li>
+                        </ul>
+                        <div class="suite-actions">
+                            <a href="#reservas" class="btn-suite-reserve" onclick="selectSuite('Pasadía')">Seleccionar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Romantic Decorations Section -->
+    <section id="decoraciones" class="decorations-section">
+        <div class="container">
+            <div class="section-header reveal-on-scroll">
+                <span class="section-subtitle">Servicios Adicionales</span>
+                <h2>Decoraciones Especiales</h2>
+                <div class="divider"></div>
+                <p>Sorprende a tu pareja celebrando aniversarios, cumpleaños o momentos especiales con nuestros románticos sets de decoración.</p>
+            </div>
+
+            <div class="decorations-grid">
+                <!-- Decoración 1: Elios -->
+                <div class="decor-card reveal-on-scroll">
+                    <div class="decor-img-wrapper">
+                        <img src="assets/decoracion-elios.webp" alt="Decoración Elios" class="decor-img" loading="lazy" onclick="openLightbox('assets/decoracion-elios.webp')">
+                        <div class="decor-zoom-hint" onclick="openLightbox('assets/decoracion-elios.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
+                    </div>
+                    <div class="decor-details">
+                        <h4>Decoración Elios</h4>
+                        <span class="decor-price">$180,000 COP</span>
+                        <p class="decor-room-avail"><i class="fa-solid fa-circle-info"></i> Disponible en Suite Orquídeas, Eugenias, Margaritas y Aves del Paraíso.</p>
+                        <ul class="decor-bullets">
+                            <li>39 Globos y 8 Globos en Helio</li>
+                            <li>Pétalos de rosa decorativos</li>
+                            <li>3 Pizarras de mensajes personalizadas</li>
+                            <li>Opciones: Con Vino ($267k) | Con Champaña ($321k)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Decoración 2: Estándar Casita Mágica -->
+                <div class="decor-card reveal-on-scroll">
+                    <div class="decor-img-wrapper">
+                        <img src="assets/decoracion-estandar-casita.webp" alt="Decoración Estándar Casita" class="decor-img" loading="lazy" onclick="openLightbox('assets/decoracion-estandar-casita.webp')">
+                        <div class="decor-zoom-hint" onclick="openLightbox('assets/decoracion-estandar-casita.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
+                    </div>
+                    <div class="decor-details">
+                        <h4>Estándar (Casita Mágica)</h4>
+                        <span class="decor-price">$59,000 COP</span>
+                        <p class="decor-room-avail"><i class="fa-solid fa-circle-info"></i> Diseñado para Casita Mágica.</p>
+                        <ul class="decor-bullets">
+                            <li>13 Globos y Pétalos</li>
+                            <li>1 Pizarra de bienvenida</li>
+                            <li>Letrero con motivo especial</li>
+                            <li>Opciones: Con Vino ($146k) | Con Champaña ($200k)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Decoración 3: Estándar Margaritas / Paraíso -->
+                <div class="decor-card reveal-on-scroll">
+                    <div class="decor-img-wrapper">
+                        <img src="assets/decoracion-estandar-suites.webp" alt="Decoración Estándar Suites" class="decor-img" loading="lazy" onclick="openLightbox('assets/decoracion-estandar-suites.webp')">
+                        <div class="decor-zoom-hint" onclick="openLightbox('assets/decoracion-estandar-suites.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
+                    </div>
+                    <div class="decor-details">
+                        <h4>Estándar (Margaritas / Paraíso)</h4>
+                        <span class="decor-price">$59,000 COP</span>
+                        <p class="decor-room-avail"><i class="fa-solid fa-circle-info"></i> Disponible en Margaritas y Aves del Paraíso.</p>
+                        <ul class="decor-bullets">
+                            <li>13 Globos y Letrero</li>
+                            <li>Pétalos de rosa en la suite</li>
+                            <li>Mini pizarra de mensajes</li>
+                            <li>Opciones: Con Vino ($146k) | Con Champaña ($200k)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Decoración 4: Pizarra Eugenias -->
+                <div class="decor-card reveal-on-scroll">
+                    <div class="decor-img-wrapper">
+                        <img src="assets/decoracion-pizarra.webp" alt="Decoración Pizarra Eugenias" class="decor-img" loading="lazy" onclick="openLightbox('assets/decoracion-pizarra.webp')">
+                        <div class="decor-zoom-hint" onclick="openLightbox('assets/decoracion-pizarra.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
+                    </div>
+                    <div class="decor-details">
+                        <h4>Decoración Pizarra</h4>
+                        <span class="decor-price">$70,000 COP</span>
+                        <p class="decor-room-avail"><i class="fa-solid fa-circle-info"></i> Diseñado para Suite Eugenias.</p>
+                        <ul class="decor-bullets">
+                            <li>24 Globos de color</li>
+                            <li>Letrero del motivo especial</li>
+                            <li>2 Pizarras de mensajes escritas</li>
+                            <li>Opciones: Con Vino ($157k) | Con Champaña ($211k)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional decorations notice -->
+            <div class="decor-extra-info reveal-on-scroll">
+                <div class="decor-extra-header">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div>
+                        <h4>Tarifas especiales para Suite Margaritas y Aves del Paraíso</h4>
+                        <p>Por dimensiones y distribución de estas suites, los siguientes arreglos tienen una tarifa ajustada:</p>
+                    </div>
+                </div>
+                <div class="decor-chips-grid">
+                    <div class="decor-chip">
+                        <span class="decor-chip-name">Pétalos</span>
+                        <span class="decor-chip-price">$85,000 COP</span>
+                    </div>
+                    <div class="decor-chip">
+                        <span class="decor-chip-name">Globos</span>
+                        <span class="decor-chip-price">$125,000 COP</span>
+                    </div>
+                    <div class="decor-chip">
+                        <span class="decor-chip-name">Velas</span>
+                        <span class="decor-chip-price">$136,000 COP</span>
+                    </div>
+                    <div class="decor-chip">
+                        <span class="decor-chip-name">Elios</span>
+                        <span class="decor-chip-price">$140,000 COP</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spa Section -->
+    <section id="spa" class="spa-section">
+        <div class="container">
+            <div class="spa-wrapper">
+                <div class="spa-image-side reveal-on-scroll">
+                    <img src="assets/spa-services.webp" alt="Servicios de Spa Dapa Glamping" class="spa-promo-img" loading="lazy" onclick="openLightbox('assets/spa-services.webp')">
+                    <div class="spa-zoom-overlay" onclick="openLightbox('assets/spa-services.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver Folleto Spa</div>
+                </div>
+                <div class="spa-text-side reveal-on-scroll">
+                    <span class="section-subtitle">Salud & Relax</span>
+                    <h2>Servicio de Spa en la Suite</h2>
+                    <div class="divider-left"></div>
+                    <p class="spa-tagline">¿Necesitas un respiro del día a día?</p>
+                    <p>Vive un momento de total relajación sin salir de tu habitación. Todos nuestros tratamientos de spa se realizan directamente en la suite de tu elección para máxima privacidad y descanso.</p>
+                    
+                    <div class="spa-plans">
+                        <div class="spa-plan-item">
+                            <div class="spa-plan-header">
+                                <h5>Spa Relajante (45 min)</h5>
+                                <span class="spa-plan-price">Desde $95,000 COP</span>
+                            </div>
+                            <p>Aceites naturales, aromaterapia, musicoterapia y té relajante. <br>
+                            <strong>1 persona:</strong> $95,000 COP | <strong>2 personas:</strong> $165,000 COP</p>
+                        </div>
+                        <div class="spa-plan-item">
+                            <div class="spa-plan-header">
+                                <h5>Spa Relajante con Piedras (45 min)</h5>
+                                <span class="spa-plan-price">Desde $140,000 COP</span>
+                            </div>
+                            <p>Piedras volcánicas, aromaterapia, musicoterapia y shot de crema de whisky. <br>
+                            <strong>1 persona:</strong> $140,000 COP | <strong>2 personas:</strong> $240,000 COP</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Included Meals Section -->
+    <section id="alimentacion" class="meals-section">
+        <div class="container">
+            <div class="section-header reveal-on-scroll">
+                <span class="section-subtitle">Gastronomía</span>
+                <h2>Alimentación Incluida en tu Suite</h2>
+                <div class="divider"></div>
+                <p>Todas nuestras estadías incluyen alimentación de cortesía (desayuno y almuerzo o cena) servida directamente en tu suite de forma gratuita. Revisa las opciones disponibles en el folleto oficial a continuación:</p>
+            </div>
+            
+            <div class="meals-single-container">
+                <div class="meals-image-side-centered reveal-on-scroll">
+                    <img src="assets/included-menu.webp" alt="Menú de Comidas Incluidas Dapa Glamping" class="meals-promo-img-large" loading="lazy" onclick="openLightbox('assets/included-menu.webp')">
+                    <div class="meals-zoom-overlay" onclick="openLightbox('assets/included-menu.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar Folleto Menú</div>
+                </div>
+                
+                <div class="menu-notice-box-centered reveal-on-scroll">
+                    <p><i class="fa-solid fa-circle-exclamation"></i> <strong>Nota:</strong> Este menú de comidas está 100% incluido en el costo de hospedaje de las suites. El menú de licores y platos adicionales a la carta funciona como servicio de restaurante extra con costo adicional.</p>
+                    <a href="https://drive.google.com/file/d/1ybp4EkQd3t0XZckqy0Z0T_BlsMS5bZtm/view" target="_blank" rel="noopener" class="btn-primary-small"><i class="fa-solid fa-book-open"></i> Ver Menú a la Carta (Extra)</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>
