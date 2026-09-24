@@ -143,4 +143,258 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // --- Lightbox Modal (Flyer Viewer) con navegación de Carrusel, Zoom & Paneo ---
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxDl = document.getElementById('lightbox-dl');
+    const lightboxViewport = document.getElementById('lightbox-viewport');
+    const zoomInBtn = document.getElementById('zoom-in-btn');
+    const zoomOutBtn = document.getElementById('zoom-out-btn');
+    const zoomResetBtn = document.getElementById('zoom-reset-btn');
+    const zoomLevelText = document.getElementById('zoom-level-text');
+
+    let currentZoom = 1;
+    let panX = 0;
+    let panY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    function applyZoomTransform() {
+        if (!lightboxImg) return;
+        lightboxImg.style.transform = `translate(${panX}px, ${panY}px) scale(${currentZoom})`;
+        if (zoomLevelText) {
+            zoomLevelText.textContent = `${Math.round(currentZoom * 100)}%`;
+        }
+        if (lightboxViewport) {
+            if (currentZoom > 1) {
+                lightboxViewport.style.cursor = isDragging ? 'grabbing' : 'grab';
+            } else {
+                lightboxViewport.style.cursor = 'zoom-in';
+            }
+        }
+    }
+
+    function resetZoom() {
+        currentZoom = 1;
+        panX = 0;
+        panY = 0;
+        applyZoomTransform();
+    }
+
+    function zoomIn() {
+        if (currentZoom < 3.5) {
+            currentZoom = Math.min(3.5, Math.round((currentZoom + 0.25) * 100) / 100);
+            applyZoomTransform();
+        }
+    }
+
+    function zoomOut() {
+        if (currentZoom > 0.6) {
+            currentZoom = Math.max(0.5, Math.round((currentZoom - 0.25) * 100) / 100);
+            if (currentZoom <= 1) {
+                panX = 0;
+                panY = 0;
+            }
+            applyZoomTransform();
+        }
+    }
+
+    if (zoomInBtn) zoomInBtn.addEventListener('click', (e) => { e.stopPropagation(); zoomIn(); });
+    if (zoomOutBtn) zoomOutBtn.addEventListener('click', (e) => { e.stopPropagation(); zoomOut(); });
+    if (zoomResetBtn) zoomResetBtn.addEventListener('click', (e) => { e.stopPropagation(); resetZoom(); });
+
+    // Zoom con rueda del ratón en la imagen
+    if (lightboxViewport) {
+        lightboxViewport.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            if (e.deltaY < 0) {
+                zoomIn();
+            } else {
+                zoomOut();
+            }
+        }, { passive: false });
+
+        // Toggle zoom al hacer clic/doble clic
+        lightboxViewport.addEventListener('click', (e) => {
+            if (e.target === lightboxImg) {
+                if (currentZoom === 1) {
+                    currentZoom = 1.75;
+                    applyZoomTransform();
+                } else if (currentZoom > 1.75) {
+                    resetZoom();
+                } else {
+                    zoomIn();
+                }
+            }
+        });
+
+        // Arrastrar imagen con mouse (Pan)
+        lightboxViewport.addEventListener('mousedown', (e) => {
+            if (currentZoom <= 1) return;
+            isDragging = true;
+            startX = e.clientX - panX;
+            startY = e.clientY - panY;
+            lightboxViewport.classList.add('is-dragging');
+            e.preventDefault();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            panX = e.clientX - startX;
+            panY = e.clientY - startY;
+            applyZoomTransform();
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                if (lightboxViewport) lightboxViewport.classList.remove('is-dragging');
+                applyZoomTransform();
+            }
+        });
+
+        // Gestos táctiles para móviles (Touch pinch & drag)
+        let initialTouchDist = 0;
+        let initialZoom = 1;
+        lightboxViewport.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1 && currentZoom > 1) {
+                isDragging = true;
+                startX = e.touches[0].clientX - panX;
+                startY = e.touches[0].clientY - panY;
+            } else if (e.touches.length === 2) {
+                isDragging = false;
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                initialTouchDist = Math.hypot(dx, dy);
+                initialZoom = currentZoom;
+            }
+        }, { passive: true });
+
+        lightboxViewport.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 1 && isDragging && currentZoom > 1) {
+                panX = e.touches[0].clientX - startX;
+                panY = e.touches[0].clientY - startY;
+                applyZoomTransform();
+            } else if (e.touches.length === 2 && initialTouchDist > 0) {
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                const currentDist = Math.hypot(dx, dy);
+                const factor = currentDist / initialTouchDist;
+                currentZoom = Math.min(3.5, Math.max(0.8, initialZoom * factor));
+                applyZoomTransform();
+            }
+        }, { passive: true });
+
+        lightboxViewport.addEventListener('touchend', () => {
+            isDragging = false;
+            initialTouchDist = 0;
+            if (currentZoom < 1) resetZoom();
+        });
+    }
+
+    const galleryImages = [
+        'assets/plan-relax-spa.webp',
+        'assets/suite-orquideas.webp',
+        'assets/suite-aves-del-paraiso.webp',
+        'assets/suite-margaritas.webp',
+        'assets/suite-eugenias.webp',
+        'assets/pasadia.webp',
+        'assets/decoracion-elios.webp',
+        'assets/decoracion-estandar-casita.webp',
+        'assets/decoracion-estandar-suites.webp',
+        'assets/decoracion-pizarra.webp',
+        'assets/spa-services.webp',
+        'assets/included-menu.webp'
+    ];
+    let currentGalleryIndex = 0;
+
+    window.openLightbox = (imageSrc) => {
+        if (!imageSrc) return;
+        resetZoom();
+
+        // Normalizar filename (soporta guiones y guiones bajos indistintamente)
+        const cleanBase = imageSrc.split('/').pop().replace(/[-_]/g, '').toLowerCase();
+        const matchedIndex = galleryImages.findIndex(img => {
+            const imgBase = img.split('/').pop().replace(/[-_]/g, '').toLowerCase();
+            return imgBase === cleanBase;
+        });
+
+        if (matchedIndex !== -1) {
+            currentGalleryIndex = matchedIndex;
+            updateLightboxImage();
+        } else {
+            // Si es una ruta directa no indexada
+            lightboxImg.src = imageSrc;
+            if (lightboxDl) lightboxDl.href = imageSrc;
+            lightboxCaption.textContent = "Visualización de Imagen";
+        }
+
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Deshabilitar scroll de página
+    };
+
+    window.closeLightbox = () => {
+        resetZoom();
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Habilitar scroll de página
+    };
+
+    window.prevLightbox = (e) => {
+        if (e) e.stopPropagation();
+        resetZoom();
+        currentGalleryIndex = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
+        updateLightboxImage();
+    };
+
+    window.nextLightbox = (e) => {
+        if (e) e.stopPropagation();
+        resetZoom();
+        currentGalleryIndex = (currentGalleryIndex + 1) % galleryImages.length;
+        updateLightboxImage();
+    };
+
+    function updateLightboxImage() {
+        const src = galleryImages[currentGalleryIndex];
+        lightboxImg.src = src;
+        if (lightboxDl) lightboxDl.href = src;
+        
+        let caption = "Folleto Promocional";
+        if (src.includes('plan-relax-spa')) caption = "Folleto: Casita Mágica (Planes Relax y Spa)";
+        else if (src.includes('suite-orquideas')) caption = "Folleto: Tarifas Suite Orquídeas";
+        else if (src.includes('suite-aves-del-paraiso')) caption = "Folleto: Tarifas Suite Aves del Paraíso";
+        else if (src.includes('suite-margaritas')) caption = "Folleto: Tarifas Suite Margaritas";
+        else if (src.includes('suite-eugenias')) caption = "Folleto: Tarifas Suite Eugenias";
+        else if (src.includes('pasadia')) caption = "Folleto: Plan Pasadía";
+        else if (src.includes('decoracion-elios')) caption = "Detalles: Decoración Elios";
+        else if (src.includes('decoracion-estandar-casita')) caption = "Detalles: Decoración Estándar para Casita Mágica";
+        else if (src.includes('decoracion-estandar-suites')) caption = "Detalles: Decoración Estándar para Margaritas y Aves del Paraíso";
+        else if (src.includes('decoracion-pizarra')) caption = "Detalles: Decoración Pizarra para Suite Eugenias";
+        else if (src.includes('spa-services')) caption = "Folleto: Servicios de Spa";
+        else if (src.includes('included-menu')) caption = "Detalles: Alimentación Incluida (Desayunos y Almuerzos/Cenas)";
+        
+        lightboxCaption.textContent = caption;
+    }
+
+    // Navegación con teclado para Lightbox (+ y - para zoom)
+    document.addEventListener('keydown', (e) => {
+        if (lightbox && lightbox.style.display === 'flex') {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            } else if (e.key === 'ArrowLeft') {
+                prevLightbox();
+            } else if (e.key === 'ArrowRight') {
+                nextLightbox();
+            } else if (e.key === '+' || e.key === '=') {
+                zoomIn();
+            } else if (e.key === '-') {
+                zoomOut();
+            } else if (e.key === '0') {
+                resetZoom();
+            }
+        }
+    });
+
+    // --- Inline Validation Helpers ---
 });
