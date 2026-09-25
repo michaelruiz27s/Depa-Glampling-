@@ -546,4 +546,269 @@ document.addEventListener('DOMContentLoaded', () => {
     weekdayPromoCheckbox.addEventListener('change', updatePriceCalculator);
 
     // Check if the selected date falls on a weekday (Sunday to Thursday)
+    function checkWeekdayStatus() {
+        const dateVal = bookingDateInput.value;
+        if (!dateVal) return;
+
+        const dateObj = new Date(dateVal + 'T00:00:00'); // Prevent timezone shift
+        const day = dateObj.getDay(); // 0 = Sunday, 1 = Monday, ..., 5 = Friday, 6 = Saturday
+
+        const suite = suiteSelect.value;
+
+        if (suite === 'Pasadía') {
+            // For Pasadía, "weekday" applies Monday to Friday and Sunday
+            // Saturday is the only "Saturday" rate
+            if (day === 6) { // Saturday
+                weekdayPromoCheckbox.checked = false;
+            } else {
+                weekdayPromoCheckbox.checked = true;
+            }
+        } else {
+            // For general suites, weekday rates apply Sunday to Thursday (0 to 4)
+            if (day >= 0 && day <= 4) {
+                weekdayPromoCheckbox.checked = true;
+            } else {
+                weekdayPromoCheckbox.checked = false;
+            }
+        }
+    }
+
+    // Main calculator logic
+    function updatePriceCalculator() {
+        const suite = suiteSelect.value;
+        if (!suite) {
+            calcTotal.textContent = "$0 COP";
+            return;
+        }
+
+        const isWeek = weekdayPromoCheckbox.checked;
+        const people = parseInt(peopleCountSelect.value) || 2;
+        let accommodationPrice = 0;
+
+        // 1. Calculate accommodation price
+        if (suite === 'Casita Mágica') {
+            const subplan = subplanSelect.value;
+            if (subplan === 'Plan Relax') accommodationPrice = 200000;
+            else if (subplan === 'Plan Spa') accommodationPrice = 359900;
+            else if (subplan === 'Plan Full') accommodationPrice = 399900;
+            
+            // Add extra people charge: $30,000 COP per extra person above 2
+            const extraPeople = Math.max(0, people - 2);
+            accommodationPrice += extraPeople * 30000;
+        } 
+        else if (suite === 'Suite Orquídeas') {
+            if (isWeek) {
+                if (people === 2) accommodationPrice = 590000;
+                else if (people === 3) accommodationPrice = 710000;
+                else if (people >= 4) accommodationPrice = 810000;
+            } else {
+                if (people === 2) accommodationPrice = 650000;
+                else if (people === 3) accommodationPrice = 770000;
+                else if (people >= 4) accommodationPrice = 880000;
+            }
+        } 
+        else if (suite === 'Suite Aves del Paraíso' || suite === 'Suite Margaritas') {
+            accommodationPrice = isWeek ? 420000 : 490000;
+        } 
+        else if (suite === 'Suite Eugenias') {
+            // Eugenias pricing: base is for 2, 3, or 4 people
+            // For people from 5 to 8, add $160,000 COP per extra person
+            let basePrice = 0;
+            if (isWeek) {
+                if (people === 2) basePrice = 590000;
+                else if (people === 3) basePrice = 710000;
+                else if (people >= 4) basePrice = 810000;
+            } else {
+                if (people === 2) basePrice = 650000;
+                else if (people === 3) basePrice = 770000;
+                else if (people >= 4) basePrice = 880000;
+            }
+            
+            const extraPeople = Math.max(0, people - 4);
+            accommodationPrice = basePrice + (extraPeople * 160000);
+        } 
+        else if (suite === 'Pasadía') {
+            accommodationPrice = isWeek ? 320000 : 360000;
+        }
+
+        calcAccommodation.textContent = `$${accommodationPrice.toLocaleString()} COP`;
+
+        // 2. Calculate decoration price
+        let decorPrice = 0;
+        const selectedDecorOption = decorSelect.options[decorSelect.selectedIndex];
+        if (selectedDecorOption && decorSelect.value !== 'Ninguna') {
+            decorPrice = parseInt(selectedDecorOption.dataset.price) || 0;
+            calcDecorRow.style.display = 'flex';
+            calcDecor.textContent = `+$${decorPrice.toLocaleString()} COP`;
+        } else {
+            calcDecorRow.style.display = 'none';
+        }
+
+        // 3. Calculate spa price
+        let spaPrice = 0;
+        const spaVal = spaSelect.value;
+        if (spaVal && spaVal !== 'Ninguno') {
+            spaPrice = spaConfig[spaVal] || 0;
+            calcSpaRow.style.display = 'flex';
+            calcSpa.textContent = `+$${spaPrice.toLocaleString()} COP`;
+        } else {
+            calcSpaRow.style.display = 'none';
+        }
+
+        // 4. Calculate total
+        const total = accommodationPrice + decorPrice + spaPrice;
+        calcTotal.textContent = `$${total.toLocaleString()} COP`;
+
+
+    }
+
+
+
+    // --- WhatsApp Message Generator & Form Submit ---
+    bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = clientNameInput.value.trim();
+        const suite = suiteSelect.value;
+        const subplan = suite === 'Casita Mágica' ? subplanSelect.value : '';
+        const people = peopleCountSelect.value;
+        const date = bookingDateInput.value;
+        const decor = decorSelect.value;
+        const spa = spaSelect.value;
+        const isWeek = weekdayPromoCheckbox.checked;
+        const notes = extraCommentsTextarea.value.trim();
+
+        const totalText = calcTotal.textContent;
+
+        // Clear all previous errors
+        clearError(clientNameInput, clientNameError);
+        clearError(suiteSelect, suiteSelectError);
+        clearError(peopleCountSelect, peopleCountError);
+        clearError(bookingDateInput, bookingDateError);
+
+        let hasError = false;
+
+        if (!name) {
+            showError(clientNameInput, clientNameError, 'Por favor, ingresa tu nombre completo.');
+            hasError = true;
+        }
+        if (!suite) {
+            showError(suiteSelect, suiteSelectError, 'Por favor, selecciona una suite.');
+            hasError = true;
+        }
+        if (!date) {
+            showError(bookingDateInput, bookingDateError, 'Por favor, selecciona una fecha.');
+            hasError = true;
+        }
+
+        if (hasError) return;
+
+        // --- VALIDACIONES DE CAPACIDAD Y DECORACIONES ---
+        const config = roomConfigs[suite];
+        if (config) {
+            // 1. Validar que la capacidad no exceda lo configurado
+            const maxCap = Math.max(...config.capacities);
+            if (parseInt(people) > maxCap) {
+                showError(peopleCountSelect, peopleCountError, `La suite '${suite}' solo permite un máximo de ${maxCap} persona(s).`);
+                return;
+            }
+
+            // 2. Validar que la decoración sea permitida para esa suite
+            const validDecors = config.decorations.map(d => d.name);
+            if (decor && decor !== 'Ninguna' && !validDecors.includes(decor)) {
+                showError(decorSelect, null, `La decoración no está disponible para esta suite.`);
+                return;
+            }
+        }
+
+        // Format date beautifully
+        const dateObj = new Date(date + 'T00:00:00');
+        const formattedDate = dateObj.toLocaleDateString('es-ES', {
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric'
+        });
+
+        // Construct message
+        let msg = `🏕️ *SOLICITUD DE RESERVA - DAPA GLAMPING* 🏕️\n`;
+        msg += `--------------------------------------------------\n`;
+        msg += `👤 *Cliente:* ${name}\n`;
+        msg += `🏨 *Hospedaje:* ${suite}${subplan ? ` (${subplan})` : ''}\n`;
+        msg += `📅 *Fecha de estadía:* ${formattedDate}\n`;
+        msg += `👥 *Huéspedes:* ${people} persona(s)\n`;
+        
+        if (decor && decor !== 'Ninguna') {
+            msg += `✨ *Decoración:* ${decor}\n`;
+        }
+        
+        if (spa && spa !== 'Ninguno') {
+            // Extraer solo el nombre del servicio eliminando el precio de la etiqueta
+            const spaLabel = spaSelect.options[spaSelect.selectedIndex].textContent.split(' - ')[0];
+            msg += `💆 *Servicio de Spa:* ${spaLabel}\n`;
+        }
+        
+        msg += `🔥 *Tarifa especial semana:* ${isWeek ? 'Sí (Solicito descuento de semana)' : 'No (Fin de semana/Festivos)'}\n`;
+        
+
+        if (notes) {
+            msg += `💬 *Notas adicionales:* "${notes}"\n`;
+        }
+        
+        msg += `--------------------------------------------------\n`;
+        msg += `💰 *VALOR ESTIMADO:* ${totalText}\n`;
+        msg += `--------------------------------------------------\n`;
+        msg += `_Este mensaje es una cotización estimada de pre-reserva. Por favor, confirmen disponibilidad._`;
+
+        const numericTotal = parseInt(totalText.replace(/[^0-9]/g, ''), 10) || 0;
+
+        fetch('/api/bookings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                clienteNombre: name,
+                suite: suite,
+                subplan: subplan || null,
+                numPersonas: parseInt(people, 10),
+                fechaReserva: date,
+                decoracion: decor,
+                spa: spa,
+                esTarifaSemana: Boolean(isWeek),
+                comentarios: notes,
+                precioTotal: numericTotal
+            })
+        }).catch(() => {});
+
+        // Encode URI and redirect to WhatsApp Web / Mobile App
+        const whatsappNumber = '573172309090';
+        const encodedMsg = encodeURIComponent(msg);
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMsg}`;
+
+        // Open in new tab
+        window.open(whatsappUrl, '_blank');
+    });
+
+    // --- Scroll Reveal Animation with Intersection Observer ---
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target); // Stop observing once revealed
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    } else {
+        // Fallback for older browsers
+        revealElements.forEach(el => el.classList.add('revealed'));
+    }
+
 });
