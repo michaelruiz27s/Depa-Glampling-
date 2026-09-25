@@ -397,4 +397,153 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Inline Validation Helpers ---
+    function showError(inputEl, errorEl, message) {
+        if (errorEl) {
+            errorEl.textContent = message;
+            errorEl.classList.add('active');
+        }
+        if (inputEl) {
+            inputEl.classList.add('input-error-shake');
+            // Remove shake animation class after 400ms
+            setTimeout(() => {
+                inputEl.classList.remove('input-error-shake');
+            }, 400);
+        }
+    }
+
+    function clearError(inputEl, errorEl) {
+        if (errorEl) {
+            errorEl.textContent = '';
+            errorEl.classList.remove('active');
+        }
+        if (inputEl) {
+            inputEl.classList.remove('input-error-shake');
+        }
+    }
+
+    // Clear errors on user input
+    if (clientNameInput) clientNameInput.addEventListener('input', () => clearError(clientNameInput, clientNameError));
+    if (suiteSelect) suiteSelect.addEventListener('change', () => clearError(suiteSelect, suiteSelectError));
+    if (peopleCountSelect) peopleCountSelect.addEventListener('change', () => clearError(peopleCountSelect, peopleCountError));
+    if (bookingDateInput) bookingDateInput.addEventListener('change', () => clearError(bookingDateInput, bookingDateError));
+
+    // --- Dynamic Form Logic & Live Calculator ---
+
+    // Room configurations
+    const roomConfigs = {
+        'Casita Mágica': {
+            capacities: [2, 3, 4],
+            decorations: [
+                { name: 'Ninguna', price: 0 },
+                { name: 'Decoración Estándar', price: 59000 },
+                { name: 'Decoración Elios', price: 180000 }
+            ]
+        },
+        'Suite Orquídeas': {
+            capacities: [2, 3, 4],
+            decorations: [
+                { name: 'Ninguna', price: 0 },
+                { name: 'Decoración Elios', price: 180000 }
+            ]
+        },
+        'Suite Aves del Paraíso': {
+            capacities: [2],
+            decorations: [
+                { name: 'Ninguna', price: 0 },
+                { name: 'Decoración Estándar', price: 59000 },
+                { name: 'Decoración Pétalos', price: 85000 },
+                { name: 'Decoración Globos', price: 125000 },
+                { name: 'Decoración Velas', price: 136000 },
+                { name: 'Decoración Elios', price: 140000 }
+            ]
+        },
+        'Suite Margaritas': {
+            capacities: [2],
+            decorations: [
+                { name: 'Ninguna', price: 0 },
+                { name: 'Decoración Estándar', price: 59000 },
+                { name: 'Decoración Pétalos', price: 85000 },
+                { name: 'Decoración Globos', price: 125000 },
+                { name: 'Decoración Velas', price: 136000 },
+                { name: 'Decoración Elios', price: 140000 }
+            ]
+        },
+        'Suite Eugenias': {
+            capacities: [2, 3, 4, 5, 6, 7, 8],
+            decorations: [
+                { name: 'Ninguna', price: 0 },
+                { name: 'Decoración Pizarra', price: 70000 },
+                { name: 'Decoración Elios', price: 180000 }
+            ]
+        },
+        'Pasadía': {
+            capacities: [2],
+            decorations: [
+                { name: 'Ninguna', price: 0 }
+            ]
+        }
+    };
+
+    // Spa Services pricing
+    const spaConfig = {
+        'Ninguno': 0,
+        'Spa Relajante 1p': 95000,
+        'Spa Relajante 2p': 165000,
+        'Spa Piedras 1p': 140000,
+        'Spa Piedras 2p': 240000
+    };
+
+    // Populate dropdowns and update layout based on room selection
+    suiteSelect.addEventListener('change', () => {
+        const suite = suiteSelect.value;
+        if (!suite) return;
+
+        const config = roomConfigs[suite];
+
+        // 1. Show/Hide sub-plans for Casita Mágica
+        if (suite === 'Casita Mágica') {
+            subplanGroup.style.display = 'block';
+            subplanSelect.setAttribute('required', 'required');
+        } else {
+            subplanGroup.style.display = 'none';
+            subplanSelect.removeAttribute('required');
+        }
+
+        // 2. Populate capacities
+        peopleCountSelect.innerHTML = '';
+        config.capacities.forEach(cap => {
+            const option = document.createElement('option');
+            option.value = cap;
+            option.textContent = `${cap} Personas`;
+            peopleCountSelect.appendChild(option);
+        });
+
+        // 3. Populate decorations
+        decorSelect.innerHTML = '';
+        config.decorations.forEach(dec => {
+            const option = document.createElement('option');
+            option.value = dec.name;
+            option.textContent = dec.price > 0 ? `${dec.name} (+$${dec.price.toLocaleString()} COP)` : dec.name;
+            option.dataset.price = dec.price;
+            decorSelect.appendChild(option);
+        });
+
+        // Auto-check weekday promo checkbox based on date (optional enhancement)
+        checkWeekdayStatus();
+        updatePriceCalculator();
+    });
+
+    // Auto-calculate weekday rates when dates change
+    bookingDateInput.addEventListener('change', () => {
+        checkWeekdayStatus();
+        updatePriceCalculator();
+    });
+
+    subplanSelect.addEventListener('change', updatePriceCalculator);
+    peopleCountSelect.addEventListener('change', updatePriceCalculator);
+    decorSelect.addEventListener('change', updatePriceCalculator);
+    spaSelect.addEventListener('change', updatePriceCalculator);
+    weekdayPromoCheckbox.addEventListener('change', updatePriceCalculator);
+
+    // Check if the selected date falls on a weekday (Sunday to Thursday)
 });
