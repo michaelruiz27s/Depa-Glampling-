@@ -863,5 +863,55 @@
         <button class="lightbox-next" onclick="nextLightbox(event)" aria-label="Siguiente imagen"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
 
+    <!-- Floating Chatbot Widget -->
+    <div class="chatbot-widget" id="chatbot-widget">
+        <!-- Floating Bubble Button -->
+        <button class="chatbot-bubble-btn" id="chatbot-bubble-btn" aria-label="Abrir asistente virtual">
+            <i class="fa-solid fa-comments"></i>
+            <span class="chatbot-badge">1</span>
+        </button>
+
+        <!-- Chat Window -->
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <div class="chatbot-bot-info">
+                    <div class="chatbot-avatar">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h4>Asistente Dapa</h4>
+                        <span class="chatbot-status"><span class="status-dot"></span> En línea</span>
+                    </div>
+                </div>
+                <button class="chatbot-close-btn" id="chatbot-close-btn" aria-label="Cerrar chat">&times;</button>
+            </div>
+
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="chat-message bot">
+                    <p>¡Hola! Te damos la bienvenida a Dapa Glamping. ¿En qué información o suite te podemos orientar hoy?</p>
+                </div>
+            </div>
+
+            <!-- Quick replies container -->
+            <div class="chatbot-quick-replies" id="chatbot-quick-replies">
+                <button class="quick-reply-btn" data-query="fotos">📸 Ver Fotos</button>
+                <button class="quick-reply-btn" data-query="suites">🏨 Todas las Suites</button>
+                <button class="quick-reply-btn" data-query="pasadia">☀️ Pasadía</button>
+                <button class="quick-reply-btn" data-query="casita">🕰️ Casita Mágica</button>
+                <button class="quick-reply-btn" data-query="decoraciones">✨ Decoraciones</button>
+                <button class="quick-reply-btn" data-query="catalogo">📖 Catálogo</button>
+            </div>
+
+            <form class="chatbot-input-area" id="chatbot-input-area">
+                <input type="text" id="chatbot-input" placeholder="Pregúntame algo..." required autocomplete="off">
+                <button type="submit" class="chatbot-send-btn" aria-label="Enviar mensaje">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="script.js" charset="UTF-8"></script>
 </body>
 </html>

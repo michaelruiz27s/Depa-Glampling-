@@ -811,4 +811,52 @@ document.addEventListener('DOMContentLoaded', () => {
         revealElements.forEach(el => el.classList.add('revealed'));
     }
 
+    // --- Floating Chatbot Usability & Response Logic ---
+    const chatbotBubble = document.getElementById("chatbot-bubble-btn");
+    const chatbotWindow = document.getElementById("chatbot-window");
+    const chatbotClose = document.getElementById("chatbot-close-btn");
+    const chatbotMessages = document.getElementById("chatbot-messages");
+    const chatbotForm = document.getElementById("chatbot-input-area");
+    const chatbotInput = document.getElementById("chatbot-input");
+    const chatbotBadge = document.querySelector(".chatbot-badge");
+
+    if (chatbotBubble && chatbotWindow) {
+        chatbotBubble.addEventListener("click", () => {
+            chatbotWindow.classList.toggle("active");
+            if (chatbotBadge) chatbotBadge.style.display = "none";
+        });
+    }
+
+    if (chatbotClose && chatbotWindow) {
+        chatbotClose.addEventListener("click", () => {
+            chatbotWindow.classList.remove("active");
+        });
+    }
+
+    function appendMessage(sender, text) {
+        if (!chatbotMessages) return;
+        const msgDiv = document.createElement("div");
+        msgDiv.className = `chat-message ${sender}`;
+        const p = document.createElement("p");
+        p.textContent = text;
+        msgDiv.appendChild(p);
+        chatbotMessages.appendChild(msgDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    function getBotResponse(rawText) {
+        return "¡Hola! Soy el asistente virtual de Dapa Glamping. ¿En qué podemos asesorarte sobre tu estadía?";
+    }
+
+    if (chatbotForm && chatbotInput) {
+        chatbotForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const val = chatbotInput.value.trim();
+            if (!val) return;
+            appendMessage("user", val);
+            chatbotInput.value = "";
+            setTimeout(() => appendMessage("bot", getBotResponse(val)), 500);
+        });
+    }
+
 });
