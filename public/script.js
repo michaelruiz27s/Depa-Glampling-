@@ -812,51 +812,249 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Floating Chatbot Usability & Response Logic ---
-    const chatbotBubble = document.getElementById("chatbot-bubble-btn");
-    const chatbotWindow = document.getElementById("chatbot-window");
-    const chatbotClose = document.getElementById("chatbot-close-btn");
-    const chatbotMessages = document.getElementById("chatbot-messages");
-    const chatbotForm = document.getElementById("chatbot-input-area");
-    const chatbotInput = document.getElementById("chatbot-input");
-    const chatbotBadge = document.querySelector(".chatbot-badge");
+    const chatbotBubble = document.getElementById('chatbot-bubble-btn');
+    const chatbotWindow = document.getElementById('chatbot-window');
+    const chatbotClose = document.getElementById('chatbot-close-btn');
+    const chatbotMessages = document.getElementById('chatbot-messages');
+    const chatbotForm = document.getElementById('chatbot-input-area');
+    const chatbotInput = document.getElementById('chatbot-input');
+    const chatbotBadge = document.querySelector('.chatbot-badge');
 
+    // Toggle window
     if (chatbotBubble && chatbotWindow) {
-        chatbotBubble.addEventListener("click", () => {
-            chatbotWindow.classList.toggle("active");
-            if (chatbotBadge) chatbotBadge.style.display = "none";
+        chatbotBubble.addEventListener('click', () => {
+            chatbotWindow.classList.toggle('active');
+            if (chatbotBadge) chatbotBadge.style.display = 'none'; // Clear notification badge
         });
     }
 
     if (chatbotClose && chatbotWindow) {
-        chatbotClose.addEventListener("click", () => {
-            chatbotWindow.classList.remove("active");
+        chatbotClose.addEventListener('click', () => {
+            chatbotWindow.classList.remove('active');
         });
     }
 
+    // Scroll chat to bottom helper
+    function scrollChatToBottom() {
+        if (chatbotMessages) {
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+    }
+
+    // Add message to chat area helper (con escape para el usuario)
     function appendMessage(sender, text) {
         if (!chatbotMessages) return;
-        const msgDiv = document.createElement("div");
+        const msgDiv = document.createElement('div');
         msgDiv.className = `chat-message ${sender}`;
-        const p = document.createElement("p");
-        p.textContent = text;
+        const p = document.createElement('p');
+        if (sender === 'user') {
+            p.textContent = text; // Previene inyección XSS de texto arbitrario
+        } else {
+            p.innerHTML = text; // Permite enlaces y formato seguro generado por el bot
+        }
         msgDiv.appendChild(p);
         chatbotMessages.appendChild(msgDiv);
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        scrollChatToBottom();
     }
 
+    // Core conversational bot parsing logic
     function getBotResponse(rawText) {
-        return "¡Hola! Soy el asistente virtual de Dapa Glamping. ¿En qué podemos asesorarte sobre tu estadía?";
+        const text = rawText.toLowerCase().trim();
+
+        // Detección automática de número de contacto (teléfono entre 7 y 12 dígitos)
+        const phoneRegex = /\b\d{7,12}\b/;
+        const matchPhone = rawText.match(phoneRegex);
+        if (matchPhone) {
+            const phone = matchPhone[0];
+            let extractedName = "";
+            const nameKeywords = ["mi nombre es", "me llamo", "nombre:", "soy"];
+            
+            // Buscar si especificó un nombre con palabra clave
+            for (const keyword of nameKeywords) {
+                if (text.includes(keyword)) {
+                    const idx = text.indexOf(keyword) + keyword.length;
+                    extractedName = rawText.substring(idx).replace(phone, "").replace(/[,.!\-]/g, "").trim();
+                    break;
+                }
+            }
+            
+            // Limpieza secundaria de caracteres si no se halló keyword
+            if (!extractedName) {
+                extractedName = rawText.replace(phone, "").replace(/[,.!\-]/g, "").trim();
+            }
+            
+            // Limitar longitud
+            if (extractedName.length > 20) {
+                extractedName = extractedName.substring(0, 20) + "...";
+            }
+            
+            const clientName = extractedName ? extractedName : "Interesado";
+            const whatsappNumber = '573172309090';
+            const msg = `Hola! Me gustar\u00EDa recibir informaci\u00F3n. Mi nombre es *${clientName}* y mi celular es *${phone}*. \u00BFMe podr\u00EDan contactar porfa para cotizar habitaciones y planes? Gracias!`;
+            const encodedMsg = encodeURIComponent(msg);
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMsg}`;
+
+            // Auto-redirección tras 1.5s
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 1500);
+
+            return `Listo, ya anot\u00E9 tus datos (Nombre: ${clientName}, Tel\u00E9fono: ${phone}). Te estoy redirigiendo a nuestro WhatsApp de reservas. Si no abre autom\u00E1ticamente, haz clic aqu\u00ED porfa: <br>
+                    👉 <a href="${whatsappUrl}" target="_blank" rel="noopener" class="chat-inline-link">Abrir WhatsApp de Reservas</a>`;
+        }
+
+        // 1. Pasadía option
+        if (text.includes('pasadia') || text.includes('pasadía') || (text.includes('dia') && text.includes('plan'))) {
+            if (text.includes('3') || text.includes('4') || text.includes('tres') || text.includes('cuatro') || text.includes('grupo') || text.includes('familia')) {
+                return `El <strong>Plan Pasadía</strong> es máximo para <strong>2 personas</strong> por habitación. Si son 3 o más personas, les recomiendo reservar habitaciones separadas (ej. Paraíso y Margarita) o quedarse en la <strong>Suite Orquídeas</strong> o <strong>Suite Eugenias</strong> para pasar la noche. 😊`;
+            }
+            return `El <strong>Plan Pasadía</strong> es para pasar el día (10:00 a.m. a 5:00 p.m.) en las suites Paraíso o Margarita. Es para un máximo de 2 personas. ¿Te gustaría cotizar este plan?`;
+        }
+
+        // 2. Casita Mágica
+        if (text.includes('casita') || text.includes('bloque') || text.includes('horas') || text.includes('por hora')) {
+            let match = text.match(/\b(3|4|tres|cuatro)\b/);
+            if (match) {
+                const count = (match[0] === '3' || match[0] === 'tres') ? 3 : 4;
+                const extraPeople = count - 2;
+                const extraCost = extraPeople * 30000;
+                return `Para la <strong>Casita Mágica</strong> con <strong>${count} personas</strong>: la base es para 2 personas, y por cada persona adicional se cobra <strong>$30.000 COP</strong> por el ingreso (el excedente total sería de $${extraCost.toLocaleString()} COP). Ten en cuenta que si quieres masajes para los demás, dependerá del paquete que elijas. ¿Te gustaría cotizarlo?`;
+            }
+            return `Te cuento, la <strong>Casita Mágica</strong> se alquila por bloques de horas para 2 personas:
+- Plan de 4 horas: $200.000 COP.
+- Persona extra: $30.000 COP adicional.
+- Puedes agregar masajes relajantes si lo deseas.
+¿Te gustaría reservar algún bloque de horas?`;
+        }
+
+        // 3. Capacidades y Habitaciones Tradicionales / Fotos e Imágenes
+        if (text.includes('imagen') || text.includes('imágenes') || text.includes('foto') || text.includes('fotos') || text.includes('ver habitacion') || text.includes('ver habitación') || text.includes('ver habitaciones') || text.includes('ver suites') || text.includes('capacidad') || text.includes('personas') || text.includes('huespedes') || text.includes('huéspedes') || text.includes('habitacion') || text.includes('habitación') || text.includes('suite') || text.includes('habitaciones') || text.includes('alojamiento') || text.includes('alojamientos') || text.includes('tarifas') || text.includes('precios') || text.includes('precio') || text.includes('eugenia') || text.includes('orquidea') || text.includes('paraiso') || text.includes('margarita')) {
+            // Si el usuario pregunta específicamente por imágenes/fotos o pide ver habitaciones
+            const wantsImages = text.includes('imagen') || text.includes('imágenes') || text.includes('foto') || text.includes('fotos') || text.includes('ver');
+
+            // Check for group count
+            let matchGroup = text.match(/\b(5|6|7|8|cinco|seis|siete|ocho)\b/);
+            if (matchGroup && !wantsImages) {
+                const count = parseInt(matchGroup[0]) || (matchGroup[0] === 'cinco' ? 5 : matchGroup[0] === 'seis' ? 6 : matchGroup[0] === 'siete' ? 7 : 8);
+                const extraPeople = count - 4;
+                const extraCost = extraPeople * 160000;
+                return `Para un grupo de <strong>${count} personas</strong>, la mejor opción es la <strong>Suite Eugenias</strong> (capacidad de 2 a 8 personas). La tarifa base cubre 4 personas, y a partir de la 5ª se cobra un adicional de $160.000 COP por persona (el excedente por las ${extraPeople} personas adicionales sería de $${extraCost.toLocaleString()} COP).<br><br>
+                📸 <a href="#" onclick="openLightbox('assets/suite-eugenias.webp'); return false;" class="chat-inline-link">Ver fotos de Suite Eugenias</a><br><br>
+                ¿Te gustaría cotizarla con su piscina privada y chimenea?`;
+            }
+            
+            if ((text.includes('3') || text.includes('tres') || text.includes('4') || text.includes('cuatro')) && !wantsImages) {
+                return `Para grupos de <strong>3 o 4 personas</strong>, las opciones ideales son:
+<br><br>
+• <strong>Suite Orquídeas:</strong> Dos niveles y mallas catamarán (máx 4 personas). <br>👉 <a href="#" onclick="openLightbox('assets/suite-orquideas.webp'); return false;" class="chat-inline-link">Ver foto de Suite Orquídeas</a><br><br>
+• <strong>Suite Eugenias:</strong> Piscina privada y chimenea (base para 4 pers, hasta 8). <br>👉 <a href="#" onclick="openLightbox('assets/suite-eugenias.webp'); return false;" class="chat-inline-link">Ver foto de Suite Eugenias</a><br><br>
+<em>Nota: Las suites Paraíso y Margaritas son exclusivamente para parejas (máx 2 personas).</em>`;
+            }
+            
+            return `¡Aquí puedes ver las fotos y detalles de cada una de nuestras habitaciones y planes! Toca el enlace para abrir la imagen: <br><br>
+📸 <a href="#" onclick="openLightbox('assets/suite-orquideas.webp'); return false;" class="chat-inline-link">Suite Orquídeas (2 a 4 pers - Dos niveles y mallas)</a> <br>
+📸 <a href="#" onclick="openLightbox('assets/suite-aves-del-paraiso.webp'); return false;" class="chat-inline-link">Suite Aves del Paraíso (Parejas - Jacuzzi privado)</a> <br>
+📸 <a href="#" onclick="openLightbox('assets/suite-margaritas.webp'); return false;" class="chat-inline-link">Suite Margaritas (Parejas - Jacuzzi privado)</a> <br>
+📸 <a href="#" onclick="openLightbox('assets/suite-eugenias.webp'); return false;" class="chat-inline-link">Suite Eugenias (Familiar 2 a 8 pers - Piscina y chimenea)</a> <br>
+📸 <a href="#" onclick="openLightbox('assets/plan-relax-spa.webp'); return false;" class="chat-inline-link">Casita Mágica (Planes por horas Relax / Spa)</a> <br>
+📸 <a href="#" onclick="openLightbox('assets/pasadia.webp'); return false;" class="chat-inline-link">Plan Pasadía (10 am a 5 pm para 2 personas)</a> <br><br>
+¿Cuál de ellas te gustaría cotizar o reservar?`;
+        }
+
+        // 4. Masajes y Spa
+        if (text.includes('masaje') || text.includes('masajes') || text.includes('spa') || text.includes('terapia')) {
+            return `Los masajes y servicios de spa los realizamos directamente en tu suite para mayor comodidad (como masajes relajantes o con piedras volcánicas). Las tarifas varían si son individuales o en pareja.<br><br>
+            👉 <a href="#" onclick="openLightbox('assets/spa-services.webp'); return false;" class="chat-inline-link">Ver Folleto de Servicios de Spa</a><br><br>
+            Si te hospedas en la Suite Eugenias con un grupo grande, podemos coordinar terapeutas para atenderlos a todos allí mismo. 😊`;
+        }
+
+        // 4.5 Decoraciones
+        if (text.includes('decor') || text.includes('celebrar') || text.includes('cumple') || text.includes('aniversario') || text.includes('sorpresa') || text.includes('romantico') || text.includes('romántica')) {
+            return `¡Tenemos hermosos sets de decoración para celebrar momentos especiales! 🌹🎈<br><br>
+                    <strong>*Importante:*</strong> Las decoraciones se contratan de forma individual y se aplican en <strong>una (1) sola habitación</strong> de tu elección.<br><br>
+                    • <a href="#" onclick="openLightbox('assets/decoracion-elios.webp'); return false;" class="chat-inline-link">Ver Decoración Elios ($180.000 COP)</a> (39 globos, helio, pétalos y 3 pizarras).<br>
+                    • <a href="#" onclick="openLightbox('assets/decoracion-estandar-casita.webp'); return false;" class="chat-inline-link">Ver Estándar Casita Mágica ($59.000 COP)</a>.<br>
+                    • <a href="#" onclick="openLightbox('assets/decoracion-estandar-suites.webp'); return false;" class="chat-inline-link">Ver Estándar Margaritas / Paraíso ($59.000 COP)</a>.<br>
+                    • <a href="#" onclick="openLightbox('assets/decoracion-pizarra.webp'); return false;" class="chat-inline-link">Ver Decoración Pizarra Eugenias ($70.000 COP)</a>.<br><br>
+                    Además, en Margaritas y Paraíso puedes adicionar: Pétalos ($85k), Globos ($125k) o Velas ($136k).`;
+        }
+
+        // 5. Catálogo
+        if (text.includes('catalogo') || text.includes('catálogo') || text.includes('folleto') || text.includes('servicios') || text.includes('precios')) {
+            return `¡Con gusto! Puedes ver toda nuestra información gráfica haciendo clic aquí: <br><br>
+                    👉 <a href="#" onclick="openLightbox('assets/plan-relax-spa.webp'); return false;" class="chat-inline-link">Folleto de Suites y Tarifas</a> <br>
+                    👉 <a href="#" onclick="openLightbox('assets/included-menu.webp'); return false;" class="chat-inline-link">Folleto de Alimentación Incluida</a> <br>
+                    👉 <a href="#" onclick="openLightbox('assets/spa-services.webp'); return false;" class="chat-inline-link">Folleto de Servicios de Spa</a>`;
+        }
+
+        // 6. Default response for unhandled topics (menu a la carta, exact location, etc.)
+        return `Para darte una información más detallada, puedes conversar directamente con uno de nuestros asesores por WhatsApp: <br>
+                👉 <a href="https://wa.me/573172309090" target="_blank" rel="noopener" class="chat-inline-link">Escríbenos a WhatsApp aquí</a> <br><br>
+                O si prefieres, escríbeme tu nombre o número de teléfono por aquí y nosotros te contactamos de inmediato.`;
     }
 
+    // Form submission chat handler
     if (chatbotForm && chatbotInput) {
-        chatbotForm.addEventListener("submit", (e) => {
+        chatbotForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const val = chatbotInput.value.trim();
-            if (!val) return;
-            appendMessage("user", val);
-            chatbotInput.value = "";
-            setTimeout(() => appendMessage("bot", getBotResponse(val)), 500);
+            const query = chatbotInput.value.trim();
+            if (!query) return;
+
+            // Display user message
+            appendMessage('user', query);
+            chatbotInput.value = '';
+
+            // Simulate typing delay
+            setTimeout(() => {
+                const response = getBotResponse(query);
+                appendMessage('bot', response);
+            }, 750);
         });
     }
 
+    // Quick replies chips handler
+    const quickReplyBtns = document.querySelectorAll('.quick-reply-btn');
+    quickReplyBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const queryKey = btn.dataset.query;
+            let queryText = btn.textContent;
+            
+            // Send visual message
+            appendMessage('user', queryText);
+
+            // Simulate typing delay
+            setTimeout(() => {
+                if (queryKey === 'fotos') {
+                    response = getBotResponse('fotos de las habitaciones');
+                } else if (queryKey === 'pasadia') {
+                    response = getBotResponse('pasadia');
+                } else if (queryKey === 'casita') {
+                    response = getBotResponse('casita');
+                } else if (queryKey === 'suites') {
+                    response = getBotResponse('suites');
+                } else if (queryKey === 'decoraciones') {
+                    response = getBotResponse('decoraciones');
+                } else if (queryKey === 'catalogo') {
+                    response = getBotResponse('catalogo');
+                } else {
+                    response = getBotResponse(queryKey || queryText);
+                }
+                appendMessage('bot', response);
+            }, 600);
+        });
+    });
+
+
+    // Deshabilitar clic derecho y arrastre en imágenes y videos para evitar descargas fáciles
+    document.addEventListener('contextmenu', (e) => {
+        if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+            e.preventDefault();
+        }
+    });
+
+    document.addEventListener('dragstart', (e) => {
+        if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+            e.preventDefault();
+        }
+    });
 });
