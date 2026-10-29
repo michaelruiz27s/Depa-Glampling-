@@ -1,0 +1,448 @@
+/* DAPA GLAMPING — SPA
+   Carrusel compacto a la izquierda y precios a la derecha.
+   La galería intercala fotos y videos sin filtros por tipo.
+*/
+
+/* Dos columnas en pantallas amplias. Las tarifas originales se mantienen intactas. */
+.spa-section .spa-wrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: clamp(24px, 3.3vw, 46px);
+}
+
+.spa-carousel-container,
+.spa-text-side {
+    min-width: 0;
+    width: 100%;
+}
+
+.spa-carousel-container {
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(191, 161, 95, 0.3);
+    background: var(--color-white);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.spa-carousel-topbar {
+    min-height: 43px;
+    padding: 9px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: var(--color-primary);
+    color: #f8f7f0;
+}
+
+.spa-carousel-label {
+    font: 600 0.86rem var(--font-body);
+    letter-spacing: 0.01em;
+}
+
+.spa-counter-badge {
+    flex-shrink: 0;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.14);
+    color: #f8f7f0;
+    font: 600 0.77rem var(--font-body);
+    font-variant-numeric: tabular-nums;
+}
+
+.spa-carousel-stage {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    position: relative;
+    background: #132018;
+    overflow: hidden;
+    outline-offset: -3px;
+}
+
+.spa-carousel-track,
+.spa-slide,
+.spa-slide-media {
+    width: 100%;
+    height: 100%;
+}
+
+.spa-slide {
+    display: none;
+    position: absolute;
+    inset: 0;
+}
+
+.spa-slide.active { display: block; }
+
+.spa-slide-media {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #101b14;
+    cursor: zoom-in;
+}
+
+.spa-slide-media.video-media { cursor: default; }
+
+.spa-slide-img,
+.spa-slide-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.spa-slide-img { object-fit: cover; }
+.spa-slide-video { object-fit: contain; background: #070d0a; }
+
+/* Los títulos salen en una franja pequeña debajo, sin cubrir los controles del video. */
+.spa-slide-info { display: none; }
+
+.spa-media-caption {
+    min-height: 76px;
+    padding: 12px 16px 11px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    background: var(--color-white);
+}
+
+.spa-media-caption strong {
+    font: 700 0.95rem/1.3 var(--font-heading);
+    color: var(--color-primary);
+}
+
+.spa-media-caption span {
+    display: block;
+    font: 400 0.8rem/1.45 var(--font-body);
+    color: #617168;
+}
+
+.spa-zoom-badge {
+    pointer-events: none;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border-radius: 18px;
+    padding: 5px 9px;
+    color: white;
+    background: rgba(17, 31, 21, 0.75);
+    font: 600 0.73rem var(--font-body);
+    opacity: 0;
+    transition: opacity .2s ease;
+}
+.spa-slide-media:hover .spa-zoom-badge,
+.spa-slide-media:focus-within .spa-zoom-badge { opacity: 1; }
+
+.spa-nav-arrow {
+    position: absolute;
+    z-index: 5;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 37px;
+    height: 37px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, .55);
+    border-radius: 50%;
+    background: rgba(17, 31, 21, 0.72);
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease, transform .2s ease;
+}
+.spa-nav-arrow:hover { background: var(--color-accent); transform: translateY(-50%) scale(1.07); }
+.spa-nav-arrow:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; }
+.spa-prev-arrow { left: 11px; }
+.spa-next-arrow { right: 11px; }
+.spa-nav-arrow:disabled { opacity: .35; cursor: not-allowed; }
+
+/* Solo se muestra como alternativa si un navegador bloquea el autoplay. */
+.spa-video-play-btn {
+    position: absolute;
+    z-index: 4;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    border: 1px solid rgba(255,255,255,.6);
+    border-radius: 50%;
+    background: rgba(27,51,34,.83);
+    color: #fff;
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: opacity .2s ease, background .2s ease;
+}
+.spa-video-play-btn:hover { background: var(--color-accent); }
+.spa-video-play-btn.hidden { opacity: 0; pointer-events: none; }
+
+/* Miniaturas compactas para navegar directamente sin seleccionar tipo de contenido. */
+.spa-thumbnails-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px;
+    border-top: 1px solid rgba(27,51,34,.08);
+    background: #edf3ed;
+}
+.spa-thumb-scroll-btn {
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgba(27,51,34,.16);
+    border-radius: 50%;
+    background: #fff;
+    color: var(--color-primary);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    font-size: .72rem;
+}
+.spa-thumb-scroll-btn:hover { color: #fff; background: var(--color-primary); }
+.spa-thumbnails-strip {
+    display: flex;
+    gap: 6px;
+    min-width: 0;
+    flex: 1;
+    padding: 3px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+.spa-thumbnails-strip::-webkit-scrollbar { display: none; }
+.spa-thumb-item {
+    position: relative;
+    flex: 0 0 53px;
+    height: 44px;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    background: #cfdbd2;
+    cursor: pointer;
+}
+.spa-thumb-item.active { border-color: var(--color-accent); box-shadow: 0 0 0 1px var(--color-accent); }
+.spa-thumb-item:hover { border-color: var(--color-primary); }
+.spa-thumb-item img { width: 100%; height: 100%; object-fit: cover; }
+.spa-thumb-icon,
+.spa-thumb-number {
+    position: absolute;
+    pointer-events: none;
+    color: white;
+    background: rgba(12,25,16,.75);
+    font-size: .56rem;
+    line-height: 1;
+    padding: 3px;
+    border-radius: 4px;
+}
+.spa-thumb-icon { bottom: 2px; right: 2px; }
+.spa-thumb-number { top: 2px; left: 2px; }
+
+/* Precios a la derecha, como en la referencia. */
+.spa-section .spa-text-side {
+    flex: initial;
+    margin: 0;
+}
+.spa-section .spa-text-side > p { margin-bottom: 20px; }
+.spa-section .spa-plans { gap: 16px; }
+.spa-section .spa-plan-item { padding: 20px 21px; }
+.spa-section .spa-plan-header { gap: 8px 16px; flex-wrap: wrap; align-items: baseline; }
+.spa-section .spa-plan-header h5 { font-size: 1.09rem; }
+.spa-section .spa-plan-price { white-space: nowrap; margin-left: auto; }
+.spa-section .spa-plan-item p { margin-bottom: 0; }
+.spa-section .spa-actions-row { margin-top: 22px; }
+
+/* Conserva la versión oscura de la web y el borde dorado de las tarifas. */
+[data-theme="dark"] .spa-carousel-container { background: #19251c; border-color: rgba(191,161,95,.3); }
+[data-theme="dark"] .spa-carousel-topbar { background: #15231a; }
+[data-theme="dark"] .spa-media-caption { background: #1a281e; }
+[data-theme="dark"] .spa-media-caption strong { color: #f2f3ec; }
+[data-theme="dark"] .spa-media-caption span { color: #b2c1b5; }
+[data-theme="dark"] .spa-thumbnails-wrapper { background: #142019; border-color: rgba(255,255,255,.06); }
+[data-theme="dark"] .spa-thumb-scroll-btn { color: #f4f6f1; background: #25382b; border-color: rgba(255,255,255,.17); }
+[data-theme="dark"] .spa-thumb-scroll-btn:hover { background: var(--color-accent); color: #17261a; }
+[data-theme="dark"] .spa-thumb-item { background: #25382b; }
+
+/* Pantallas reducidas: tarifas primero, galería después; nunca se comprime el texto. */
+@media (max-width: 980px) {
+    .spa-section .spa-wrapper {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 680px;
+        margin-inline: auto;
+        gap: 30px;
+    }
+    .spa-section .spa-text-side { order: -1; }
+    .spa-carousel-container { max-width: 580px; margin-inline: auto; }
+}
+
+@media (max-width: 560px) {
+    .spa-section .spa-wrapper { gap: 24px; }
+    .spa-section .spa-plan-item { padding: 16px; }
+    .spa-section .spa-plan-header h5 { font-size: 1.03rem; }
+    .spa-section .spa-plan-price { margin-left: 0; }
+    .spa-nav-arrow { width: 34px; height: 34px; }
+    .spa-prev-arrow { left: 6px; }
+    .spa-next-arrow { right: 6px; }
+    .spa-media-caption { padding: 10px 12px; min-height: 72px; }
+    .spa-thumb-item { flex-basis: 48px; height: 40px; }
+}
+
+/* ——— Spa refinado: tipografía, opciones legibles y reserva sin duplicar botones ——— */
+.spa-section .spa-wrapper {
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    gap: clamp(24px, 3vw, 44px);
+    align-items: stretch;
+}
+.spa-section .spa-carousel-container {
+    display: flex;
+    flex-direction: column;
+}
+.spa-section .spa-carousel-stage {
+    flex: 1 1 auto;
+    aspect-ratio: auto;
+    min-height: 360px;
+}
+.spa-section .spa-text-side > p { margin-bottom: 17px; }
+.spa-section .spa-plans { gap: 16px; }
+.spa-section .spa-plan-item {
+    padding: clamp(17px, 1.7vw, 23px);
+    background: rgba(238, 243, 236, .9);
+    border: 1px solid rgba(191, 161, 95, .23);
+    border-left: 4px solid var(--color-accent);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(15, 32, 20, .045);
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+.spa-section .spa-plan-item.is-selected {
+    border-color: var(--color-accent);
+    border-left-width: 4px;
+    box-shadow: 0 8px 25px rgba(191, 161, 95, .16);
+}
+.spa-section .spa-plan-header { display: flex; align-items: center; gap: 9px 12px; flex-wrap: wrap; margin: 0 0 9px; }
+.spa-section .spa-plan-header h3 {
+    flex: 1 1 240px;
+    min-width: 0;
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(1.09rem, 1.5vw, 1.29rem);
+    line-height: 1.3;
+    color: var(--color-primary);
+}
+.spa-section .spa-plan-header h3 i { color: var(--color-accent); font-size: .85em; margin-right: 5px; }
+.spa-plan-duration { font: 600 .73rem var(--font-body); color: #576d59; white-space: nowrap; }
+.spa-plan-duration i { color: var(--color-accent); margin-right: 3px; }
+.spa-section .spa-plan-description { font-size: .89rem; line-height: 1.55; margin: 0 0 14px; }
+.spa-price-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    margin: 0 0 14px;
+}
+.spa-price-options legend { margin-bottom: 8px; font-size: .78rem; font-weight: 600; color: #627366; }
+.spa-price-option { position: relative; display: block; min-width: 0; cursor: pointer; }
+.spa-price-option input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+}
+.spa-price-details {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border: 1px solid rgba(27, 51, 34, .14);
+    background: rgba(255, 255, 255, .6);
+    padding: 11px 12px;
+    border-radius: 9px;
+    transition: background .2s, border-color .2s, box-shadow .2s;
+}
+.spa-price-details > span { font-weight: 600; font-size: .77rem; color: #4f6354; }
+.spa-price-details strong {
+    font: 700 clamp(.97rem, 1.35vw, 1.1rem)/1.1 var(--font-body);
+    color: #81652d;
+    white-space: nowrap;
+}
+.spa-price-details small { font-size: .57em; font-weight: 600; }
+.spa-price-option input:checked + .spa-price-details {
+    border-color: var(--color-accent);
+    background: rgba(191, 161, 95, .1);
+    box-shadow: 0 0 0 1px rgba(191, 161, 95, .18);
+}
+.spa-price-option input:focus-visible + .spa-price-details { outline: 3px solid var(--color-accent); outline-offset: 2px; }
+.spa-price-option:hover .spa-price-details { border-color: var(--color-accent); }
+.spa-select-treatment {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px 15px;
+    border: 1px solid var(--color-accent);
+    border-radius: 8px;
+    background: var(--color-accent);
+    color: #17261a;
+    font: 700 .82rem var(--font-body);
+    cursor: pointer;
+    transition: transform .2s ease, background .2s ease;
+}
+.spa-select-treatment:hover { transform: translateY(-2px); background: #d7b970; }
+.spa-select-treatment:focus-visible { outline: 3px solid #426e52; outline-offset: 3px; }
+.spa-selected-notice { margin: 6px 0 0; color: #38724c; font-size: .8rem; font-weight: 600; line-height: 1.4; }
+.spa-selected-notice[hidden] { display: none; }
+/* Barra del progreso: muestra el tiempo de las fotos y el avance del video */
+.spa-progress-track { height: 3px; background: rgba(191, 161, 95, .2); }
+.spa-progress-bar { display: block; height: 100%; width: 0; background: var(--color-accent); transition: none; }
+.spa-carousel-container { border-radius: 13px; }
+.spa-carousel-stage { aspect-ratio: 4 / 3; }
+.spa-slide {
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .38s ease, visibility .38s ease;
+}
+.spa-slide.active { visibility: visible; opacity: 1; pointer-events: auto; z-index: 1; }
+.spa-carousel-container:focus-within .spa-nav-arrow { opacity: 1; }
+[data-theme="dark"] .spa-section .spa-plan-item { background: rgba(20, 31, 23, .9); border-color: rgba(191, 161, 95, .26); border-left-color: var(--color-accent); }
+[data-theme="dark"] .spa-plan-header h3 { color: #f4f4ed; }
+[data-theme="dark"] .spa-plan-duration, [data-theme="dark"] .spa-price-options legend { color: #b2c4b7; }
+[data-theme="dark"] .spa-price-details { background: rgba(10, 21, 14, .5); border-color: rgba(255,255,255,.13); }
+[data-theme="dark"] .spa-price-details > span { color: #cddbd0; }
+[data-theme="dark"] .spa-price-details strong { color: #d0b16e; }
+[data-theme="dark"] .spa-price-option input:checked + .spa-price-details { background: rgba(191,161,95,.12); border-color: var(--color-accent); }
+[data-theme="dark"] .spa-selected-notice { color: #cdb577; }
+@media (max-width: 1040px) {
+    .spa-section .spa-wrapper { grid-template-columns: minmax(0, 1fr); max-width: 680px; margin-inline: auto; gap: 27px; }
+    .spa-section .spa-text-side { order: -1; }
+    .spa-carousel-container { max-width: 610px; margin-inline: auto; }
+}
+@media (max-width: 560px) {
+    .spa-section { padding-top: 62px; padding-bottom: 62px; }
+    .spa-section .spa-plan-item { padding: 16px; }
+    .spa-price-options { gap: 7px; }
+    .spa-price-details { padding: 10px 9px; }
+    .spa-price-details strong { font-size: clamp(.9rem, 3.6vw, 1.06rem); }
+    .spa-select-treatment { min-height: 42px; width: 100%; }
+    .spa-section .spa-carousel-stage { flex: 0 0 auto; aspect-ratio: 1 / 1; min-height: 0; }
+    .spa-carousel-stage { aspect-ratio: 1 / 1; }
+    .spa-slide-video { object-fit: contain; }
+    .spa-thumb-item { flex-basis: 44px; height: 38px; }
+    .spa-media-caption { min-height: 68px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .spa-slide, .spa-select-treatment, .spa-price-details, .spa-nav-arrow { transition: none !important; }
+    .spa-select-treatment:hover { transform: none; }
+}
+
+/* Los enlaces de navegación no quedan ocultos bajo la barra fija. */
+.spa-section { scroll-margin-top: 92px; }
+.spa-slide-media[role="button"]:focus-visible { outline: 3px solid var(--color-accent); outline-offset: -4px; }

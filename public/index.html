@@ -1,917 +1,1284 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dapa Glamping | Hospedaje Campestre y Reserva de Suites</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dapa Glamping | Hospedaje Campestre y Reserva de Suites</title>
+<meta name="dapa-version" content="folletos-logo-2"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- FontAwesome for icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Custom CSS -->
+<link href="style.css?v=folletos-logo-2" rel="stylesheet"/>
+<link href="spa-carousel.css?v=spa-carousel-size-2" rel="stylesheet"/>
+<link href="menu-carousel.css?v=folletos-logo-2" rel="stylesheet"/>
+<link href="portal.css?v=folletos-logo-2" rel="stylesheet"/></head>
 <body>
+<!-- Header / Navbar -->
+<header class="navbar">
+<div class="nav-container">
+<a class="logo-wrapper" href="https://www.instagram.com/dapaglamping?igsi=ZWt0aDk5NDFlaHdl" rel="noopener" target="_blank">
+<img alt="Dapa Glamping Logo" class="logo-img" id="main-logo" src="assets/logo.png?v=folletos-logo-2"/>
+<span class="logo-text">Dapa Glamping</span>
+</a>
+<nav class="nav-links" id="nav-links">
+<a class="nav-link active" href="#inicio">Inicio</a>
+<a class="nav-link" href="#suites">Suites y Planes</a>
+<a class="nav-link" href="#decoraciones">Decoraciones</a>
+<a class="nav-link" href="#spa">Spa</a>
+<a class="nav-link" href="#alimentacion">Alimentación</a>
+<a class="nav-link" href="#experiencia">Experiencia Dapa</a>
+<a class="nav-link" href="#ubicacion">Ubicación</a>
+<a class="nav-link" href="#faq">Preguntas</a>
+<a class="btn-primary-small" href="#reservas">Reservar</a>
+<a class="nav-link nav-account-link" href="/acceso.html" id="account-link">Ingresar</a></nav>
+<div class="nav-controls">
+<button aria-label="Cambiar entre modo claro y oscuro" class="theme-toggle-btn" id="theme-toggle-btn" title="Cambiar tema">
+<i class="fa-solid fa-moon"></i>
+</button>
+<button aria-label="Abrir menú" class="mobile-menu-btn" id="mobile-menu-btn">
+<i class="fa-solid fa-bars"></i>
+</button>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="hero" id="inicio" style="background-image: linear-gradient(rgba(27, 51, 34, 0.65), rgba(27, 51, 34, 0.45)), url('assets/hero-bg.webp');">
+<div class="hero-content">
+<span class="hero-tagline"><i class="fa-solid fa-mountain-sun"></i> HOSPEDAJE CAMPESTRE EN DAPA, VALLE DEL CAUCA</span>
+<h1>Descanso exclusivo rodeado de naturaleza y clima de montaña</h1>
+<p>Disfruta de suites privadas con jacuzzi de agua caliente, mallas de catamarán, servicio de spa y vista al bosque de niebla. Cotiza tu estadía en tiempo real y reserva de forma directa.</p>
+<div class="hero-actions">
+<a class="btn-primary" href="#suites">Ver Suites y Planes</a>
+<a class="btn-secondary" href="#reservas">Cotizar y Reservar</a>
+</div>
+</div>
+<div class="hero-scroll-indicator">
+<a aria-label="Ir a suites" href="#suites"><i class="fa-solid fa-chevron-down animate-bounce"></i></a>
+</div>
+</section>
+<!-- Suites and Plans Section -->
+<section class="suites-section" id="suites">
+<div class="container">
+<div class="section-header reveal-on-scroll">
+<span class="section-subtitle">Alojamientos</span>
+<h2>Suites &amp; Planes Disponibles</h2>
+<div class="divider"></div>
+<p>Elige el alojamiento ideal para tu estadía. Contamos con opciones para parejas, grupos familiares y planes por horas.</p>
+</div>
+<div class="suites-grid">
+<!-- Suite 1: Casita Mágica -->
+<div class="suite-card reveal-on-scroll">
+<div class="suite-img-wrapper brochure-media">
+<img alt="Casita Mágica" class="suite-img brochure-poster" loading="lazy" onclick="openLightbox('assets/plan-relax-spa.webp')" src="assets/plan-relax-spa.webp"/>
+<div class="suite-tag"><i class="fa-regular fa-clock"></i> Planes por Horas</div>
+<div class="suite-zoom-hint" onclick="openLightbox('assets/plan-relax-spa.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver folleto</div>
+</div>
+<div class="suite-details">
+<div class="suite-header-info">
+<h3>Casita Mágica</h3>
+<span class="suite-price" data-rate-key="casita_relax" data-rate-prefix="Desde " data-rate-suffix=" COP">Desde $200,000 COP</span>
+</div>
+<p class="suite-desc">Un rincón mágico perfecto para desconectarte por unas horas. Elige entre nuestros planes Relax, Spa o Full.</p>
+<div class="plan-suboptions">
+<div class="plan-suboption" data-rate-template="Plan Relax (4h): [[casita_relax]] COP"><strong>Plan Relax (4h):</strong> $200,000 COP</div>
+<div class="plan-suboption" data-rate-template="Plan Spa (5h): [[casita_spa]] COP"><strong>Plan Spa (5h):</strong> $359,900 COP</div>
+<div class="plan-suboption" data-rate-template="Plan Full (5h): [[casita_full]] COP"><strong>Plan Full (5h):</strong> $399,900 COP</div>
+</div>
+<p class="portal-muted">Hora adicional: <strong data-rate-key="casita_hora_extra">$30.000 COP</strong></p>
+<div class="suite-schedule">
+<span><i class="fa-regular fa-clock"></i> Bloques de 4 o 5 Horas</span>
+<span><i class="fa-solid fa-moon"></i> Solo por horas / No incluye noche</span>
+</div>
+<ul class="suite-features">
+<li><i class="fa-solid fa-vector-square"></i> 30 m² de Privacidad</li>
+<li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
+<li><i class="fa-solid fa-wifi"></i> Wifi  &amp; Mini Sala (Sofá)</li>
+<li><i class="fa-solid fa-bell"></i> Servicio a la Habitación</li>
+</ul>
+<div class="suite-actions">
+<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Casita Mágica')">Seleccionar</a>
+</div>
+</div>
+</div>
+<!-- Suite 2: Suite Orquídeas -->
+<div class="suite-card reveal-on-scroll">
+<div class="suite-img-wrapper brochure-media">
+<img alt="Suite Orquídeas" class="suite-img brochure-poster" loading="lazy" onclick="openLightbox('assets/suite-orquideas.webp')" src="assets/suite-orquideas.webp"/>
+<div class="suite-tag"><i class="fa-solid fa-users"></i> Hasta 4 Personas</div>
+<div class="suite-zoom-hint" onclick="openLightbox('assets/suite-orquideas.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver folleto</div>
+</div>
+<div class="suite-details">
+<div class="suite-header-info">
+<h3>Suite Orquídeas</h3>
+<span class="suite-price" data-rate-key="orquideas_semana_2" data-rate-prefix="Desde " data-rate-suffix=" COP">Desde $590,000 COP</span>
+</div>
+<p class="suite-desc">Amplio y lujoso glamping con dos niveles de mallas catamarán y capacidad para acomodar hasta 4 personas.</p>
+<div class="pricing-tabs">
+<div class="pricing-col">
+<span class="pricing-title">Lunes a Jueves:</span>
+<div data-rate-template="2 Pers: [[orquideas_semana_2]] | 3 Pers: [[orquideas_semana_3]] | 4 Pers: [[orquideas_semana_4]]">2 Pers: $590k | 3 Pers: $710k | 4 Pers: $810k</div>
+</div>
+<div class="pricing-col">
+<span class="pricing-title">FindeS y Festivos:</span>
+<div data-rate-template="2 Pers: [[orquideas_finde_2]] | 3 Pers: [[orquideas_finde_3]] | 4 Pers: [[orquideas_finde_4]]">2 Pers: $650k | 3 Pers: $770k | 4 Pers: $880k</div>
+</div>
+</div>
+<div class="suite-schedule">
+<span><i class="fa-regular fa-clock"></i> Check-in: 4:00 PM</span>
+<span><i class="fa-regular fa-clock"></i> Check-out: 2:00 PM</span>
+</div>
+<ul class="suite-features">
+<li><i class="fa-solid fa-vector-square"></i> 60 m² de Privacidad</li>
+<li><i class="fa-solid fa-bed"></i> 2 Camas dobles (Máx 4 pers)</li>
+<li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
+<li><i class="fa-solid fa-square"></i> 2 Mallas de Catamarán</li>
+</ul>
+<div class="suite-actions">
+<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Suite Orquídeas')">Seleccionar</a>
+</div>
+</div>
+</div>
+<!-- Suite 3: Suite Aves del Paraíso -->
+<div class="suite-card reveal-on-scroll">
+<div class="suite-img-wrapper brochure-media">
+<img alt="Suite Aves del Paraíso" class="suite-img brochure-poster" loading="lazy" onclick="openLightbox('assets/suite_aves_del_paraiso.webp')" src="assets/suite_aves_del_paraiso.webp"/>
+<div class="suite-tag"><i class="fa-solid fa-heart"></i> Exclusivo Parejas</div>
+<div class="suite-zoom-hint" onclick="openLightbox('assets/suite_aves_del_paraiso.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver folleto</div>
+</div>
+<div class="suite-details">
+<div class="suite-header-info">
+<h3>Suite Aves del Paraíso</h3>
+<span class="suite-price" data-rate-key="aves_semana" data-rate-prefix="Desde " data-rate-suffix=" COP">Desde $420,000 COP</span>
+</div>
+<p class="suite-desc">Una romántica suite ideal para parejas, rodeada de abundante vegetación y la calma típica del bosque de Dapa.</p>
+<div class="pricing-tabs">
+<div class="pricing-col">
+<span class="pricing-title">Lunes a Jueves:</span>
+<div data-rate-template="[[aves_semana]] COP (2 personas)">$420,000 COP (2 personas)</div>
+</div>
+<div class="pricing-col">
+<span class="pricing-title">FindeS y Festivos:</span>
+<div data-rate-template="[[aves_finde]] COP (2 personas)">$490,000 COP (2 personas)</div>
+</div>
+</div>
+<div class="suite-schedule">
+<span><i class="fa-regular fa-clock"></i> Check-in: 7:00 PM</span>
+<span><i class="fa-regular fa-clock"></i> Check-out: 5:00 PM (Día sig.)</span>
+</div>
+<ul class="suite-features">
+<li><i class="fa-solid fa-vector-square"></i> 20 m² de Privacidad</li>
+<li><i class="fa-solid fa-bed"></i> Cama doble para 2 personas </li>
+<li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
+<li><i class="fa-solid fa-fan"></i> Ventilador &amp; Wifi gratis</li>
+</ul>
+<div class="suite-actions">
+<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Suite Aves del Paraíso')">Seleccionar</a>
+</div>
+</div>
+</div>
+<!-- Suite 4: Suite Margaritas -->
+<div class="suite-card reveal-on-scroll">
+<div class="suite-img-wrapper brochure-media">
+<img alt="Suite Margaritas" class="suite-img brochure-poster" loading="lazy" onclick="openLightbox('assets/suite_margaritas.webp')" src="assets/suite_margaritas.webp"/>
+<div class="suite-tag"><i class="fa-solid fa-heart"></i> Exclusivo Parejas</div>
+<div class="suite-zoom-hint" onclick="openLightbox('assets/suite_margaritas.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver folleto</div>
+</div>
+<div class="suite-details">
+<div class="suite-header-info">
+<h3>Suite Margaritas</h3>
+<span class="suite-price" data-rate-key="margaritas_semana" data-rate-prefix="Desde " data-rate-suffix=" COP">Desde $420,000 COP</span>
+</div>
+<p class="suite-desc">Habitación idéntica a Aves del Paraíso. Un refugio privado con jacuzzi de agua caliente e inigualable confort para dos.</p>
+<div class="pricing-tabs">
+<div class="pricing-col">
+<span class="pricing-title">Lunes a Jueves:</span>
+<div data-rate-template="[[margaritas_semana]] COP (2 personas)">$420,000 COP (2 personas)</div>
+</div>
+<div class="pricing-col">
+<span class="pricing-title">FindeS y Festivos:</span>
+<div data-rate-template="[[margaritas_finde]] COP (2 personas)">$490,000 COP (2 personas)</div>
+</div>
+</div>
+<div class="suite-schedule">
+<span><i class="fa-regular fa-clock"></i> Check-in: 7:00 PM</span>
+<span><i class="fa-regular fa-clock"></i> Check-out: 5:00 PM (Día sig.)</span>
+</div>
+<ul class="suite-features">
+<li><i class="fa-solid fa-vector-square"></i> 20 m² de Privacidad</li>
+<li><i class="fa-solid fa-bed"></i> Cama doble para 2 personas </li>
+<li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
+<li><i class="fa-solid fa-fan"></i> Ventilador &amp; Wifi gratis</li>
+</ul>
+<div class="suite-actions">
+<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Suite Margaritas')">Seleccionar</a>
+</div>
+</div>
+</div>
+<!-- Suite 5: Suite Eugenias -->
+<div class="suite-card reveal-on-scroll">
+<div class="suite-img-wrapper brochure-media">
+<img alt="Suite Eugenias" class="suite-img brochure-poster" loading="lazy" onclick="openLightbox('assets/suite_eugenias.webp')" src="assets/suite_eugenias.webp"/>
+<div class="suite-tag"><i class="fa-solid fa-people-roof"></i> Familiar (Hasta 8 pers.)</div>
+<div class="suite-zoom-hint" onclick="openLightbox('assets/suite_eugenias.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver folleto</div>
+</div>
+<div class="suite-details">
+<div class="suite-header-info">
+<h3>Suite Eugenias</h3>
+<span class="suite-price" data-rate-key="eugenias_semana_2" data-rate-prefix="Desde " data-rate-suffix=" COP">Desde $590,000 COP</span>
+</div>
+<p class="suite-desc">Nuestra suite más grande y lujosa. Cuenta con piscina privada, chimenea, malla catamarán y espacio para albergar hasta 8 personas.</p>
+<div class="pricing-tabs">
+<div class="pricing-col">
+<span class="pricing-title">Lunes a Jueves:</span>
+<div data-rate-template="2 Pers: [[eugenias_semana_2]] | 3 Pers: [[eugenias_semana_3]] | 4 Pers: [[eugenias_semana_4]] (+ Extra)">2 Pers: $590k | 3 Pers: $710k | 4 Pers: $810k (+ Extra)</div>
+</div>
+<div class="pricing-col">
+<span class="pricing-title">FindeS y Festivos:</span>
+<div data-rate-template="2 Pers: [[eugenias_finde_2]] | 3 Pers: [[eugenias_finde_3]] | 4 Pers: [[eugenias_finde_4]] (+ Extra)">2 Pers: $650k | 3 Pers: $770k | 4 Pers: $880k (+ Extra)</div>
+</div>
+</div>
+<div class="suite-schedule">
+<span><i class="fa-regular fa-clock"></i> Check-in: 5:00 PM</span>
+<span><i class="fa-regular fa-clock"></i> Check-out: 3:00 PM</span>
+</div>
+<ul class="suite-features">
+<li><i class="fa-solid fa-vector-square"></i> 60 m² de Privacidad</li>
+<li><i class="fa-solid fa-swimming-pool"></i> Piscina Privada &amp; Chimenea </li>
+<li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
+<li><i class="fa-solid fa-users"></i> Capacidad Máxima: 8 personas</li>
+</ul>
+<div class="suite-actions">
+<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Suite Eugenias')">Seleccionar</a>
+</div>
+</div>
+</div>
+<!-- Suite 6: Pasadía -->
+<div class="suite-card reveal-on-scroll">
+<div class="suite-img-wrapper brochure-media">
+<img alt="Pasadía" class="suite-img brochure-poster" loading="lazy" onclick="openLightbox('assets/pasadia.webp')" src="assets/pasadia.webp"/>
+<div class="suite-tag"><i class="fa-solid fa-sun"></i> Plan Solo Día</div>
+<div class="suite-zoom-hint" onclick="openLightbox('assets/pasadia.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver folleto</div>
+</div>
+<div class="suite-details">
+<div class="suite-header-info">
+<h3>Pasadía</h3>
+<span class="suite-price" data-rate-key="pasadia_semana" data-rate-prefix="Desde " data-rate-suffix=" COP">Desde $320,000 COP</span>
+</div>
+<p class="suite-desc">Disfruta de las instalaciones durante el día. Puedes elegir para tu estadía entre Suite Paraíso y Suite Margaritas.</p>
+<div class="pricing-tabs">
+<div class="pricing-col">
+<span class="pricing-title">Lunes a Viernes y Dom:</span>
+<div data-rate-template="[[pasadia_semana]] COP (2 personas)">$320,000 COP (2 personas)</div>
+</div>
+<div class="pricing-col">
+<span class="pricing-title">Solo Sábados:</span>
+<div data-rate-template="[[pasadia_sabado]] COP (2 personas)">$360,000 COP (2 personas)</div>
+</div>
+</div>
+<div class="suite-schedule">
+<span><i class="fa-regular fa-clock"></i> Check-in: 10:00 AM</span>
+<span><i class="fa-regular fa-clock"></i> Check-out: 5:00 PM (Mismo día)</span>
+</div>
+<ul class="suite-features">
+<li><i class="fa-solid fa-utensils"></i> Incluye Almuerzo &amp; Bebida Caliente</li>
+<li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
+<li><i class="fa-solid fa-wifi"></i> Wifi  &amp; Ventilador</li>
+<li><i class="fa-solid fa-p"></i> Parqueadero Privado</li>
+</ul>
+<div class="suite-actions">
+<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Pasadía')">Seleccionar</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Romantic Decorations Section -->
+<section class="decorations-section" id="decoraciones">
+<div class="container">
+<div class="section-header reveal-on-scroll">
+<span class="section-subtitle">Servicios Adicionales</span>
+<h2>Decoraciones Especiales</h2>
+<div class="divider"></div>
+<p>Sorprende a tu pareja celebrando aniversarios, cumpleaños o momentos especiales con nuestros románticos sets de decoración.</p>
+</div>
+<div class="decorations-grid">
+<!-- Decoración 1: Elios -->
+<div class="decor-card reveal-on-scroll">
+<div class="decor-img-wrapper">
+<img alt="Decoración Elios" class="decor-img" loading="lazy" onclick="openLightbox('assets/fotos-sin-tarifas/decor-elios.webp')" src="assets/fotos-sin-tarifas/decor-elios.webp"/>
+<div class="decor-zoom-hint" onclick="openLightbox('assets/fotos-sin-tarifas/decor-elios.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
+</div>
+<div class="decor-details">
+<h4>Decoración Elios</h4>
+<span class="decor-price" data-rate-key="decor_elios">$180,000 COP</span>
+<p class="decor-room-avail"><i class="fa-solid fa-circle-info"></i> Disponible en Suite Orquídeas, Eugenias, Margaritas y Aves del Paraíso.</p>
+<ul class="decor-bullets">
+<li>39 Globos y 8 Globos en Helio</li>
+<li>Pétalos de rosa decorativos</li>
+<li>3 Pizarras de mensajes personalizadas</li>
+<li data-rate-template="Opciones: con vino ([[decor_elios_vino]]) | con champaña ([[decor_elios_champana]])">Opciones: Con Vino ($267k) | Con Champaña ($321k)</li>
+</ul>
+</div>
+</div>
+<!-- Decoración 2: Estándar Casita Mágica -->
+<div class="decor-card reveal-on-scroll">
+<div class="decor-img-wrapper">
+<img alt="Decoración Estándar Casita" class="decor-img" loading="lazy" onclick="openLightbox('assets/fotos-sin-tarifas/decor-estandar-casita.webp')" src="assets/fotos-sin-tarifas/decor-estandar-casita.webp"/>
+<div class="decor-zoom-hint" onclick="openLightbox('assets/fotos-sin-tarifas/decor-estandar-casita.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
+</div>
+<div class="decor-details">
+<h4>Estándar (Casita Mágica)</h4>
+<span class="decor-price" data-rate-key="decor_estandar">$59,000 COP</span>
+<p class="decor-room-avail"><i class="fa-solid fa-circle-info"></i> Diseñado para Casita Mágica.</p>
+<ul class="decor-bullets">
+<li>13 Globos y Pétalos</li>
+<li>1 Pizarra de bienvenida</li>
+<li>Letrero con motivo especial</li>
+<li data-rate-template="Opciones: con vino ([[decor_estandar_vino]]) | con champaña ([[decor_estandar_champana]])">Opciones: Con Vino ($146k) | Con Champaña ($200k)</li>
+</ul>
+</div>
+</div>
+<!-- Decoración 3: Estándar Margaritas / Paraíso -->
+<div class="decor-card reveal-on-scroll">
+<div class="decor-img-wrapper">
+<img alt="Decoración Estándar Suites" class="decor-img" loading="lazy" onclick="openLightbox('assets/fotos-sin-tarifas/decor-estandar-suites.webp')" src="assets/fotos-sin-tarifas/decor-estandar-suites.webp"/>
+<div class="decor-zoom-hint" onclick="openLightbox('assets/fotos-sin-tarifas/decor-estandar-suites.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
+</div>
+<div class="decor-details">
+<h4>Estándar (Margaritas / Paraíso)</h4>
+<span class="decor-price" data-rate-key="decor_estandar">$59,000 COP</span>
+<p class="decor-room-avail"><i class="fa-solid fa-circle-info"></i> Disponible en Margaritas y Aves del Paraíso.</p>
+<ul class="decor-bullets">
+<li>13 Globos y Letrero</li>
+<li>Pétalos de rosa en la suite</li>
+<li>Mini pizarra de mensajes</li>
+<li data-rate-template="Opciones: con vino ([[decor_estandar_vino]]) | con champaña ([[decor_estandar_champana]])">Opciones: Con Vino ($146k) | Con Champaña ($200k)</li>
+</ul>
+</div>
+</div>
+<!-- Decoración 4: Pizarra Eugenias -->
+<div class="decor-card reveal-on-scroll">
+<div class="decor-img-wrapper">
+<img alt="Decoración Pizarra Eugenias" class="decor-img" loading="lazy" onclick="openLightbox('assets/fotos-sin-tarifas/decor-pizarra.webp')" src="assets/fotos-sin-tarifas/decor-pizarra.webp"/>
+<div class="decor-zoom-hint" onclick="openLightbox('assets/fotos-sin-tarifas/decor-pizarra.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
+</div>
+<div class="decor-details">
+<h4>Decoración Pizarra</h4>
+<span class="decor-price" data-rate-key="decor_pizarra">$70,000 COP</span>
+<p class="decor-room-avail"><i class="fa-solid fa-circle-info"></i> Diseñado para Suite Eugenias.</p>
+<ul class="decor-bullets">
+<li>24 Globos de color</li>
+<li>Letrero del motivo especial</li>
+<li>2 Pizarras de mensajes escritas</li>
+<li data-rate-template="Opciones: con vino ([[decor_pizarra_vino]]) | con champaña ([[decor_pizarra_champana]])">Opciones: Con Vino ($157k) | Con Champaña ($211k)</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Additional decorations notice -->
+<div class="decor-extra-info reveal-on-scroll">
+<div class="decor-extra-header">
+<i class="fa-solid fa-circle-info"></i>
+<div>
+<h4>Tarifas especiales para Suite Margaritas y Aves del Paraíso</h4>
+<p>Por dimensiones y distribución de estas suites, los siguientes arreglos tienen una tarifa ajustada:</p>
+</div>
+</div>
+<div class="decor-chips-grid">
+<div class="decor-chip">
+<span class="decor-chip-name">Pétalos</span>
+<span class="decor-chip-price" data-rate-key="decor_petalos">$85,000 COP</span>
+</div>
+<div class="decor-chip">
+<span class="decor-chip-name">Globos</span>
+<span class="decor-chip-price" data-rate-key="decor_globos">$125,000 COP</span>
+</div>
+<div class="decor-chip">
+<span class="decor-chip-name">Velas</span>
+<span class="decor-chip-price" data-rate-key="decor_velas">$136,000 COP</span>
+</div>
+<div class="decor-chip">
+<span class="decor-chip-name">Elios</span>
+<span class="decor-chip-price" data-rate-key="decor_elios_pareja">$140,000 COP</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Spa Section -->
+<section aria-label="Servicio de spa y tarifas" class="spa-section" id="spa">
+<div class="container">
+<div class="spa-wrapper">
+<!-- Spa Interactive Carousel Side -->
+<div class="spa-carousel-container reveal-on-scroll" id="spa-carousel-container">
+<!-- Carousel Topbar -->
+<div class="spa-carousel-topbar"><span class="spa-carousel-label">Galería del Spa</span><span aria-live="off" class="spa-counter-badge" id="spa-counter">1 / 18</span></div>
+<!-- Main Stage -->
+<div aria-label="Galería del spa con imágenes y videos; usa las flechas para avanzar o retroceder" class="spa-carousel-stage" id="spa-carousel-stage" tabindex="0">
+<div class="spa-carousel-track" id="spa-carousel-track">
+<div class="spa-slide active" data-index="0" data-type="image">
+<div aria-label="Ampliar imagen del spa" class="spa-slide-media" onclick="openLightbox('assets/spa/spa-01-masaje-pareja-suite-jacuzzi.webp')" role="button" tabindex="-1">
+<img alt="Masaje en Pareja en Suite" class="spa-slide-img" decoding="async" fetchpriority="low" loading="lazy" src="assets/spa/spa-01-masaje-pareja-suite-jacuzzi.webp">
+<div class="spa-zoom-badge" title="Ampliar imagen"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
+</img></div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-camera"></i> En Pareja</div>
+<h4 class="spa-slide-title">Masaje en Pareja en Suite</h4>
+<p class="spa-slide-desc">Sesión simultánea con vista al jacuzzi y domo de cristal</p>
+</div>
+</div><div class="spa-slide" data-index="1" data-type="video">
+<div class="spa-slide-media video-media">
+<video class="spa-slide-video" controls="" controlslist="nodownload" muted="" oncontextmenu="return false;" playsinline="" poster="assets/spa/spa-video-01-masaje-espalda-exterior-poster.webp" preload="none">
+<source data-src="assets/spa/spa-video-01-masaje-espalda-exterior.mp4" type="video/mp4"/>
+                                    Tu navegador no soporta video.
+                                </video>
+<button aria-label="Reproducir video" class="spa-video-play-btn hidden" type="button">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-film"></i> Video</div>
+<h4 class="spa-slide-title">Video: Masaje en Deck Exterior</h4>
+<p class="spa-slide-desc">Movimientos fluidos y suaves en terraza campestre</p>
+</div>
+</div><div class="spa-slide" data-index="2" data-type="video">
+<div class="spa-slide-media video-media">
+<video class="spa-slide-video" controls="" controlslist="nodownload" muted="" oncontextmenu="return false;" playsinline="" poster="assets/spa/spa-video-02-relajacion-deck-glamping-poster.webp" preload="none">
+<source data-src="assets/spa/spa-video-02-relajacion-deck-glamping.mp4" type="video/mp4"/>
+                                    Tu navegador no soporta video.
+                                </video>
+<button aria-label="Reproducir video" class="spa-video-play-btn hidden" type="button">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-film"></i> Video</div>
+<h4 class="spa-slide-title">Video: Relajación al Aire Libre</h4>
+<p class="spa-slide-desc">Sesión rodeada del sonido de los pájaros y el viento</p>
+</div>
+</div><div class="spa-slide" data-index="3" data-type="image">
+<div aria-label="Ampliar imagen del spa" class="spa-slide-media" onclick="openLightbox('assets/spa/spa-02-masaje-pareja-naturaleza.webp')" role="button" tabindex="-1">
+<img alt="Armonía &amp; Aves del Paraíso" class="spa-slide-img" data-src="assets/spa/spa-02-masaje-pareja-naturaleza.webp" decoding="async" loading="lazy">
+<div class="spa-zoom-badge" title="Ampliar imagen"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
+</img></div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-camera"></i> Naturaleza</div>
+<h4 class="spa-slide-title">Armonía &amp; Aves del Paraíso</h4>
+<p class="spa-slide-desc">Entorno campestre rodeado de vegetación tropical</p>
+</div>
+</div><div class="spa-slide" data-index="4" data-type="video">
+<div class="spa-slide-media video-media">
+<video class="spa-slide-video" controls="" controlslist="nodownload" muted="" oncontextmenu="return false;" playsinline="" poster="assets/spa/spa-video-03-masaje-terapeutico-naturaleza-poster.webp" preload="none">
+<source data-src="assets/spa/spa-video-03-masaje-terapeutico-naturaleza.mp4" type="video/mp4"/>
+                                    Tu navegador no soporta video.
+                                </video>
+<button aria-label="Reproducir video" class="spa-video-play-btn hidden" type="button">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-film"></i> Video</div>
+<h4 class="spa-slide-title">Video: Masaje Corporal en Naturaleza</h4>
+<p class="spa-slide-desc">Tratamiento completo con aceites naturales botánicos</p>
+</div>
+</div><div class="spa-slide" data-index="5" data-type="image">
+<div aria-label="Ampliar imagen del spa" class="spa-slide-media" onclick="openLightbox('assets/spa/spa-03-masaje-relajante-aire-libre.webp')" role="button" tabindex="-1">
+<img alt="Masaje Relajante al Aire Libre" class="spa-slide-img" data-src="assets/spa/spa-03-masaje-relajante-aire-libre.webp" decoding="async" loading="lazy">
+<div class="spa-zoom-badge" title="Ampliar imagen"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
+</img></div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-camera"></i> Al Aire Libre</div>
+<h4 class="spa-slide-title">Masaje Relajante al Aire Libre</h4>
+<p class="spa-slide-desc">Camilla ergonómica profesional y brisa fresca de montaña</p>
+</div>
+</div><div class="spa-slide" data-index="6" data-type="video">
+<div class="spa-slide-media video-media">
+<video class="spa-slide-video" controls="" controlslist="nodownload" muted="" oncontextmenu="return false;" playsinline="" poster="assets/spa/spa-video-04-tecnica-aceites-esenciales-poster.webp" preload="none">
+<source data-src="assets/spa/spa-video-04-tecnica-aceites-esenciales.mp4" type="video/mp4"/>
+                                    Tu navegador no soporta video.
+                                </video>
+<button aria-label="Reproducir video" class="spa-video-play-btn hidden" type="button">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-film"></i> Aromaterapia</div>
+<h4 class="spa-slide-title">Video: Aplicación de Aceites Esenciales</h4>
+<p class="spa-slide-desc">Aromaterapia que nutre la piel y calma los sentidos</p>
+</div>
+</div><div class="spa-slide" data-index="7" data-type="video">
+<div class="spa-slide-media video-media">
+<video class="spa-slide-video" controls="" controlslist="nodownload" muted="" oncontextmenu="return false;" playsinline="" poster="assets/spa/spa-video-05-maderoterapia-relajante-piernas-poster.webp" preload="none">
+<source data-src="assets/spa/spa-video-05-maderoterapia-relajante-piernas.mp4" type="video/mp4"/>
+                                    Tu navegador no soporta video.
+                                </video>
+<button aria-label="Reproducir video" class="spa-video-play-btn hidden" type="button">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-film"></i> Maderoterapia</div>
+<h4 class="spa-slide-title">Video: Maderoterapia Relajante de Piernas</h4>
+<p class="spa-slide-desc">Técnica de drenaje y alivio de fatiga en piernas</p>
+</div>
+</div><div class="spa-slide" data-index="8" data-type="image">
+<div aria-label="Ampliar imagen del spa" class="spa-slide-media" onclick="openLightbox('assets/spa/spa-04-reflexologia-podal-deck.webp')" role="button" tabindex="-1">
+<img alt="Reflexología Podal en Terraza" class="spa-slide-img" data-src="assets/spa/spa-04-reflexologia-podal-deck.webp" decoding="async" loading="lazy">
+<div class="spa-zoom-badge" title="Ampliar imagen"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
+</img></div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-camera"></i> Reflexología</div>
+<h4 class="spa-slide-title">Reflexología Podal en Terraza</h4>
+<p class="spa-slide-desc">Técnica enfocada en pies y piernas para activar la circulación</p>
+</div>
+</div><div class="spa-slide" data-index="9" data-type="video">
+<div class="spa-slide-media video-media">
+<video class="spa-slide-video" controls="" controlslist="nodownload" muted="" oncontextmenu="return false;" playsinline="" poster="assets/spa/spa-video-06-masaje-pareja-suite-piedras-poster.webp" preload="none">
+<source data-src="assets/spa/spa-video-06-masaje-pareja-suite-piedras.mp4" type="video/mp4"/>
+                                    Tu navegador no soporta video.
+                                </video>
+<button aria-label="Reproducir video" class="spa-video-play-btn hidden" type="button">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-film"></i> En Pareja</div>
+<h4 class="spa-slide-title">Video: Masaje Doble en Suite Privada</h4>
+<p class="spa-slide-desc">Experiencia romántica para desconectarse juntos</p>
+</div>
+</div><div class="spa-slide" data-index="10" data-type="image">
+<div aria-label="Ampliar imagen del spa" class="spa-slide-media" onclick="openLightbox('assets/spa/spa-05-masaje-atardecer-glamping.webp')" role="button" tabindex="-1">
+<img alt="Masaje al Atardecer en Glamping" class="spa-slide-img" data-src="assets/spa/spa-05-masaje-atardecer-glamping.webp" decoding="async" loading="lazy">
+<div class="spa-zoom-badge" title="Ampliar imagen"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
+</img></div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-camera"></i> Atardecer</div>
+<h4 class="spa-slide-title">Masaje al Atardecer en Glamping</h4>
+<p class="spa-slide-desc">Iluminación cálida y descanso total al caer la tarde</p>
+</div>
+</div><div class="spa-slide" data-index="11" data-type="video">
+<div class="spa-slide-media video-media">
+<video class="spa-slide-video" controls="" controlslist="nodownload" muted="" oncontextmenu="return false;" playsinline="" poster="assets/spa/spa-video-07-masaje-suite-vista-jacuzzi-poster.webp" preload="none">
+<source data-src="assets/spa/spa-video-07-masaje-suite-vista-jacuzzi.mp4" type="video/mp4"/>
+                                    Tu navegador no soporta video.
+                                </video>
+<button aria-label="Reproducir video" class="spa-video-play-btn hidden" type="button">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-film"></i> Suite Privada</div>
+<h4 class="spa-slide-title">Video: Sesión Frente al Jacuzzi</h4>
+<p class="spa-slide-desc">Espacio privado con jacuzzi de agua caliente y techo panorámico</p>
+</div>
+</div><div class="spa-slide" data-index="12" data-type="video">
+<div class="spa-slide-media video-media">
+<video class="spa-slide-video" controls="" controlslist="nodownload" muted="" oncontextmenu="return false;" playsinline="" poster="assets/spa/spa-video-08-sesion-relajante-profunda-poster.webp" preload="none">
+<source data-src="assets/spa/spa-video-08-sesion-relajante-profunda.mp4" type="video/mp4"/>
+                                    Tu navegador no soporta video.
+                                </video>
+<button aria-label="Reproducir video" class="spa-video-play-btn hidden" type="button">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-film"></i> Video</div>
+<h4 class="spa-slide-title">Video: Desconexión y Alivio Muscular</h4>
+<p class="spa-slide-desc">Técnica suave y continua con música relajante</p>
+</div>
+</div><div class="spa-slide" data-index="13" data-type="image">
+<div aria-label="Ampliar imagen del spa" class="spa-slide-media" onclick="openLightbox('assets/spa/spa-06-terapia-espalda-bosque.webp')" role="button" tabindex="-1">
+<img alt="Terapia Descontracturante" class="spa-slide-img" data-src="assets/spa/spa-06-terapia-espalda-bosque.webp" decoding="async" loading="lazy">
+<div class="spa-zoom-badge" title="Ampliar imagen"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
+</img></div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-camera"></i> Terapéutico</div>
+<h4 class="spa-slide-title">Terapia Descontracturante</h4>
+<p class="spa-slide-desc">Liberación de contracturas con aceites esenciales botánicos</p>
+</div>
+</div><div class="spa-slide" data-index="14" data-type="video">
+<div class="spa-slide-media video-media">
+<video class="spa-slide-video" controls="" controlslist="nodownload" muted="" oncontextmenu="return false;" playsinline="" poster="assets/spa/spa-video-09-reflexologia-podal-aire-libre-poster.webp" preload="none">
+<source data-src="assets/spa/spa-video-09-reflexologia-podal-aire-libre.mp4" type="video/mp4"/>
+                                    Tu navegador no soporta video.
+                                </video>
+<button aria-label="Reproducir video" class="spa-video-play-btn hidden" type="button">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-film"></i> Reflexología</div>
+<h4 class="spa-slide-title">Video: Reflexología Podal al Aire Libre</h4>
+<p class="spa-slide-desc">Descanso inmediato para pies tras un día de naturaleza</p>
+</div>
+</div><div class="spa-slide" data-index="15" data-type="image">
+<div aria-label="Ampliar imagen del spa" class="spa-slide-media" onclick="openLightbox('assets/spa/spa-07-masaje-terapeutico-profesional.webp')" role="button" tabindex="-1">
+<img alt="Terapeutas Certificadas" class="spa-slide-img" data-src="assets/spa/spa-07-masaje-terapeutico-profesional.webp" decoding="async" loading="lazy">
+<div class="spa-zoom-badge" title="Ampliar imagen"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
+</img></div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-camera"></i> Profesional</div>
+<h4 class="spa-slide-title">Terapeutas Certificadas</h4>
+<p class="spa-slide-desc">Atención dedicada y profesional en la intimidad de tu estancia</p>
+</div>
+</div><div class="spa-slide" data-index="16" data-type="video">
+<div class="spa-slide-media video-media">
+<video class="spa-slide-video" controls="" controlslist="nodownload" muted="" oncontextmenu="return false;" playsinline="" poster="assets/spa/spa-video-10-masaje-atardecer-iluminacion-poster.webp" preload="none">
+<source data-src="assets/spa/spa-video-10-masaje-atardecer-iluminacion.mp4" type="video/mp4"/>
+                                    Tu navegador no soporta video.
+                                </video>
+<button aria-label="Reproducir video" class="spa-video-play-btn hidden" type="button">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-film"></i> Atardecer</div>
+<h4 class="spa-slide-title">Video: Atardecer Romántico con Masaje</h4>
+<p class="spa-slide-desc">La magia del atardecer con luces cálidas en las montañas</p>
+</div>
+</div><div class="spa-slide" data-index="17" data-type="video">
+<div class="spa-slide-media video-media">
+<video class="spa-slide-video" controls="" controlslist="nodownload" muted="" oncontextmenu="return false;" playsinline="" poster="assets/spa/spa-video-11-ambiente-suite-spa-pareja-poster.webp" preload="none">
+<source data-src="assets/spa/spa-video-11-ambiente-suite-spa-pareja.mp4" type="video/mp4"/>
+                                    Tu navegador no soporta video.
+                                </video>
+<button aria-label="Reproducir video" class="spa-video-play-btn hidden" type="button">
+<i class="fa-solid fa-play"></i>
+</button>
+</div>
+<div class="spa-slide-info">
+<div class="spa-slide-pill"><i class="fa-solid fa-film"></i> Experiencia</div>
+<h4 class="spa-slide-title">Video: Experiencia Integral de Spa</h4>
+<p class="spa-slide-desc">Ambiente de paz, música suave y privacidad total en la suite</p>
+</div>
+</div></div>
+<!-- Navigation Arrows -->
+<button aria-label="Elemento anterior" class="spa-nav-arrow spa-prev-arrow" id="spa-prev-btn" type="button">
+<i class="fa-solid fa-chevron-left"></i>
+</button>
+<button aria-label="Elemento siguiente" class="spa-nav-arrow spa-next-arrow" id="spa-next-btn" type="button">
+<i class="fa-solid fa-chevron-right"></i>
+</button>
+</div>
+<!-- Progress: 2 segundos por imagen o duración real del video -->
+<div aria-hidden="true" class="spa-progress-track"><span class="spa-progress-bar" id="spa-progress-bar"></span></div>
+<!-- Caption -->
+<div aria-live="off" class="spa-media-caption"><strong id="spa-current-title"></strong><span id="spa-current-desc"></span></div><div class="spa-thumbnails-wrapper">
+<button aria-label="Desplazar miniaturas izquierda" class="spa-thumb-scroll-btn thumb-prev" id="spa-thumb-prev" type="button">
+<i class="fa-solid fa-chevron-left"></i>
+</button>
+<div class="spa-thumbnails-strip" id="spa-thumbnails-strip">
+<button aria-label="Ver Masaje en Pareja en Suite" class="spa-thumb-item active" data-index="0" data-type="image" type="button">
+<img alt="Masaje en Pareja en Suite" loading="lazy" src="assets/spa/spa-01-masaje-pareja-suite-jacuzzi-thumb.webp">
+<span class="spa-thumb-number">1</span>
+</img></button><button aria-label="Ver Video: Masaje en Deck Exterior" class="spa-thumb-item" data-index="1" data-type="video" type="button">
+<img alt="Video: Masaje en Deck Exterior" loading="lazy" src="assets/spa/spa-video-01-masaje-espalda-exterior-thumb.webp">
+<span class="spa-thumb-number">2</span>
+</img></button><button aria-label="Ver Video: Relajación al Aire Libre" class="spa-thumb-item" data-index="2" data-type="video" type="button">
+<img alt="Video: Relajación al Aire Libre" loading="lazy" src="assets/spa/spa-video-02-relajacion-deck-glamping-thumb.webp">
+<span class="spa-thumb-number">3</span>
+</img></button><button aria-label="Ver Armonía &amp; Aves del Paraíso" class="spa-thumb-item" data-index="3" data-type="image" type="button">
+<img alt="Armonía &amp; Aves del Paraíso" loading="lazy" src="assets/spa/spa-02-masaje-pareja-naturaleza-thumb.webp">
+<span class="spa-thumb-number">4</span>
+</img></button><button aria-label="Ver Video: Masaje Corporal en Naturaleza" class="spa-thumb-item" data-index="4" data-type="video" type="button">
+<img alt="Video: Masaje Corporal en Naturaleza" loading="lazy" src="assets/spa/spa-video-03-masaje-terapeutico-naturaleza-thumb.webp"/>
+<span class="spa-thumb-number">5</span>
+</button><button aria-label="Ver Masaje Relajante al Aire Libre" class="spa-thumb-item" data-index="5" data-type="image" type="button">
+<img alt="Masaje Relajante al Aire Libre" loading="lazy" src="assets/spa/spa-03-masaje-relajante-aire-libre-thumb.webp"/>
+<span class="spa-thumb-number">6</span>
+</button><button aria-label="Ver Video: Aplicación de Aceites Esenciales" class="spa-thumb-item" data-index="6" data-type="video" type="button">
+<img alt="Video: Aplicación de Aceites Esenciales" loading="lazy" src="assets/spa/spa-video-04-tecnica-aceites-esenciales-thumb.webp"/>
+<span class="spa-thumb-number">7</span>
+</button><button aria-label="Ver Video: Maderoterapia Relajante de Piernas" class="spa-thumb-item" data-index="7" data-type="video" type="button">
+<img alt="Video: Maderoterapia Relajante de Piernas" loading="lazy" src="assets/spa/spa-video-05-maderoterapia-relajante-piernas-thumb.webp"/>
+<span class="spa-thumb-number">8</span>
+</button><button aria-label="Ver Reflexología Podal en Terraza" class="spa-thumb-item" data-index="8" data-type="image" type="button">
+<img alt="Reflexología Podal en Terraza" loading="lazy" src="assets/spa/spa-04-reflexologia-podal-deck-thumb.webp"/>
+<span class="spa-thumb-number">9</span>
+</button><button aria-label="Ver Video: Masaje Doble en Suite Privada" class="spa-thumb-item" data-index="9" data-type="video" type="button">
+<img alt="Video: Masaje Doble en Suite Privada" loading="lazy" src="assets/spa/spa-video-06-masaje-pareja-suite-piedras-thumb.webp"/>
+<span class="spa-thumb-number">10</span>
+</button><button aria-label="Ver Masaje al Atardecer en Glamping" class="spa-thumb-item" data-index="10" data-type="image" type="button">
+<img alt="Masaje al Atardecer en Glamping" loading="lazy" src="assets/spa/spa-05-masaje-atardecer-glamping-thumb.webp"/>
+<span class="spa-thumb-number">11</span>
+</button><button aria-label="Ver Video: Sesión Frente al Jacuzzi" class="spa-thumb-item" data-index="11" data-type="video" type="button">
+<img alt="Video: Sesión Frente al Jacuzzi" loading="lazy" src="assets/spa/spa-video-07-masaje-suite-vista-jacuzzi-thumb.webp"/>
+<span class="spa-thumb-number">12</span>
+</button><button aria-label="Ver Video: Desconexión y Alivio Muscular" class="spa-thumb-item" data-index="12" data-type="video" type="button">
+<img alt="Video: Desconexión y Alivio Muscular" loading="lazy" src="assets/spa/spa-video-08-sesion-relajante-profunda-thumb.webp"/>
+<span class="spa-thumb-number">13</span>
+</button><button aria-label="Ver Terapia Descontracturante" class="spa-thumb-item" data-index="13" data-type="image" type="button">
+<img alt="Terapia Descontracturante" loading="lazy" src="assets/spa/spa-06-terapia-espalda-bosque-thumb.webp"/>
+<span class="spa-thumb-number">14</span>
+</button><button aria-label="Ver Video: Reflexología Podal al Aire Libre" class="spa-thumb-item" data-index="14" data-type="video" type="button">
+<img alt="Video: Reflexología Podal al Aire Libre" loading="lazy" src="assets/spa/spa-video-09-reflexologia-podal-aire-libre-thumb.webp"/>
+<span class="spa-thumb-number">15</span>
+</button><button aria-label="Ver Terapeutas Certificadas" class="spa-thumb-item" data-index="15" data-type="image" type="button">
+<img alt="Terapeutas Certificadas" loading="lazy" src="assets/spa/spa-07-masaje-terapeutico-profesional-thumb.webp"/>
+<span class="spa-thumb-number">16</span>
+</button><button aria-label="Ver Video: Atardecer Romántico con Masaje" class="spa-thumb-item" data-index="16" data-type="video" type="button">
+<img alt="Video: Atardecer Romántico con Masaje" loading="lazy" src="assets/spa/spa-video-10-masaje-atardecer-iluminacion-thumb.webp"/>
+<span class="spa-thumb-number">17</span>
+</button><button aria-label="Ver Video: Experiencia Integral de Spa" class="spa-thumb-item" data-index="17" data-type="video" type="button">
+<img alt="Video: Experiencia Integral de Spa" loading="lazy" src="assets/spa/spa-video-11-ambiente-suite-spa-pareja-thumb.webp"/>
+<span class="spa-thumb-number">18</span>
+</button></div>
+<button aria-label="Desplazar miniaturas derecha" class="spa-thumb-scroll-btn thumb-next" id="spa-thumb-next" type="button">
+<i class="fa-solid fa-chevron-right"></i>
+</button>
+</div>
+</div>
+<div class="spa-text-side reveal-on-scroll">
+<span class="section-subtitle">Salud &amp; Relax</span>
+<h2>Servicio de Spa en la Suite</h2>
+<div class="divider-left"></div>
+<p class="spa-tagline">¿Necesitas un respiro del día a día?</p>
+<p>Vive un momento de total relajación sin salir de tu habitación. Todos nuestros tratamientos de spa se realizan directamente en la suite de tu elección para máxima privacidad y descanso.</p>
+<div aria-label="Tratamientos y tarifas de spa" class="spa-plans">
+<article class="spa-plan-item">
+<div class="spa-plan-header">
+<h3><i aria-hidden="true" class="fa-solid fa-leaf"></i> Spa Relajante</h3>
+<span class="spa-plan-duration"><i aria-hidden="true" class="fa-regular fa-clock"></i> 45 minutos</span>
+</div>
+<p class="spa-plan-description">Aceites naturales, aromaterapia, musicoterapia y té relajante.</p>
+<fieldset aria-label="Spa relajante: elige el número de personas" class="spa-price-options">
+<legend>Elige tu experiencia</legend>
+<label class="spa-price-option">
+<input checked="" name="spa-relax-guests" type="radio" value="Spa Relajante 1p"/>
+<span class="spa-price-details"><span>1 persona</span><strong data-rate-key="spa_relajante_1">$95.000 <small>COP</small></strong></span>
+</label>
+<label class="spa-price-option">
+<input name="spa-relax-guests" type="radio" value="Spa Relajante 2p"/>
+<span class="spa-price-details"><span>2 personas</span><strong data-rate-key="spa_relajante_2">$165.000 <small>COP</small></strong></span>
+</label>
+</fieldset>
+<button class="spa-select-treatment" data-spa-name="spa-relax-guests" type="button">
+            Seleccionar tratamiento <i aria-hidden="true" class="fa-solid fa-arrow-right"></i>
+</button>
+</article>
+<article class="spa-plan-item">
+<div class="spa-plan-header">
+<h3><i aria-hidden="true" class="fa-solid fa-fire-flame-curved"></i> Spa Relajante con Piedras</h3>
+<span class="spa-plan-duration"><i aria-hidden="true" class="fa-regular fa-clock"></i> 45 minutos</span>
+</div>
+<p class="spa-plan-description">Piedras volcánicas, aromaterapia, musicoterapia y shot de crema de whisky.</p>
+<fieldset aria-label="Spa con piedras: elige el número de personas" class="spa-price-options">
+<legend>Elige tu experiencia</legend>
+<label class="spa-price-option">
+<input checked="" name="spa-stones-guests" type="radio" value="Spa Piedras 1p"/>
+<span class="spa-price-details"><span>1 persona</span><strong data-rate-key="spa_piedras_1">$140.000 <small>COP</small></strong></span>
+</label>
+<label class="spa-price-option">
+<input name="spa-stones-guests" type="radio" value="Spa Piedras 2p"/>
+<span class="spa-price-details"><span>2 personas</span><strong data-rate-key="spa_piedras_2">$240.000 <small>COP</small></strong></span>
+</label>
+</fieldset>
+<button class="spa-select-treatment" data-spa-name="spa-stones-guests" type="button">
+            Seleccionar tratamiento <i aria-hidden="true" class="fa-solid fa-arrow-right"></i>
+</button>
+</article>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Included Meals Section -->
+<section class="meals-section" id="alimentacion">
+<div class="container">
+<div class="section-header reveal-on-scroll">
+<span class="section-subtitle">Gastronomía</span>
+<h2>Alimentación Incluida en tu Suite</h2>
+<div class="divider"></div>
+<p>Todas nuestras estadías incluyen alimentación de cortesía (desayuno y almuerzo o cena) servida directamente en tu suite de forma gratuita. Conoce las opciones preparadas por nuestros chefs locales:</p>
+</div>
 
-    <!-- Header / Navbar -->
-    <header class="navbar">
-        <div class="nav-container">
-            <a href="https://www.instagram.com/dapaglamping?igsi=ZWt0aDk5NDFlaHdl" target="_blank" rel="noopener" class="logo-wrapper">
-                <img src="assets/logo.png" alt="Dapa Glamping Logo" class="logo-img" id="main-logo">
-                <span class="logo-text">Dapa Glamping</span>
-            </a>
-            <nav class="nav-links" id="nav-links">
-                <a href="#inicio" class="nav-link active">Inicio</a>
-                <a href="#suites" class="nav-link">Suites y Planes</a>
-                <a href="#decoraciones" class="nav-link">Decoraciones</a>
-                <a href="#spa" class="nav-link">Spa</a>
-                <a href="#alimentacion" class="nav-link">Alimentación</a>
-                <a href="#experiencia" class="nav-link">Experiencia Dapa</a>
-                <a href="#ubicacion" class="nav-link">Ubicación</a>
-                <a href="#faq" class="nav-link">Preguntas</a>
-                <a href="#reservas" class="btn-primary-small">Reservar</a>
-            </nav>
-            <div class="nav-controls">
-                <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Cambiar entre modo claro y oscuro" title="Cambiar tema">
-                    <i class="fa-solid fa-moon"></i>
-                </button>
-                <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </div>
+<!-- Carrusel de Gastronomía -->
+<div class="menu-carousel-section reveal-on-scroll">
+  <div class="menu-carousel-tabs" role="tablist">
+    <button class="menu-tab-btn active" data-category="all" type="button"><i class="fa-solid fa-utensils"></i> Todos los Platillos (7)</button>
+    <button class="menu-tab-btn" data-category="almuerzo" type="button"><i class="fa-solid fa-bowl-food"></i> Almuerzos y Cenas</button>
+    <button class="menu-tab-btn" data-category="desayuno" type="button"><i class="fa-solid fa-mug-hot"></i> Desayunos de Cortesía</button>
+  </div>
+
+  <div class="menu-carousel-wrapper">
+    <button class="menu-carousel-arrow prev" id="menu-prev-btn" type="button" aria-label="Platillo anterior"><i class="fa-solid fa-chevron-left"></i></button>
+
+    <div class="menu-carousel-track" id="menu-carousel-track">
+      <!-- Platillo 1 -->
+      <article class="menu-dish-card" data-category="almuerzo">
+        <div class="menu-dish-media" onclick="openLightbox('assets/menu/01_hamburguesa.webp')" role="button" tabindex="0" title="Ampliar imagen">
+          <img alt="Hamburguesa artesanal de res 150g" class="menu-dish-img" loading="lazy" decoding="async" width="1200" height="1200" src="assets/menu/01_hamburguesa.webp">
+          <span class="menu-dish-tag">Opción 1 &bull; Almuerzo / Cena</span>
+          <span class="menu-dish-badge-included"><i class="fa-solid fa-check"></i> Incluido</span>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="inicio" class="hero" style="background-image: linear-gradient(rgba(27, 51, 34, 0.65), rgba(27, 51, 34, 0.45)), url('assets/hero-bg.webp');">
-        <div class="hero-content">
-            <span class="hero-tagline"><i class="fa-solid fa-mountain-sun"></i> HOSPEDAJE CAMPESTRE EN DAPA, VALLE DEL CAUCA</span>
-            <h1>Descanso exclusivo rodeado de naturaleza y clima de montaña</h1>
-            <p>Disfruta de suites privadas con jacuzzi de agua caliente, mallas de catamarán, servicio de spa y vista al bosque de niebla. Cotiza tu estadía en tiempo real y reserva de forma directa.</p>
-            <div class="hero-actions">
-                <a href="#suites" class="btn-primary">Ver Suites y Planes</a>
-                <a href="#reservas" class="btn-secondary">Cotizar y Reservar</a>
-            </div>
+        <div class="menu-dish-body">
+          <h3 class="menu-dish-title">Hamburguesa Artesanal 150g</h3>
+          <p class="menu-dish-desc">Carne de res seleccionada 150g en pan artesanal de malta y miel, queso fundido, tomates frescos y lechuga crujiente. Acompañada con chips de papas caseras.</p>
         </div>
-        <div class="hero-scroll-indicator">
-            <a href="#suites" aria-label="Ir a suites"><i class="fa-solid fa-chevron-down animate-bounce"></i></a>
+      </article>
+
+      <!-- Platillo 2 -->
+      <article class="menu-dish-card" data-category="almuerzo">
+        <div class="menu-dish-media" onclick="openLightbox('assets/menu/02_cazuela_con_arroz.webp')" role="button" tabindex="0" title="Ampliar imagen">
+          <img alt="Cazuela de fríjoles con garra" class="menu-dish-img" loading="lazy" decoding="async" width="1200" height="1200" src="assets/menu/02_cazuela_con_arroz.webp">
+          <span class="menu-dish-tag">Opción 2 &bull; Almuerzo / Cena</span>
+          <span class="menu-dish-badge-included"><i class="fa-solid fa-check"></i> Incluido</span>
         </div>
-    </section>
-
-    <!-- Suites and Plans Section -->
-    <section id="suites" class="suites-section">
-        <div class="container">
-            <div class="section-header reveal-on-scroll">
-                <span class="section-subtitle">Alojamientos</span>
-                <h2>Suites & Planes Disponibles</h2>
-                <div class="divider"></div>
-                <p>Elige el alojamiento ideal para tu estadía. Contamos con opciones para parejas, grupos familiares y planes por horas.</p>
-            </div>
-
-            <div class="suites-grid">
-                <!-- Suite 1: Casita Mágica -->
-                <div class="suite-card reveal-on-scroll">
-                    <div class="suite-img-wrapper">
-                        <img src="assets/plan-relax-spa.webp" alt="Casita Mágica" class="suite-img" loading="lazy" onclick="openLightbox('assets/plan-relax-spa.webp')">
-                        <div class="suite-tag"><i class="fa-regular fa-clock"></i> Planes por Horas</div>
-                        <div class="suite-zoom-hint" onclick="openLightbox('assets/plan-relax-spa.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver Folleto</div>
-                    </div>
-                    <div class="suite-details">
-                        <div class="suite-header-info">
-                            <h3>Casita Mágica</h3>
-                            <span class="suite-price">Desde $200,000 COP</span>
-                        </div>
-                        <p class="suite-desc">Un rincón mágico perfecto para desconectarte por unas horas. Elige entre nuestros planes Relax, Spa o Full.</p>
-                        
-                        <div class="plan-suboptions">
-                            <div class="plan-suboption"><strong>Plan Relax (4h):</strong> $200,000 COP</div>
-                            <div class="plan-suboption"><strong>Plan Spa (5h):</strong> $359,900 COP</div>
-                            <div class="plan-suboption"><strong>Plan Full (5h):</strong> $399,900 COP</div>
-                        </div>
-
-                        <div class="suite-schedule">
-                            <span><i class="fa-regular fa-clock"></i> Bloques de 4 o 5 Horas</span>
-                            <span><i class="fa-solid fa-moon"></i> Solo por horas / No incluye noche</span>
-                        </div>
-
-                        <ul class="suite-features">
-                            <li><i class="fa-solid fa-vector-square"></i> 30 m² de Privacidad</li>
-                            <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
-                            <li><i class="fa-solid fa-wifi"></i> Wifi  & Mini Sala (Sofá)</li>
-                            <li><i class="fa-solid fa-bell"></i> Servicio a la Habitación</li>
-                        </ul>
-                        <div class="suite-actions">
-                            <a href="#reservas" class="btn-suite-reserve" onclick="selectSuite('Casita Mágica')">Seleccionar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Suite 2: Suite Orquídeas -->
-                <div class="suite-card reveal-on-scroll">
-                    <div class="suite-img-wrapper">
-                        <img src="assets/suite-orquideas.webp" alt="Suite Orquídeas" class="suite-img" loading="lazy" onclick="openLightbox('assets/suite-orquideas.webp')">
-                        <div class="suite-tag"><i class="fa-solid fa-users"></i> Hasta 4 Personas</div>
-                        <div class="suite-zoom-hint" onclick="openLightbox('assets/suite-orquideas.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver Folleto</div>
-                    </div>
-                    <div class="suite-details">
-                        <div class="suite-header-info">
-                            <h3>Suite Orquídeas</h3>
-                            <span class="suite-price">Desde $590,000 COP</span>
-                        </div>
-                        <p class="suite-desc">Amplio y lujoso glamping con dos niveles de mallas catamarán y capacidad para acomodar hasta 4 personas.</p>
-                        
-                        <div class="pricing-tabs">
-                            <div class="pricing-col">
-                                <span class="pricing-title">Lunes a Jueves:</span>
-                                <div>2 Pers: $590k | 3 Pers: $710k | 4 Pers: $810k</div>
-                            </div>
-                            <div class="pricing-col">
-                                <span class="pricing-title">FindeS y Festivos:</span>
-                                <div>2 Pers: $650k | 3 Pers: $770k | 4 Pers: $880k</div>
-                            </div>
-                        </div>
-
-                        <div class="suite-schedule">
-                            <span><i class="fa-regular fa-clock"></i> Check-in: 4:00 PM</span>
-                            <span><i class="fa-regular fa-clock"></i> Check-out: 2:00 PM</span>
-                        </div>
-
-                        <ul class="suite-features">
-                            <li><i class="fa-solid fa-vector-square"></i> 60 m² de Privacidad</li>
-                            <li><i class="fa-solid fa-bed"></i> 2 Camas dobles (Máx 4 pers)</li>
-                            <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
-                            <li><i class="fa-solid fa-square"></i> 2 Mallas de Catamarán</li>
-                        </ul>
-                        <div class="suite-actions">
-                            <a href="#reservas" class="btn-suite-reserve" onclick="selectSuite('Suite Orquídeas')">Seleccionar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Suite 3: Suite Aves del Paraíso -->
-                <div class="suite-card reveal-on-scroll">
-                    <div class="suite-img-wrapper">
-                        <img src="assets/suite-aves-del-paraiso.webp" alt="Suite Aves del Paraíso" class="suite-img" loading="lazy" onclick="openLightbox('assets/suite-aves-del-paraiso.webp')">
-                        <div class="suite-tag"><i class="fa-solid fa-heart"></i> Exclusivo Parejas</div>
-                        <div class="suite-zoom-hint" onclick="openLightbox('assets/suite-aves-del-paraiso.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver Folleto</div>
-                    </div>
-                    <div class="suite-details">
-                        <div class="suite-header-info">
-                            <h3>Suite Aves del Paraíso</h3>
-                            <span class="suite-price">Desde $420,000 COP</span>
-                        </div>
-                        <p class="suite-desc">Una romántica suite ideal para parejas, rodeada de abundante vegetación y la calma típica del bosque de Dapa.</p>
-                        
-                        <div class="pricing-tabs">
-                            <div class="pricing-col">
-                                <span class="pricing-title">Lunes a Jueves:</span>
-                                <div>$420,000 COP (2 personas)</div>
-                            </div>
-                            <div class="pricing-col">
-                                <span class="pricing-title">FindeS y Festivos:</span>
-                                <div>$490,000 COP (2 personas)</div>
-                            </div>
-                        </div>
-
-                        <div class="suite-schedule">
-                            <span><i class="fa-regular fa-clock"></i> Check-in: 7:00 PM</span>
-                            <span><i class="fa-regular fa-clock"></i> Check-out: 5:00 PM (Día sig.)</span>
-                        </div>
-
-                        <ul class="suite-features">
-                            <li><i class="fa-solid fa-vector-square"></i> 20 m² de Privacidad</li>
-                            <li><i class="fa-solid fa-bed"></i> Cama doble para 2 personas </li>
-                            <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
-                            <li><i class="fa-solid fa-fan"></i> Ventilador & Wifi gratis</li>
-                        </ul>
-                        <div class="suite-actions">
-                            <a href="#reservas" class="btn-suite-reserve" onclick="selectSuite('Suite Aves del Paraíso')">Seleccionar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Suite 4: Suite Margaritas -->
-                <div class="suite-card reveal-on-scroll">
-                    <div class="suite-img-wrapper">
-                        <img src="assets/suite-margaritas.webp" alt="Suite Margaritas" class="suite-img" loading="lazy" onclick="openLightbox('assets/suite-margaritas.webp')">
-                        <div class="suite-tag"><i class="fa-solid fa-heart"></i> Exclusivo Parejas</div>
-                        <div class="suite-zoom-hint" onclick="openLightbox('assets/suite-margaritas.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver Folleto</div>
-                    </div>
-                    <div class="suite-details">
-                        <div class="suite-header-info">
-                            <h3>Suite Margaritas</h3>
-                            <span class="suite-price">Desde $420,000 COP</span>
-                        </div>
-                        <p class="suite-desc">Habitación idéntica a Aves del Paraíso. Un refugio privado con jacuzzi de agua caliente e inigualable confort para dos.</p>
-                        
-                        <div class="pricing-tabs">
-                            <div class="pricing-col">
-                                <span class="pricing-title">Lunes a Jueves:</span>
-                                <div>$420,000 COP (2 personas)</div>
-                            </div>
-                            <div class="pricing-col">
-                                <span class="pricing-title">FindeS y Festivos:</span>
-                                <div>$490,000 COP (2 personas)</div>
-                            </div>
-                        </div>
-
-                        <div class="suite-schedule">
-                            <span><i class="fa-regular fa-clock"></i> Check-in: 7:00 PM</span>
-                            <span><i class="fa-regular fa-clock"></i> Check-out: 5:00 PM (Día sig.)</span>
-                        </div>
-
-                        <ul class="suite-features">
-                            <li><i class="fa-solid fa-vector-square"></i> 20 m² de Privacidad</li>
-                            <li><i class="fa-solid fa-bed"></i> Cama doble para 2 personas </li>
-                            <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
-                            <li><i class="fa-solid fa-fan"></i> Ventilador & Wifi gratis</li>
-                        </ul>
-                        <div class="suite-actions">
-                            <a href="#reservas" class="btn-suite-reserve" onclick="selectSuite('Suite Margaritas')">Seleccionar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Suite 5: Suite Eugenias -->
-                <div class="suite-card reveal-on-scroll">
-                    <div class="suite-img-wrapper">
-                        <img src="assets/suite-eugenias.webp" alt="Suite Eugenias" class="suite-img" loading="lazy" onclick="openLightbox('assets/suite-eugenias.webp')">
-                        <div class="suite-tag"><i class="fa-solid fa-people-roof"></i> Familiar (Hasta 8 pers.)</div>
-                        <div class="suite-zoom-hint" onclick="openLightbox('assets/suite-eugenias.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver Folleto</div>
-                    </div>
-                    <div class="suite-details">
-                        <div class="suite-header-info">
-                            <h3>Suite Eugenias</h3>
-                            <span class="suite-price">Desde $590,000 COP</span>
-                        </div>
-                        <p class="suite-desc">Nuestra suite más grande y lujosa. Cuenta con piscina privada, chimenea, malla catamarán y espacio para albergar hasta 8 personas.</p>
-                        
-                        <div class="pricing-tabs">
-                            <div class="pricing-col">
-                                <span class="pricing-title">Lunes a Jueves:</span>
-                                <div>2 Pers: $590k | 3 Pers: $710k | 4 Pers: $810k (+ Extra)</div>
-                            </div>
-                            <div class="pricing-col">
-                                <span class="pricing-title">FindeS y Festivos:</span>
-                                <div>2 Pers: $650k | 3 Pers: $770k | 4 Pers: $880k (+ Extra)</div>
-                            </div>
-                        </div>
-
-                        <div class="suite-schedule">
-                            <span><i class="fa-regular fa-clock"></i> Check-in: 5:00 PM</span>
-                            <span><i class="fa-regular fa-clock"></i> Check-out: 3:00 PM</span>
-                        </div>
-
-                        <ul class="suite-features">
-                            <li><i class="fa-solid fa-vector-square"></i> 60 m² de Privacidad</li>
-                            <li><i class="fa-solid fa-swimming-pool"></i> Piscina Privada & Chimenea </li>
-                            <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
-                            <li><i class="fa-solid fa-users"></i> Capacidad Máxima: 8 personas</li>
-                        </ul>
-                        <div class="suite-actions">
-                            <a href="#reservas" class="btn-suite-reserve" onclick="selectSuite('Suite Eugenias')">Seleccionar</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Suite 6: Pasadía -->
-                <div class="suite-card reveal-on-scroll">
-                    <div class="suite-img-wrapper">
-                        <img src="assets/pasadia.webp" alt="Pasadía" class="suite-img" loading="lazy" onclick="openLightbox('assets/pasadia.webp')">
-                        <div class="suite-tag"><i class="fa-solid fa-sun"></i> Plan Solo Día</div>
-                        <div class="suite-zoom-hint" onclick="openLightbox('assets/pasadia.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver Folleto</div>
-                    </div>
-                    <div class="suite-details">
-                        <div class="suite-header-info">
-                            <h3>Pasadía</h3>
-                            <span class="suite-price">Desde $320,000 COP</span>
-                        </div>
-                        <p class="suite-desc">Disfruta de las instalaciones durante el día. Puedes elegir para tu estadía entre Suite Paraíso y Suite Margaritas.</p>
-                        
-                        <div class="pricing-tabs">
-                            <div class="pricing-col">
-                                <span class="pricing-title">Lunes a Viernes y Dom:</span>
-                                <div>$320,000 COP (2 personas)</div>
-                            </div>
-                            <div class="pricing-col">
-                                <span class="pricing-title">Solo Sábados:</span>
-                                <div>$360,000 COP (2 personas)</div>
-                            </div>
-                        </div>
-
-                        <div class="suite-schedule">
-                            <span><i class="fa-regular fa-clock"></i> Check-in: 10:00 AM</span>
-                            <span><i class="fa-regular fa-clock"></i> Check-out: 5:00 PM (Mismo día)</span>
-                        </div>
-
-                        <ul class="suite-features">
-                            <li><i class="fa-solid fa-utensils"></i> Incluye Almuerzo & Bebida Caliente</li>
-                            <li><i class="fa-solid fa-hot-tub-person"></i> Jacuzzi privado con agua caliente </li>
-                            <li><i class="fa-solid fa-wifi"></i> Wifi  & Ventilador</li>
-                            <li><i class="fa-solid fa-p"></i> Parqueadero Privado</li>
-                        </ul>
-                        <div class="suite-actions">
-                            <a href="#reservas" class="btn-suite-reserve" onclick="selectSuite('Pasadía')">Seleccionar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="menu-dish-body">
+          <h3 class="menu-dish-title">Cazuela Tradicional de Fríjoles</h3>
+          <p class="menu-dish-desc">Cazuela de fríjoles con garra cocinados a fuego lento, acompañada con porción de arroz blanco, huevo frito, chorizo campesino y ensalada fresca.</p>
         </div>
-    </section>
+      </article>
 
-    <!-- Romantic Decorations Section -->
-    <section id="decoraciones" class="decorations-section">
-        <div class="container">
-            <div class="section-header reveal-on-scroll">
-                <span class="section-subtitle">Servicios Adicionales</span>
-                <h2>Decoraciones Especiales</h2>
-                <div class="divider"></div>
-                <p>Sorprende a tu pareja celebrando aniversarios, cumpleaños o momentos especiales con nuestros románticos sets de decoración.</p>
-            </div>
-
-            <div class="decorations-grid">
-                <!-- Decoración 1: Elios -->
-                <div class="decor-card reveal-on-scroll">
-                    <div class="decor-img-wrapper">
-                        <img src="assets/decoracion-elios.webp" alt="Decoración Elios" class="decor-img" loading="lazy" onclick="openLightbox('assets/decoracion-elios.webp')">
-                        <div class="decor-zoom-hint" onclick="openLightbox('assets/decoracion-elios.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
-                    </div>
-                    <div class="decor-details">
-                        <h4>Decoración Elios</h4>
-                        <span class="decor-price">$180,000 COP</span>
-                        <p class="decor-room-avail"><i class="fa-solid fa-circle-info"></i> Disponible en Suite Orquídeas, Eugenias, Margaritas y Aves del Paraíso.</p>
-                        <ul class="decor-bullets">
-                            <li>39 Globos y 8 Globos en Helio</li>
-                            <li>Pétalos de rosa decorativos</li>
-                            <li>3 Pizarras de mensajes personalizadas</li>
-                            <li>Opciones: Con Vino ($267k) | Con Champaña ($321k)</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Decoración 2: Estándar Casita Mágica -->
-                <div class="decor-card reveal-on-scroll">
-                    <div class="decor-img-wrapper">
-                        <img src="assets/decoracion-estandar-casita.webp" alt="Decoración Estándar Casita" class="decor-img" loading="lazy" onclick="openLightbox('assets/decoracion-estandar-casita.webp')">
-                        <div class="decor-zoom-hint" onclick="openLightbox('assets/decoracion-estandar-casita.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
-                    </div>
-                    <div class="decor-details">
-                        <h4>Estándar (Casita Mágica)</h4>
-                        <span class="decor-price">$59,000 COP</span>
-                        <p class="decor-room-avail"><i class="fa-solid fa-circle-info"></i> Diseñado para Casita Mágica.</p>
-                        <ul class="decor-bullets">
-                            <li>13 Globos y Pétalos</li>
-                            <li>1 Pizarra de bienvenida</li>
-                            <li>Letrero con motivo especial</li>
-                            <li>Opciones: Con Vino ($146k) | Con Champaña ($200k)</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Decoración 3: Estándar Margaritas / Paraíso -->
-                <div class="decor-card reveal-on-scroll">
-                    <div class="decor-img-wrapper">
-                        <img src="assets/decoracion-estandar-suites.webp" alt="Decoración Estándar Suites" class="decor-img" loading="lazy" onclick="openLightbox('assets/decoracion-estandar-suites.webp')">
-                        <div class="decor-zoom-hint" onclick="openLightbox('assets/decoracion-estandar-suites.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
-                    </div>
-                    <div class="decor-details">
-                        <h4>Estándar (Margaritas / Paraíso)</h4>
-                        <span class="decor-price">$59,000 COP</span>
-                        <p class="decor-room-avail"><i class="fa-solid fa-circle-info"></i> Disponible en Margaritas y Aves del Paraíso.</p>
-                        <ul class="decor-bullets">
-                            <li>13 Globos y Letrero</li>
-                            <li>Pétalos de rosa en la suite</li>
-                            <li>Mini pizarra de mensajes</li>
-                            <li>Opciones: Con Vino ($146k) | Con Champaña ($200k)</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Decoración 4: Pizarra Eugenias -->
-                <div class="decor-card reveal-on-scroll">
-                    <div class="decor-img-wrapper">
-                        <img src="assets/decoracion-pizarra.webp" alt="Decoración Pizarra Eugenias" class="decor-img" loading="lazy" onclick="openLightbox('assets/decoracion-pizarra.webp')">
-                        <div class="decor-zoom-hint" onclick="openLightbox('assets/decoracion-pizarra.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar</div>
-                    </div>
-                    <div class="decor-details">
-                        <h4>Decoración Pizarra</h4>
-                        <span class="decor-price">$70,000 COP</span>
-                        <p class="decor-room-avail"><i class="fa-solid fa-circle-info"></i> Diseñado para Suite Eugenias.</p>
-                        <ul class="decor-bullets">
-                            <li>24 Globos de color</li>
-                            <li>Letrero del motivo especial</li>
-                            <li>2 Pizarras de mensajes escritas</li>
-                            <li>Opciones: Con Vino ($157k) | Con Champaña ($211k)</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Additional decorations notice -->
-            <div class="decor-extra-info reveal-on-scroll">
-                <div class="decor-extra-header">
-                    <i class="fa-solid fa-circle-info"></i>
-                    <div>
-                        <h4>Tarifas especiales para Suite Margaritas y Aves del Paraíso</h4>
-                        <p>Por dimensiones y distribución de estas suites, los siguientes arreglos tienen una tarifa ajustada:</p>
-                    </div>
-                </div>
-                <div class="decor-chips-grid">
-                    <div class="decor-chip">
-                        <span class="decor-chip-name">Pétalos</span>
-                        <span class="decor-chip-price">$85,000 COP</span>
-                    </div>
-                    <div class="decor-chip">
-                        <span class="decor-chip-name">Globos</span>
-                        <span class="decor-chip-price">$125,000 COP</span>
-                    </div>
-                    <div class="decor-chip">
-                        <span class="decor-chip-name">Velas</span>
-                        <span class="decor-chip-price">$136,000 COP</span>
-                    </div>
-                    <div class="decor-chip">
-                        <span class="decor-chip-name">Elios</span>
-                        <span class="decor-chip-price">$140,000 COP</span>
-                    </div>
-                </div>
-            </div>
+      <!-- Platillo 3 -->
+      <article class="menu-dish-card" data-category="almuerzo">
+        <div class="menu-dish-media" onclick="openLightbox('assets/menu/03_sopa.webp')" role="button" tabindex="0" title="Ampliar imagen">
+          <img alt="Sancocho tradicional de gallina" class="menu-dish-img" loading="lazy" decoding="async" width="1200" height="1200" src="assets/menu/03_sopa.webp">
+          <span class="menu-dish-tag">Opción 3 &bull; Almuerzo / Cena</span>
+          <span class="menu-dish-badge-included"><i class="fa-solid fa-check"></i> Incluido</span>
         </div>
-    </section>
-
-    <!-- Spa Section -->
-    <section id="spa" class="spa-section">
-        <div class="container">
-            <div class="spa-wrapper">
-                <div class="spa-image-side reveal-on-scroll">
-                    <img src="assets/spa-services.webp" alt="Servicios de Spa Dapa Glamping" class="spa-promo-img" loading="lazy" onclick="openLightbox('assets/spa-services.webp')">
-                    <div class="spa-zoom-overlay" onclick="openLightbox('assets/spa-services.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver Folleto Spa</div>
-                </div>
-                <div class="spa-text-side reveal-on-scroll">
-                    <span class="section-subtitle">Salud & Relax</span>
-                    <h2>Servicio de Spa en la Suite</h2>
-                    <div class="divider-left"></div>
-                    <p class="spa-tagline">¿Necesitas un respiro del día a día?</p>
-                    <p>Vive un momento de total relajación sin salir de tu habitación. Todos nuestros tratamientos de spa se realizan directamente en la suite de tu elección para máxima privacidad y descanso.</p>
-                    
-                    <div class="spa-plans">
-                        <div class="spa-plan-item">
-                            <div class="spa-plan-header">
-                                <h5>Spa Relajante (45 min)</h5>
-                                <span class="spa-plan-price">Desde $95,000 COP</span>
-                            </div>
-                            <p>Aceites naturales, aromaterapia, musicoterapia y té relajante. <br>
-                            <strong>1 persona:</strong> $95,000 COP | <strong>2 personas:</strong> $165,000 COP</p>
-                        </div>
-                        <div class="spa-plan-item">
-                            <div class="spa-plan-header">
-                                <h5>Spa Relajante con Piedras (45 min)</h5>
-                                <span class="spa-plan-price">Desde $140,000 COP</span>
-                            </div>
-                            <p>Piedras volcánicas, aromaterapia, musicoterapia y shot de crema de whisky. <br>
-                            <strong>1 persona:</strong> $140,000 COP | <strong>2 personas:</strong> $240,000 COP</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="menu-dish-body">
+          <h3 class="menu-dish-title">Sancocho Campestre de Gallina</h3>
+          <p class="menu-dish-desc">Sancocho tradicional en leña con sazón de montaña, servido con arroz, aguacate fresco, ensalada y tierna pechuga a la plancha.</p>
         </div>
-    </section>
+      </article>
 
-    <!-- Included Meals Section -->
-    <section id="alimentacion" class="meals-section">
-        <div class="container">
-            <div class="section-header reveal-on-scroll">
-                <span class="section-subtitle">Gastronomía</span>
-                <h2>Alimentación Incluida en tu Suite</h2>
-                <div class="divider"></div>
-                <p>Todas nuestras estadías incluyen alimentación de cortesía (desayuno y almuerzo o cena) servida directamente en tu suite de forma gratuita. Revisa las opciones disponibles en el folleto oficial a continuación:</p>
-            </div>
-            
-            <div class="meals-single-container">
-                <div class="meals-image-side-centered reveal-on-scroll">
-                    <img src="assets/included-menu.webp" alt="Menú de Comidas Incluidas Dapa Glamping" class="meals-promo-img-large" loading="lazy" onclick="openLightbox('assets/included-menu.webp')">
-                    <div class="meals-zoom-overlay" onclick="openLightbox('assets/included-menu.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ampliar Folleto Menú</div>
-                </div>
-                
-                <div class="menu-notice-box-centered reveal-on-scroll">
-                    <p><i class="fa-solid fa-circle-exclamation"></i> <strong>Nota:</strong> Este menú de comidas está 100% incluido en el costo de hospedaje de las suites. El menú de licores y platos adicionales a la carta funciona como servicio de restaurante extra con costo adicional.</p>
-                    <a href="https://drive.google.com/file/d/1ybp4EkQd3t0XZckqy0Z0T_BlsMS5bZtm/view" target="_blank" rel="noopener" class="btn-primary-small"><i class="fa-solid fa-book-open"></i> Ver Menú a la Carta (Extra)</a>
-                </div>
-            </div>
+      <!-- Platillo 4 -->
+      <article class="menu-dish-card" data-category="almuerzo">
+        <div class="menu-dish-media" onclick="openLightbox('assets/menu/04_platillo_al_horno.webp')" role="button" tabindex="0" title="Ampliar imagen">
+          <img alt="Lasaña boloñesa gratinada" class="menu-dish-img" loading="lazy" decoding="async" width="1200" height="1200" src="assets/menu/04_platillo_al_horno.webp">
+          <span class="menu-dish-tag">Opción 4 &bull; Almuerzo / Cena</span>
+          <span class="menu-dish-badge-included"><i class="fa-solid fa-check"></i> Incluido</span>
         </div>
-    </section>
-
-    <!-- Experiencia Dapa Section (Galería de Videos) -->
-    <section id="experiencia" class="experiencia-section">
-        <div class="container">
-            <div class="section-header reveal-on-scroll">
-                <span class="section-subtitle">Multimedia</span>
-                <h2>Experiencia Dapa Glamping</h2>
-                <div class="divider"></div>
-                <p>Explora de primera mano y a través de videos reales cómo es la vida en nuestro santuario natural.</p>
-            </div>
-            
-            <div class="experiencia-grid">
-                <!-- Video 1 -->
-                <div class="video-card reveal-on-scroll">
-                    <div class="video-wrapper">
-                        <video class="experiencia-video" controls preload="metadata" playsinline controlslist="nodownload" oncontextmenu="return false;">
-                            <source src="assets/casa-magica.mp4" type="video/mp4">
-                            Tu navegador no soporta reproducción de video.
-                        </video>
-                    </div>
-                    <div class="video-info">
-                        <h3>Casita Mágica</h3>
-                        <p>Recorrido en video de nuestra Casita Mágica. Un rincón ideal para desconectarse y relajarse por bloques de horas.</p>
-                    </div>
-                </div>
-
-                <!-- Video 2 -->
-                <div class="video-card reveal-on-scroll">
-                    <div class="video-wrapper">
-                        <video class="experiencia-video" controls preload="metadata" playsinline controlslist="nodownload" oncontextmenu="return false;">
-                            <source src="assets/suite-eugenia.mp4" type="video/mp4">
-                            Tu navegador no soporta reproducción de video.
-                        </video>
-                    </div>
-                    <div class="video-info">
-                        <h3>Suite Eugenias</h3>
-                        <p>Video demostrativo de nuestra suite familiar más lujosa, detallando la piscina privada y su cómoda distribución.</p>
-                    </div>
-                </div>
-
-                <!-- Video 3 -->
-                <div class="video-card reveal-on-scroll">
-                    <div class="video-wrapper">
-                        <video class="experiencia-video" controls preload="metadata" playsinline controlslist="nodownload" oncontextmenu="return false;">
-                            <source src="assets/suite-margarita.mp4" type="video/mp4">
-                            Tu navegador no soporta reproducción de video.
-                        </video>
-                    </div>
-                    <div class="video-info">
-                        <h3>Suite Margaritas</h3>
-                        <p>Vista real del jacuzzi privado con agua caliente y las comodidades pensadas para la estadía perfecta en pareja.</p>
-                    </div>
-                </div>
-
-                <!-- Video 4 -->
-                <div class="video-card reveal-on-scroll">
-                    <div class="video-wrapper">
-                        <video class="experiencia-video" controls preload="metadata" playsinline controlslist="nodownload" oncontextmenu="return false;">
-                            <source src="assets/suite-paraiso.mp4" type="video/mp4">
-                            Tu navegador no soporta reproducción de video.
-                        </video>
-                    </div>
-                    <div class="video-info">
-                        <h3>Suite Aves del Paraíso</h3>
-                        <p>Recorrido íntimo por la suite de parejas rodeada de vegetación nativa y la tranquilidad del bosque de Dapa.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="menu-dish-body">
+          <h3 class="menu-dish-title">Lasaña Boloñesa Gratinada</h3>
+          <p class="menu-dish-desc">Lasaña horneada con salsa pomodoro de la casa, carne seleccionada, queso mozzarella fundido y queso parmesano, acompañada con pan tostado.</p>
         </div>
-    </section>
+      </article>
 
-    <!-- Location & Experience Section -->
-    <section id="ubicacion" class="location-section">
-        <div class="container">
-            <div class="section-header reveal-on-scroll">
-                <span class="section-subtitle">¿Cómo llegar?</span>
-                <h2>Nuestra Ubicación</h2>
-                <div class="divider"></div>
-                <p>Estamos ubicados en la hermosa y fresca cordillera de Dapa, Valle del Cauca, a solo minutos de Cali. Un microclima perfecto rodeado de neblina.</p>
-            </div>
-
-            <div class="location-content">
-                <div class="location-map-card reveal-on-scroll">
-                    <div class="map-interactive-wrapper">
-                        <iframe 
-                            title="Mapa de ubicación Dapa Glamping"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15929.539824632598!2d-76.5684617!3d3.5562725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a7d5774a38f7%3A0xb35a0928a3f89e24!2sDapa%2C%20Yumbo%2C%20Valle%20del%20Cauca!5e0!3m2!1ses!2sco!4v1710633600000!5m2!1ses!2sco" 
-                            width="100%" 
-                            height="420" 
-                            style="border:0; border-radius: var(--border-radius-md);" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-                        <div class="map-action-bar">
-                            <span><i class="fa-solid fa-location-dot"></i> Dapa, Valle del Cauca (a 25 min de Cali)</span>
-                            <a href="https://maps.app.goo.gl/Z7sxtLJ2fE4s8Z6g7" target="_blank" rel="noopener" class="btn-primary-small"><i class="fa-solid fa-diamond-turn-right"></i> Abrir Navegación GPS</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="location-info-card reveal-on-scroll">
-                    <h4>Información Clave</h4>
-                    <ul class="info-list">
-                        <li>
-                            <i class="fa-solid fa-cloud-sun"></i>
-                            <div>
-                                <h5>Clima Fresco</h5>
-                                <p>Recomendamos traer abrigo y ropa cómoda para disfrutar de la neblina en las tardes/noches.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-calendar-check"></i>
-                            <div>
-                                <h5>Abierto 365 días</h5>
-                                <p>Abrimos todo el año. Puedes consultar tarifas con descuento para estadías de domingo a jueves.</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+      <!-- Platillo 5 -->
+      <article class="menu-dish-card" data-category="almuerzo">
+        <div class="menu-dish-media" onclick="openLightbox('assets/menu/05_panini_con_papas.webp')" role="button" tabindex="0" title="Ampliar imagen">
+          <img alt="Panini artesanal gourmet" class="menu-dish-img" loading="lazy" decoding="async" width="1200" height="1200" src="assets/menu/05_panini_con_papas.webp">
+          <span class="menu-dish-tag">Opción Ligera &bull; Almuerzo / Cena</span>
+          <span class="menu-dish-badge-included"><i class="fa-solid fa-check"></i> Incluido</span>
         </div>
-    </section>
-
-
-    <!-- Booking Form Section -->
-    <section id="reservas" class="booking-section">
-        <div class="container">
-            <div class="booking-wrapper">
-                <div class="booking-info-side reveal-on-scroll">
-                    <h2>Reserva tu Experiencia</h2>
-                    <p>Completa los datos del formulario. El sistema calculará una previsualización de tu cotización y generará un mensaje automático para enviarlo a nuestro WhatsApp de reservas, donde finalizaremos el proceso.</p>
-                    
-                    <div class="booking-contact-details">
-                        <div class="b-contact-item">
-                            <i class="fa-brands fa-whatsapp"></i>
-                            <div>
-                                <h5>WhatsApp de Reservas</h5>
-                                <p>+57 317 2309090</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="booking-form-side reveal-on-scroll">
-                    <form id="booking-form" class="booking-form">
-                        <div class="form-group">
-                            <label for="client-name">Nombre Completo *</label>
-                            <input type="text" id="client-name" name="client-name" required placeholder="Ingresa tu nombre y apellido">
-                            <span class="inline-error-msg" id="client-name-error"></span>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="suite-select">Suite o Plan *</label>
-                                <select id="suite-select" name="suite-select" required>
-                                    <option value="" disabled selected>Selecciona una opción</option>
-                                    <option value="Casita Mágica">Casita Mágica (Planes por horas)</option>
-                                    <option value="Suite Orquídeas">Suite Orquídeas (Hasta 4 pers)</option>
-                                    <option value="Suite Aves del Paraíso">Suite Aves del Paraíso (Parejas)</option>
-                                    <option value="Suite Margaritas">Suite Margaritas (Parejas)</option>
-                                    <option value="Suite Eugenias">Suite Eugenias (Hasta 8 pers)</option>
-                                    <option value="Pasadía">Pasadía (Día - 10 AM a 5 PM)</option>
-                                </select>
-                                <span class="inline-error-msg" id="suite-select-error"></span>
-                            </div>
-
-                            <div class="form-group" id="subplan-group" style="display: none;">
-                                <label for="subplan-select">Plan Específico *</label>
-                                <select id="subplan-select" name="subplan-select">
-                                    <option value="Plan Relax">Plan Relax (4 Horas) - $200,000</option>
-                                    <option value="Plan Spa">Plan Spa (5 Horas) - $359,900</option>
-                                    <option value="Plan Full">Plan Full (5 Horas) - $399,900</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="people-count">Número de Personas *</label>
-                                <select id="people-count" name="people-count" required>
-                                    <!-- Dinámico según suite -->
-                                    <option value="2">2 Personas</option>
-                                </select>
-                                <span class="inline-error-msg" id="people-count-error"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="booking-date">Fecha Estimada *</label>
-                                <input type="date" id="booking-date" name="booking-date" required>
-                                <span class="inline-error-msg" id="booking-date-error"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="decor-select">Decoración Adicional</label>
-                                <select id="decor-select" name="decor-select">
-                                    <option value="Ninguna">Ninguna</option>
-                                    <!-- Dinámico según suite -->
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="spa-select">Servicio de Spa</label>
-                                <select id="spa-select" name="spa-select">
-                                    <option value="Ninguno">Ninguno</option>
-                                    <option value="Spa Relajante 1p">Spa Relajante (1 Pers) - $95,000</option>
-                                    <option value="Spa Relajante 2p">Spa Relajante (2 Pers) - $165,000</option>
-                                    <option value="Spa Piedras 1p">Spa Piedras (1 Pers) - $140,000</option>
-                                    <option value="Spa Piedras 2p">Spa Piedras (2 Pers) - $240,000</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group checkbox-group" id="weekday-promo-group">
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="weekday-promo" name="weekday-promo" checked>
-                                <span>Me interesa cotizar precios en días de semana (Dom a Jue)</span>
-                            </label>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="extra-comments">Mensaje / Notas Especiales</label>
-                            <textarea id="extra-comments" name="extra-comments" placeholder="¿Celebran alguna ocasión? Escríbenos aquí..." rows="3"></textarea>
-                        </div>
-
-
-                        <!-- Cotización Estimada Visual Box -->
-                        <div class="price-calculator-box" id="price-calculator-box">
-
-                            <div class="calc-row">
-                                <span>Alojamiento / Plan:</span>
-                                <span id="calc-accommodation">$0 COP</span>
-                            </div>
-                            <div class="calc-row" id="calc-decor-row" style="display: none;">
-                                <span>Decoración:</span>
-                                <span id="calc-decor">$0 COP</span>
-                            </div>
-                            <div class="calc-row" id="calc-spa-row" style="display: none;">
-                                <span>Spa:</span>
-                                <span id="calc-spa">$0 COP</span>
-                            </div>
-                            <hr class="calc-divider">
-                            <div class="calc-row calc-total">
-                                <span>Total Estimado:</span>
-                                <span id="calc-total">$0 COP</span>
-                            </div>
-                            <p class="calc-notice">* Los precios son estimados y se confirmarán por WhatsApp de acuerdo a las fechas de hospedaje y festivos.</p>
-                        </div>
-
-                        <button type="submit" class="btn-primary-large" id="submit-whatsapp">
-                            <i class="fa-brands fa-whatsapp"></i> Enviar Reserva a WhatsApp
-                        </button>
-                    </form>
-                </div>
-            </div>
-    </section>
-
-    <!-- FAQ Section (Preguntas Frecuentes) -->
-    <section id="faq" class="faq-section">
-        <div class="container">
-            <div class="section-header reveal-on-scroll">
-                <span class="section-subtitle">Preguntas Frecuentes</span>
-                <h2>Todo lo que necesitas saber antes de tu viaje</h2>
-                <div class="divider"></div>
-                <p>Resolvemos las dudas más habituales sobre accesos, servicios y políticas de hospedaje.</p>
-            </div>
-
-            <div class="faq-grid">
-                <details class="faq-item reveal-on-scroll">
-                    <summary><i class="fa-solid fa-circle-question"></i> ¿El jacuzzi cuenta con agua caliente?</summary>
-                    <p>Sí, absolutamente. Cada jacuzzi privado cuenta con sistema de calentamiento de agua para que disfrutes del baño de hidromasajes a cualquier hora, incluso en las noches frías de montaña.</p>
-                </details>
-
-                <details class="faq-item reveal-on-scroll">
-                    <summary><i class="fa-solid fa-car"></i> ¿Qué tipo de vehículo se necesita para llegar?</summary>
-                    <p>La vía principal hacia Dapa está pavimentada y en buen estado. Puedes subir con total tranquilidad en automóvil particular, camioneta o motocicleta (a solo 25-30 minutos de la salida de Cali o Yumbo).</p>
-                </details>
-
-                <details class="faq-item reveal-on-scroll">
-                    <summary><i class="fa-solid fa-paw"></i> ¿Se admiten mascotas (Pet Friendly)?</summary>
-                    <p>Por políticas de cuidado del entorno natural, fauna local y preservación de mallas de catamarán, solicitamos consultar previamente por WhatsApp antes de viajar con tu mascota para verificar la suite asignada.</p>
-                </details>
-
-                <details class="faq-item reveal-on-scroll">
-                    <summary><i class="fa-solid fa-money-bill-transfer"></i> ¿Cómo se confirma y aparta la reserva?</summary>
-                    <p>Una vez completes el formulario de cotización y se envíe el resumen a WhatsApp, nuestro asesor te indicará la cuenta oficial para realizar el anticipo del 50% con el cual se congela la fecha y la suite.</p>
-                </details>
-
-                <details class="faq-item reveal-on-scroll">
-                    <summary><i class="fa-solid fa-utensils"></i> ¿La alimentación está incluida en las suites?</summary>
-                    <p>Sí, todas nuestras suites nocturnas incluyen bebida caliente de bienvenida, crispetas, desayuno completo y almuerzo (o cena según horario de entrada). En el Plan Pasadía también viene incluido el almuerzo.</p>
-                </details>
-
-                <details class="faq-item reveal-on-scroll">
-                    <summary><i class="fa-solid fa-spa"></i> ¿Cómo se coordinan los masajes y el spa?</summary>
-                    <p>Los masajes relajantes o con piedras volcánicas se realizan directamente en la privacidad de tu suite por terapeutas certificadas. Puedes agregarlos desde el cotizador para agendar el horario de tu preferencia.</p>
-                </details>
-            </div>
+        <div class="menu-dish-body">
+          <h3 class="menu-dish-title">Panini Gourmet con Papas</h3>
+          <p class="menu-dish-desc">Panini en pan rústico prensado al calor con jamón de calidad, queso derretido, vegetales salteados y aderezo especial, servido con papas doradas.</p>
         </div>
-    </section>
+      </article>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container footer-container">
-            <div class="footer-brand">
-                <a href="https://www.instagram.com/dapaglamping?igsi=ZWt0aDk5NDFlaHdl" target="_blank" rel="noopener" style="display: inline-block;">
-                    <img src="assets/logo.png" alt="Dapa Glamping Logo" class="footer-logo">
-                </a>
-                <h3>Dapa Glamping</h3>
-                <p>Naturaleza, descanso y bienestar en las montañas de Dapa, Colombia.</p>
-            </div>
-            <div class="footer-links">
-                <h4>Navegación</h4>
-                <a href="#inicio">Inicio</a>
-                <a href="#suites">Suites y Planes</a>
-                <a href="#decoraciones">Decoraciones</a>
-                <a href="#spa">Servicios de Spa</a>
-                <a href="#alimentacion">Alimentación</a>
-            </div>
-            <div class="footer-contact">
-                <h4>Contacto</h4>
-                <p><i class="fa-solid fa-phone"></i> +57 317 2309090</p>
-                <p><i class="fa-solid fa-envelope"></i> reservas@dapaglamping.com</p>
-                <p><i class="fa-solid fa-location-dot"></i> Dapa, Valle del Cauca, Colombia</p>
-                <div class="footer-socials">
-                    <a href="https://wa.me/573172309090" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="https://www.instagram.com/dapaglamping?igsi=ZWt0aDk5NDFlaHdl" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
+      <!-- Platillo 6 -->
+      <article class="menu-dish-card" data-category="desayuno">
+        <div class="menu-dish-media" onclick="openLightbox('assets/menu/06_waffles.webp')" role="button" tabindex="0" title="Ampliar imagen">
+          <img alt="Waffles dulces con miel" class="menu-dish-img" loading="lazy" decoding="async" width="1200" height="1200" src="assets/menu/06_waffles.webp">
+          <span class="menu-dish-tag">Desayuno Dulce</span>
+          <span class="menu-dish-badge-included"><i class="fa-solid fa-check"></i> Incluido</span>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Dapa Glamping. Todos los derechos reservados.</p>
+        <div class="menu-dish-body">
+          <h3 class="menu-dish-title">Waffles Artesanales de la Casa</h3>
+          <p class="menu-dish-desc">Esponjosos waffles dorados servidos con miel o sirope, mantequilla y fruta de temporada para un despertar dulce con vista a las montañas.</p>
         </div>
-    </footer>
+      </article>
 
-    <!-- Lightbox Modal for Flyer Images with Zoom & Pan Controls -->
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        
-        <!-- Zoom toolbar -->
-        <div class="lightbox-zoom-toolbar" onclick="event.stopPropagation()">
-            <button class="zoom-btn" id="zoom-out-btn" aria-label="Alejar" title="Alejar"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
-            <span class="zoom-level" id="zoom-level-text">100%</span>
-            <button class="zoom-btn" id="zoom-in-btn" aria-label="Acercar" title="Acercar"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
-            <button class="zoom-btn" id="zoom-reset-btn" aria-label="Restablecer tamaño" title="Restablecer tamaño"><i class="fa-solid fa-arrows-rotate"></i></button>
+      <!-- Platillo 7 -->
+      <article class="menu-dish-card" data-category="desayuno">
+        <div class="menu-dish-media" onclick="openLightbox('assets/menu/07_desayuno_con_huevos.webp')" role="button" tabindex="0" title="Ampliar imagen">
+          <img alt="Desayuno típico con huevos y café" class="menu-dish-img" loading="lazy" decoding="async" width="1200" height="1200" src="assets/menu/07_desayuno_con_huevos.webp">
+          <span class="menu-dish-tag">Desayuno Tradicional</span>
+          <span class="menu-dish-badge-included"><i class="fa-solid fa-check"></i> Incluido</span>
         </div>
-
-        <button class="lightbox-prev" onclick="prevLightbox(event)" aria-label="Imagen anterior"><i class="fa-solid fa-chevron-left"></i></button>
-        
-        <div class="lightbox-content-wrapper" id="lightbox-wrapper" onclick="event.stopPropagation()">
-            <div class="lightbox-img-viewport" id="lightbox-viewport">
-                <img class="lightbox-content" id="lightbox-img" alt="Visualización de Folleto">
-            </div>
-            <div class="lightbox-caption" id="lightbox-caption">Folleto de Servicios</div>
+        <div class="menu-dish-body">
+          <h3 class="menu-dish-title">Desayuno Típico Campestre</h3>
+          <p class="menu-dish-desc">Huevos al gusto (pericos, revueltos o fritos) con arepa caliente de maíz y queso, fruta fresca y café de origen colombiano o chocolate caliente.</p>
         </div>
-        
-        <button class="lightbox-next" onclick="nextLightbox(event)" aria-label="Siguiente imagen"><i class="fa-solid fa-chevron-right"></i></button>
+      </article>
     </div>
 
-    <!-- Floating Chatbot Widget -->
-    <div class="chatbot-widget" id="chatbot-widget">
-        <!-- Floating Bubble Button -->
-        <button class="chatbot-bubble-btn" id="chatbot-bubble-btn" aria-label="Abrir asistente virtual">
-            <i class="fa-solid fa-comments"></i>
-            <span class="chatbot-badge">1</span>
-        </button>
+    <button class="menu-carousel-arrow next" id="menu-next-btn" type="button" aria-label="Siguiente platillo"><i class="fa-solid fa-chevron-right"></i></button>
+  </div>
 
-        <!-- Chat Window -->
-        <div class="chatbot-window" id="chatbot-window">
-            <div class="chatbot-header">
-                <div class="chatbot-bot-info">
-                    <div class="chatbot-avatar">
-                        <i class="fa-solid fa-robot"></i>
-                    </div>
-                    <div>
-                        <h4>Asistente Dapa</h4>
-                        <span class="chatbot-status"><span class="status-dot"></span> En línea</span>
-                    </div>
-                </div>
-                <button class="chatbot-close-btn" id="chatbot-close-btn" aria-label="Cerrar chat">&times;</button>
-            </div>
+  <div class="menu-carousel-dots" id="menu-carousel-dots"></div>
 
-            <div class="chatbot-messages" id="chatbot-messages">
-                <div class="chat-message bot">
-                    <p>¡Hola! Te damos la bienvenida a Dapa Glamping. ¿En qué información o suite te podemos orientar hoy?</p>
-                </div>
-            </div>
+  <div class="menu-extra-actions">
+    <a class="btn-primary-small" href="https://drive.google.com/file/d/1ybp4EkQd3t0XZckqy0Z0T_BlsMS5bZtm/view" rel="noopener" target="_blank">
+      <i class="fa-solid fa-book-open"></i> Ver Menú a la Carta (Licores y Extras)
+    </a>
+  </div>
 
-            <!-- Quick replies container -->
-            <div class="chatbot-quick-replies" id="chatbot-quick-replies">
-                <button class="quick-reply-btn" data-query="fotos">📸 Ver Fotos</button>
-                <button class="quick-reply-btn" data-query="suites">🏨 Todas las Suites</button>
-                <button class="quick-reply-btn" data-query="pasadia">☀️ Pasadía</button>
-                <button class="quick-reply-btn" data-query="casita">🕰️ Casita Mágica</button>
-                <button class="quick-reply-btn" data-query="decoraciones">✨ Decoraciones</button>
-                <button class="quick-reply-btn" data-query="catalogo">📖 Catálogo</button>
-            </div>
-
-            <form class="chatbot-input-area" id="chatbot-input-area">
-                <input type="text" id="chatbot-input" placeholder="Pregúntame algo..." required autocomplete="off">
-                <button type="submit" class="chatbot-send-btn" aria-label="Enviar mensaje">
-                    <i class="fa-solid fa-paper-plane"></i>
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Custom JS -->
-    <script src="script.js" charset="UTF-8"></script>
+  <div class="menu-notice-box-centered">
+    <p><i class="fa-solid fa-circle-exclamation"></i> <strong>Nota:</strong> Estos platillos forman parte del menú de cortesía incluido en tu estadía. Los licores, cocteles y platos adicionales fuera del menú incluido tienen costo extra según la carta de restaurante.</p>
+  </div>
+</div>
+</div>
+</section>
+<!-- Experiencia Dapa Section (Galería de Videos) -->
+<section class="experiencia-section" id="experiencia">
+<div class="container">
+<div class="section-header reveal-on-scroll">
+<span class="section-subtitle">Multimedia</span>
+<h2>Experiencia Dapa Glamping</h2>
+<div class="divider"></div>
+<p>Explora de primera mano y a través de videos reales cómo es la vida en nuestro santuario natural.</p>
+</div>
+<div class="experiencia-grid">
+<!-- Video 1 -->
+<div class="video-card reveal-on-scroll">
+<div class="video-wrapper">
+<video class="experiencia-video" controls="" controlslist="nodownload" oncontextmenu="return false;" playsinline="" preload="metadata">
+<source src="assets/casa-magica.mp4" type="video/mp4"/>
+                            Tu navegador no soporta reproducción de video.
+                        </video>
+</div>
+<div class="video-info">
+<h3>Casita Mágica</h3>
+<p>Recorrido en video de nuestra Casita Mágica. Un rincón ideal para desconectarse y relajarse por bloques de horas.</p>
+</div>
+</div>
+<!-- Video 2 -->
+<div class="video-card reveal-on-scroll">
+<div class="video-wrapper">
+<video class="experiencia-video" controls="" controlslist="nodownload" oncontextmenu="return false;" playsinline="" preload="metadata">
+<source src="assets/suite-eugenia.mp4" type="video/mp4"/>
+                            Tu navegador no soporta reproducción de video.
+                        </video>
+</div>
+<div class="video-info">
+<h3>Suite Eugenias</h3>
+<p>Video demostrativo de nuestra suite familiar más lujosa, detallando la piscina privada y su cómoda distribución.</p>
+</div>
+</div>
+<!-- Video 3 -->
+<div class="video-card reveal-on-scroll">
+<div class="video-wrapper">
+<video class="experiencia-video" controls="" controlslist="nodownload" oncontextmenu="return false;" playsinline="" preload="metadata">
+<source src="assets/suite-margarita.mp4" type="video/mp4"/>
+                            Tu navegador no soporta reproducción de video.
+                        </video>
+</div>
+<div class="video-info">
+<h3>Suite Margaritas</h3>
+<p>Vista real del jacuzzi privado con agua caliente y las comodidades pensadas para la estadía perfecta en pareja.</p>
+</div>
+</div>
+<!-- Video 4 -->
+<div class="video-card reveal-on-scroll">
+<div class="video-wrapper">
+<video class="experiencia-video" controls="" controlslist="nodownload" oncontextmenu="return false;" playsinline="" preload="metadata">
+<source src="assets/suite-paraiso.mp4" type="video/mp4"/>
+                            Tu navegador no soporta reproducción de video.
+                        </video>
+</div>
+<div class="video-info">
+<h3>Suite Aves del Paraíso</h3>
+<p>Recorrido íntimo por la suite de parejas rodeada de vegetación nativa y la tranquilidad del bosque de Dapa.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Location & Experience Section -->
+<section class="location-section" id="ubicacion">
+<div class="container">
+<div class="section-header reveal-on-scroll">
+<span class="section-subtitle">¿Cómo llegar?</span>
+<h2>Nuestra Ubicación</h2>
+<div class="divider"></div>
+<p>Estamos ubicados en la hermosa y fresca cordillera de Dapa, Valle del Cauca, a solo minutos de Cali. Un microclima perfecto rodeado de neblina.</p>
+</div>
+<div class="location-content">
+<div class="location-map-card reveal-on-scroll">
+<div class="map-interactive-wrapper">
+<iframe allowfullscreen="" height="420" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15929.539824632598!2d-76.5684617!3d3.5562725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a7d5774a38f7%3A0xb35a0928a3f89e24!2sDapa%2C%20Yumbo%2C%20Valle%20del%20Cauca!5e0!3m2!1ses!2sco!4v1710633600000!5m2!1ses!2sco" style="border:0; border-radius: var(--border-radius-md);" title="Mapa de ubicación Dapa Glamping" width="100%">
+</iframe>
+<div class="map-action-bar">
+<span><i class="fa-solid fa-location-dot"></i> Dapa, Valle del Cauca (a 25 min de Cali)</span>
+<a class="btn-primary-small" href="https://maps.app.goo.gl/Z7sxtLJ2fE4s8Z6g7" rel="noopener" target="_blank"><i class="fa-solid fa-diamond-turn-right"></i> Abrir Navegación GPS</a>
+</div>
+</div>
+</div>
+<div class="location-info-card reveal-on-scroll">
+<h4>Información Clave</h4>
+<ul class="info-list">
+<li>
+<i class="fa-solid fa-cloud-sun"></i>
+<div>
+<h5>Clima Fresco</h5>
+<p>Recomendamos traer abrigo y ropa cómoda para disfrutar de la neblina en las tardes/noches.</p>
+</div>
+</li>
+<li>
+<i class="fa-solid fa-calendar-check"></i>
+<div>
+<h5>Abierto 365 días</h5>
+<p>Abrimos todo el año. Puedes consultar tarifas con descuento para estadías de domingo a jueves.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Booking Form Section -->
+<section class="booking-section" id="reservas">
+<div class="container">
+<div class="booking-wrapper">
+<div class="booking-info-side reveal-on-scroll">
+<h2>Reserva tu Experiencia</h2>
+<p>Completa los datos del formulario. El sistema calculará una previsualización de tu cotización y generará un mensaje automático para enviarlo a nuestro WhatsApp de reservas, donde finalizaremos el proceso.</p>
+<div class="booking-contact-details">
+<div class="b-contact-item">
+<i class="fa-brands fa-whatsapp"></i>
+<div>
+<h5>WhatsApp de Reservas</h5>
+<p>+57 317 2309090</p>
+</div>
+</div>
+</div>
+</div>
+<div class="booking-form-side reveal-on-scroll">
+<p class="tariff-alert" hidden="" id="tariff-status" role="status"></p><form class="booking-form" id="booking-form"><p class="booking-user-notice" id="booking-user-notice" role="status">Para guardar una reserva, inicia sesión como cliente.</p>
+<div class="form-group">
+<label for="client-name">Nombre Completo *</label>
+<input autocomplete="name" id="client-name" name="client-name" placeholder="Ingresa tu nombre y apellido" required="" type="text"/>
+<span class="inline-error-msg" id="client-name-error"></span>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label for="suite-select">Suite o Plan *</label>
+<select id="suite-select" name="suite-select" required="">
+<option disabled="" selected="" value="">Selecciona una opción</option>
+<option value="Casita Mágica">Casita Mágica (Planes por horas)</option>
+<option value="Suite Orquídeas">Suite Orquídeas (Hasta 4 pers)</option>
+<option value="Suite Aves del Paraíso">Suite Aves del Paraíso (Parejas)</option>
+<option value="Suite Margaritas">Suite Margaritas (Parejas)</option>
+<option value="Suite Eugenias">Suite Eugenias (Hasta 8 pers)</option>
+<option value="Pasadía">Pasadía (Día - 10 AM a 5 PM)</option>
+</select>
+<span class="inline-error-msg" id="suite-select-error"></span>
+</div>
+<div class="form-group" id="subplan-group" style="display: none;">
+<label for="subplan-select">Plan Específico *</label>
+<select id="subplan-select" name="subplan-select">
+<option data-base-label="Plan Relax (4 Horas)" data-rate-key="casita_relax" value="Plan Relax">Plan Relax (4 Horas) - $200,000</option>
+<option data-base-label="Plan Spa (5 Horas)" data-rate-key="casita_spa" value="Plan Spa">Plan Spa (5 Horas) - $359,900</option>
+<option data-base-label="Plan Full (5 Horas)" data-rate-key="casita_full" value="Plan Full">Plan Full (5 Horas) - $399,900</option>
+</select>
+</div>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label for="people-count">Número de Personas *</label>
+<select id="people-count" name="people-count" required="">
+<!-- Dinámico según suite -->
+<option value="2">2 Personas</option>
+</select>
+<span class="inline-error-msg" id="people-count-error"></span>
+</div>
+<div class="form-group">
+<label for="booking-date">Fecha Estimada *</label>
+<input id="booking-date" name="booking-date" required="" type="date"/>
+<span class="inline-error-msg" id="booking-date-error"></span>
+</div>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label for="decor-select">Decoración Adicional</label>
+<select id="decor-select" name="decor-select">
+<option value="Ninguna">Ninguna</option>
+<!-- Dinámico según suite -->
+</select>
+</div>
+<div class="form-group">
+<label for="spa-select">Servicio de Spa</label>
+<select id="spa-select" name="spa-select">
+<option value="Ninguno">Ninguno</option>
+<option data-base-label="Spa Relajante (1 Pers)" data-rate-key="spa_relajante_1" value="Spa Relajante 1p">Spa Relajante (1 Pers) - $95,000</option>
+<option data-base-label="Spa Relajante (2 Pers)" data-rate-key="spa_relajante_2" value="Spa Relajante 2p">Spa Relajante (2 Pers) - $165,000</option>
+<option data-base-label="Spa Piedras (1 Pers)" data-rate-key="spa_piedras_1" value="Spa Piedras 1p">Spa Piedras (1 Pers) - $140,000</option>
+<option data-base-label="Spa Piedras (2 Pers)" data-rate-key="spa_piedras_2" value="Spa Piedras 2p">Spa Piedras (2 Pers) - $240,000</option>
+</select>
+<p class="spa-selected-notice" hidden="" id="spa-selected-notice" role="status"></p>
+</div>
+</div>
+<div class="form-group checkbox-group" id="weekday-promo-group">
+<label class="checkbox-label">
+<input checked="" disabled="" id="weekday-promo" name="weekday-promo" title="La tarifa se determina por la fecha de estadía" type="checkbox"/>
+<span>Tarifa calculada según la fecha seleccionada (sin selección manual)</span>
+</label>
+</div>
+<div class="form-group">
+<label for="extra-comments">Mensaje / Notas Especiales</label>
+<textarea id="extra-comments" name="extra-comments" placeholder="¿Celebran alguna ocasión? Escríbenos aquí..." rows="3"></textarea>
+</div>
+<!-- Cotización Estimada Visual Box -->
+<div class="price-calculator-box" id="price-calculator-box">
+<div class="calc-row">
+<span>Alojamiento / Plan:</span>
+<span id="calc-accommodation">$0 COP</span>
+</div>
+<div class="calc-row" id="calc-decor-row" style="display: none;">
+<span>Decoración:</span>
+<span id="calc-decor">$0 COP</span>
+</div>
+<div class="calc-row" id="calc-spa-row" style="display: none;">
+<span>Spa:</span>
+<span id="calc-spa">$0 COP</span>
+</div>
+<hr class="calc-divider"/>
+<div class="calc-row calc-total">
+<span>Total Estimado:</span>
+<span id="calc-total">$0 COP</span>
+</div>
+<p class="calc-notice">* Los precios son estimados y se confirmarán por WhatsApp de acuerdo a las fechas de hospedaje y festivos.</p>
+</div>
+<button class="btn-primary-large" id="submit-whatsapp" type="submit">Guardar solicitud y continuar por WhatsApp</button>
+</form>
+</div>
+</div>
+</div></section>
+<!-- FAQ Section (Preguntas Frecuentes) -->
+<section class="faq-section" id="faq">
+<div class="container">
+<div class="section-header reveal-on-scroll">
+<span class="section-subtitle">Preguntas Frecuentes</span>
+<h2>Todo lo que necesitas saber antes de tu viaje</h2>
+<div class="divider"></div>
+<p>Resolvemos las dudas más habituales sobre accesos, servicios y políticas de hospedaje.</p>
+</div>
+<div class="faq-grid">
+<details class="faq-item reveal-on-scroll">
+<summary><i class="fa-solid fa-circle-question"></i> ¿El jacuzzi cuenta con agua caliente?</summary>
+<p>Sí, absolutamente. Cada jacuzzi privado cuenta con sistema de calentamiento de agua para que disfrutes del baño de hidromasajes a cualquier hora, incluso en las noches frías de montaña.</p>
+</details>
+<details class="faq-item reveal-on-scroll">
+<summary><i class="fa-solid fa-car"></i> ¿Qué tipo de vehículo se necesita para llegar?</summary>
+<p>La vía principal hacia Dapa está pavimentada y en buen estado. Puedes subir con total tranquilidad en automóvil particular, camioneta o motocicleta (a solo 25-30 minutos de la salida de Cali o Yumbo).</p>
+</details>
+<details class="faq-item reveal-on-scroll">
+<summary><i class="fa-solid fa-paw"></i> ¿Se admiten mascotas (Pet Friendly)?</summary>
+<p>Por políticas de cuidado del entorno natural, fauna local y preservación de mallas de catamarán, solicitamos consultar previamente por WhatsApp antes de viajar con tu mascota para verificar la suite asignada.</p>
+</details>
+<details class="faq-item reveal-on-scroll">
+<summary><i class="fa-solid fa-money-bill-transfer"></i> ¿Cómo se confirma y aparta la reserva?</summary>
+<p>Una vez completes el formulario de cotización y se envíe el resumen a WhatsApp, nuestro asesor te indicará la cuenta oficial para realizar el anticipo del 50% con el cual se congela la fecha y la suite.</p>
+</details>
+<details class="faq-item reveal-on-scroll">
+<summary><i class="fa-solid fa-utensils"></i> ¿La alimentación está incluida en las suites?</summary>
+<p>Sí, todas nuestras suites nocturnas incluyen bebida caliente de bienvenida, crispetas, desayuno completo y almuerzo (o cena según horario de entrada). En el Plan Pasadía también viene incluido el almuerzo.</p>
+</details>
+<details class="faq-item reveal-on-scroll">
+<summary><i class="fa-solid fa-spa"></i> ¿Cómo se coordinan los masajes y el spa?</summary>
+<p>Los masajes relajantes o con piedras volcánicas se realizan directamente en la privacidad de tu suite por terapeutas certificadas. Puedes agregarlos desde el cotizador para agendar el horario de tu preferencia.</p>
+</details>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer>
+<div class="container footer-container">
+<div class="footer-brand">
+<a href="https://www.instagram.com/dapaglamping?igsi=ZWt0aDk5NDFlaHdl" rel="noopener" style="display: inline-block;" target="_blank">
+<img alt="Dapa Glamping Logo" class="footer-logo" src="assets/logo.png?v=folletos-logo-2"/>
+</a>
+<h3>Dapa Glamping</h3>
+<p>Naturaleza, descanso y bienestar en las montañas de Dapa, Colombia.</p>
+</div>
+<div class="footer-links">
+<h4>Navegación</h4>
+<a href="#inicio">Inicio</a>
+<a href="#suites">Suites y Planes</a>
+<a href="#decoraciones">Decoraciones</a>
+<a href="#spa">Servicios de Spa</a>
+<a href="#alimentacion">Alimentación</a>
+</div>
+<div class="footer-contact">
+<h4>Contacto</h4>
+<p><i class="fa-solid fa-phone"></i> +57 317 2309090</p>
+<p><i class="fa-solid fa-envelope"></i> reservas@dapaglamping.com</p>
+<p><i class="fa-solid fa-location-dot"></i> Dapa, Valle del Cauca, Colombia</p>
+<div class="footer-socials">
+<a href="https://wa.me/573172309090" rel="noopener" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+<a href="https://www.instagram.com/dapaglamping?igsi=ZWt0aDk5NDFlaHdl" rel="noopener" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 Dapa Glamping. Todos los derechos reservados.</p>
+</div>
+</footer>
+<!-- Lightbox Modal for Flyer Images with Zoom & Pan Controls -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+<span class="lightbox-close" onclick="closeLightbox()">×</span>
+<!-- Zoom toolbar -->
+<div class="lightbox-zoom-toolbar" onclick="event.stopPropagation()">
+<button aria-label="Alejar" class="zoom-btn" id="zoom-out-btn" title="Alejar"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+<span class="zoom-level" id="zoom-level-text">100%</span>
+<button aria-label="Acercar" class="zoom-btn" id="zoom-in-btn" title="Acercar"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+<button aria-label="Restablecer tamaño" class="zoom-btn" id="zoom-reset-btn" title="Restablecer tamaño"><i class="fa-solid fa-arrows-rotate"></i></button>
+</div>
+<button aria-label="Imagen anterior" class="lightbox-prev" onclick="prevLightbox(event)"><i class="fa-solid fa-chevron-left"></i></button>
+<div class="lightbox-content-wrapper" id="lightbox-wrapper" onclick="event.stopPropagation()">
+<div class="lightbox-img-viewport" id="lightbox-viewport">
+<img alt="Visualización de Folleto" class="lightbox-content" id="lightbox-img"/>
+</div>
+<div class="lightbox-caption" id="lightbox-caption">Folleto de Servicios</div>
+</div>
+<button aria-label="Siguiente imagen" class="lightbox-next" onclick="nextLightbox(event)"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+<!-- Floating Chatbot Widget -->
+<div class="chatbot-widget" id="chatbot-widget">
+<!-- Floating Bubble Button -->
+<button aria-label="Abrir asistente virtual" class="chatbot-bubble-btn" id="chatbot-bubble-btn">
+<i class="fa-solid fa-comments"></i>
+<span class="chatbot-badge">1</span>
+</button>
+<!-- Chat Window -->
+<div class="chatbot-window" id="chatbot-window">
+<div class="chatbot-header">
+<div class="chatbot-bot-info">
+<div class="chatbot-avatar">
+<i class="fa-solid fa-robot"></i>
+</div>
+<div>
+<h4>Asistente Dapa</h4>
+<span class="chatbot-status"><span class="status-dot"></span> En línea</span>
+</div>
+</div>
+<button aria-label="Cerrar chat" class="chatbot-close-btn" id="chatbot-close-btn">×</button>
+</div>
+<div class="chatbot-messages" id="chatbot-messages">
+<div class="chat-message bot">
+<p>¡Hola! Te damos la bienvenida a Dapa Glamping. ¿En qué información o suite te podemos orientar hoy?</p>
+</div>
+</div>
+<!-- Quick replies container -->
+<div class="chatbot-quick-replies" id="chatbot-quick-replies">
+<button class="quick-reply-btn" data-query="fotos">📸 Ver Fotos</button>
+<button class="quick-reply-btn" data-query="suites">🏨 Todas las Suites</button>
+<button class="quick-reply-btn" data-query="pasadia">☀️ Pasadía</button>
+<button class="quick-reply-btn" data-query="casita">🕰️ Casita Mágica</button>
+<button class="quick-reply-btn" data-query="decoraciones">✨ Decoraciones</button>
+<button class="quick-reply-btn" data-query="catalogo">📖 Catálogo</button>
+</div>
+<form class="chatbot-input-area" id="chatbot-input-area">
+<input autocomplete="off" id="chatbot-input" placeholder="Pregúntame algo..." required="" type="text"/>
+<button aria-label="Enviar mensaje" class="chatbot-send-btn" type="submit">
+<i class="fa-solid fa-paper-plane"></i>
+</button>
+</form>
+</div>
+</div>
+<!-- Custom JS -->
+<script src="tariffs.js?v=folletos-logo-2"></script><script src="customer-session.js?v=folletos-logo-2"></script><script charset="UTF-8" src="script.js?v=folletos-logo-2"></script>
+<script src="spa-carousel.js?v=folletos-logo-2"></script>
+<script src="menu-carousel.js?v=folletos-logo-2"></script>
 </body>
 </html>

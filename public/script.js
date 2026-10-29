@@ -297,14 +297,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const galleryImages = [
         'assets/plan-relax-spa.webp',
         'assets/suite-orquideas.webp',
-        'assets/suite-aves-del-paraiso.webp',
-        'assets/suite-margaritas.webp',
-        'assets/suite-eugenias.webp',
+        'assets/suite_aves_del_paraiso.webp',
+        'assets/suite_margaritas.webp',
+        'assets/suite_eugenias.webp',
         'assets/pasadia.webp',
-        'assets/decoracion-elios.webp',
-        'assets/decoracion-estandar-casita.webp',
-        'assets/decoracion-estandar-suites.webp',
-        'assets/decoracion-pizarra.webp',
+        'assets/fotos-sin-tarifas/decor-elios.webp',
+        'assets/fotos-sin-tarifas/decor-estandar-casita.webp',
+        'assets/fotos-sin-tarifas/decor-estandar-suites.webp',
+        'assets/fotos-sin-tarifas/decor-pizarra.webp',
         'assets/spa-services.webp',
         'assets/included-menu.webp'
     ];
@@ -429,51 +429,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Dynamic Form Logic & Live Calculator ---
 
+    const getRate = key => window.DapaTarifas?.get(key) || 0;
+
     // Room configurations
     const roomConfigs = {
         'Casita Mágica': {
             capacities: [2, 3, 4],
             decorations: [
                 { name: 'Ninguna', price: 0 },
-                { name: 'Decoración Estándar', price: 59000 },
-                { name: 'Decoración Elios', price: 180000 }
+                { name: 'Decoración Estándar', price: getRate('decor_estandar') },
+                { name: 'Decoración Elios', price: getRate('decor_elios') }
             ]
         },
         'Suite Orquídeas': {
             capacities: [2, 3, 4],
             decorations: [
                 { name: 'Ninguna', price: 0 },
-                { name: 'Decoración Elios', price: 180000 }
+                { name: 'Decoración Elios', price: getRate('decor_elios') }
             ]
         },
         'Suite Aves del Paraíso': {
             capacities: [2],
             decorations: [
                 { name: 'Ninguna', price: 0 },
-                { name: 'Decoración Estándar', price: 59000 },
-                { name: 'Decoración Pétalos', price: 85000 },
-                { name: 'Decoración Globos', price: 125000 },
-                { name: 'Decoración Velas', price: 136000 },
-                { name: 'Decoración Elios', price: 140000 }
+                { name: 'Decoración Estándar', price: getRate('decor_estandar') },
+                { name: 'Decoración Pétalos', price: getRate('decor_petalos') },
+                { name: 'Decoración Globos', price: getRate('decor_globos') },
+                { name: 'Decoración Velas', price: getRate('decor_velas') },
+                { name: 'Decoración Elios', price: getRate('decor_elios_pareja') }
             ]
         },
         'Suite Margaritas': {
             capacities: [2],
             decorations: [
                 { name: 'Ninguna', price: 0 },
-                { name: 'Decoración Estándar', price: 59000 },
-                { name: 'Decoración Pétalos', price: 85000 },
-                { name: 'Decoración Globos', price: 125000 },
-                { name: 'Decoración Velas', price: 136000 },
-                { name: 'Decoración Elios', price: 140000 }
+                { name: 'Decoración Estándar', price: getRate('decor_estandar') },
+                { name: 'Decoración Pétalos', price: getRate('decor_petalos') },
+                { name: 'Decoración Globos', price: getRate('decor_globos') },
+                { name: 'Decoración Velas', price: getRate('decor_velas') },
+                { name: 'Decoración Elios', price: getRate('decor_elios_pareja') }
             ]
         },
         'Suite Eugenias': {
             capacities: [2, 3, 4, 5, 6, 7, 8],
             decorations: [
                 { name: 'Ninguna', price: 0 },
-                { name: 'Decoración Pizarra', price: 70000 },
-                { name: 'Decoración Elios', price: 180000 }
+                { name: 'Decoración Pizarra', price: getRate('decor_pizarra') },
+                { name: 'Decoración Elios', price: getRate('decor_elios') }
             ]
         },
         'Pasadía': {
@@ -487,11 +489,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Spa Services pricing
     const spaConfig = {
         'Ninguno': 0,
-        'Spa Relajante 1p': 95000,
-        'Spa Relajante 2p': 165000,
-        'Spa Piedras 1p': 140000,
-        'Spa Piedras 2p': 240000
+        'Spa Relajante 1p': 'spa_relajante_1',
+        'Spa Relajante 2p': 'spa_relajante_2',
+        'Spa Piedras 1p': 'spa_piedras_1',
+        'Spa Piedras 2p': 'spa_piedras_2'
     };
+
+    window.addEventListener('dapa:tarifas-cargadas', () => {
+        for (const [room, config] of Object.entries(roomConfigs)) {
+            config.decorations.forEach(dec => {
+                const key=dec.name==='Decoración Estándar'?'decor_estandar':dec.name==='Decoración Elios'?(['Suite Aves del Paraíso','Suite Margaritas'].includes(room)?'decor_elios_pareja':'decor_elios'):({'Decoración Pétalos':'decor_petalos','Decoración Globos':'decor_globos','Decoración Velas':'decor_velas','Decoración Pizarra':'decor_pizarra'})[dec.name];
+                if(key)dec.price=getRate(key);
+            });
+        }
+        const selectedSuite=suiteSelect.value;
+        const selectedDecor=decorSelect.value;
+        if(selectedSuite){suiteSelect.dispatchEvent(new Event('change'));if(Array.from(decorSelect.options).some(o=>o.value===selectedDecor))decorSelect.value=selectedDecor;}
+        updatePriceCalculator();syncSpaSelection();
+    });
 
     // Populate dropdowns and update layout based on room selection
     suiteSelect.addEventListener('change', () => {
@@ -543,6 +558,42 @@ document.addEventListener('DOMContentLoaded', () => {
     peopleCountSelect.addEventListener('change', updatePriceCalculator);
     decorSelect.addEventListener('change', updatePriceCalculator);
     spaSelect.addEventListener('change', updatePriceCalculator);
+    // Desde las tarjetas de Spa: tomar modalidad (1 o 2 personas), actualizar
+    // la cotización existente y llevar al formulario sin duplicar reservas.
+    const spaSelectedNotice = document.getElementById('spa-selected-notice');
+    function syncSpaSelection() {
+        const selected = spaSelect.value;
+        document.querySelectorAll('.spa-plan-item').forEach(card => {
+            const matchingRadio = Array.from(card.querySelectorAll('input[type="radio"]'))
+                .find(radio => radio.value === selected);
+            card.classList.toggle('is-selected', !!matchingRadio);
+            if (matchingRadio) matchingRadio.checked = true;
+        });
+        if (spaSelectedNotice) {
+            const selectedOption = spaSelect.options[spaSelect.selectedIndex];
+            const hasSpa = selected && selected !== 'Ninguno' && !!selectedOption;
+            spaSelectedNotice.hidden = !hasSpa;
+            spaSelectedNotice.textContent = hasSpa ? '✓ Seleccionado: ' + selectedOption.textContent : '';
+        }
+    }
+    document.querySelectorAll('.spa-select-treatment').forEach(button => {
+        button.addEventListener('click', () => {
+            const group = button.dataset.spaName;
+            const chosen = document.querySelector('input[name="' + group + '"]:checked');
+            if (!chosen || !Array.from(spaSelect.options).some(opt => opt.value === chosen.value)) return;
+            spaSelect.value = chosen.value;
+            spaSelect.dispatchEvent(new Event('change', { bubbles: true }));
+            const reservation = document.getElementById('reservas');
+            if (reservation) {
+                const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                reservation.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+            }
+            spaSelect.focus({ preventScroll: true });
+        });
+    });
+    spaSelect.addEventListener('change', syncSpaSelection);
+    syncSpaSelection();
+
     weekdayPromoCheckbox.addEventListener('change', updatePriceCalculator);
 
     // Check if the selected date falls on a weekday (Sunday to Thursday)
@@ -585,50 +636,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const people = parseInt(peopleCountSelect.value) || 2;
         let accommodationPrice = 0;
 
-        // 1. Calculate accommodation price
+        // 1. Tarifas que llegan de PostgreSQL; el servidor vuelve a calcular antes de guardar.
         if (suite === 'Casita Mágica') {
-            const subplan = subplanSelect.value;
-            if (subplan === 'Plan Relax') accommodationPrice = 200000;
-            else if (subplan === 'Plan Spa') accommodationPrice = 359900;
-            else if (subplan === 'Plan Full') accommodationPrice = 399900;
-            
-            // Add extra people charge: $30,000 COP per extra person above 2
-            const extraPeople = Math.max(0, people - 2);
-            accommodationPrice += extraPeople * 30000;
-        } 
-        else if (suite === 'Suite Orquídeas') {
-            if (isWeek) {
-                if (people === 2) accommodationPrice = 590000;
-                else if (people === 3) accommodationPrice = 710000;
-                else if (people >= 4) accommodationPrice = 810000;
-            } else {
-                if (people === 2) accommodationPrice = 650000;
-                else if (people === 3) accommodationPrice = 770000;
-                else if (people >= 4) accommodationPrice = 880000;
-            }
-        } 
-        else if (suite === 'Suite Aves del Paraíso' || suite === 'Suite Margaritas') {
-            accommodationPrice = isWeek ? 420000 : 490000;
-        } 
-        else if (suite === 'Suite Eugenias') {
-            // Eugenias pricing: base is for 2, 3, or 4 people
-            // For people from 5 to 8, add $160,000 COP per extra person
-            let basePrice = 0;
-            if (isWeek) {
-                if (people === 2) basePrice = 590000;
-                else if (people === 3) basePrice = 710000;
-                else if (people >= 4) basePrice = 810000;
-            } else {
-                if (people === 2) basePrice = 650000;
-                else if (people === 3) basePrice = 770000;
-                else if (people >= 4) basePrice = 880000;
-            }
-            
-            const extraPeople = Math.max(0, people - 4);
-            accommodationPrice = basePrice + (extraPeople * 160000);
-        } 
-        else if (suite === 'Pasadía') {
-            accommodationPrice = isWeek ? 320000 : 360000;
+            const key = ({'Plan Relax':'casita_relax','Plan Spa':'casita_spa','Plan Full':'casita_full'})[subplanSelect.value];
+            accommodationPrice = getRate(key) + Math.max(0,people-2)*getRate('casita_extra');
+        } else if (suite === 'Pasadía') {
+            accommodationPrice = getRate(isWeek?'pasadia_semana':'pasadia_sabado');
+        } else if (suite === 'Suite Aves del Paraíso' || suite === 'Suite Margaritas') {
+            const room = suite === 'Suite Margaritas' ? 'margaritas' : 'aves';
+            accommodationPrice = getRate(room+'_'+(isWeek?'semana':'finde'));
+        } else if (suite === 'Suite Orquídeas' || suite === 'Suite Eugenias') {
+            const room = suite === 'Suite Orquídeas'?'orquideas':'eugenias';
+            accommodationPrice = getRate(room+'_'+(isWeek?'semana':'finde')+'_'+Math.min(people,4));
+            if (room === 'eugenias') accommodationPrice += Math.max(0,people-4)*getRate('eugenias_extra');
         }
 
         calcAccommodation.textContent = `$${accommodationPrice.toLocaleString()} COP`;
@@ -648,7 +668,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let spaPrice = 0;
         const spaVal = spaSelect.value;
         if (spaVal && spaVal !== 'Ninguno') {
-            spaPrice = spaConfig[spaVal] || 0;
+            spaPrice = getRate(spaConfig[spaVal]);
             calcSpaRow.style.display = 'flex';
             calcSpa.textContent = `+$${spaPrice.toLocaleString()} COP`;
         } else {
@@ -665,7 +685,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- WhatsApp Message Generator & Form Submit ---
-    bookingForm.addEventListener('submit', (e) => {
+    bookingForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const name = clientNameInput.value.trim();
@@ -702,6 +722,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (hasError) return;
+        if (!window.DapaTarifas?.ready()) { alert('Las tarifas no están disponibles. Intenta de nuevo cuando vuelva la conexión.'); return; }
+        let loggedUser;
+        try { const auth=await fetch('/api/auth/me'); loggedUser=(await auth.json()).user; }catch{alert('No se pudo verificar tu sesión.');return;}
+        if(!loggedUser){
+            sessionStorage.setItem('dapa-reserva-borrador',JSON.stringify({name,suite,subplan,people,date,decor,spa,notes}));
+            window.location.href='/acceso.html?modo=registro&continuar='+encodeURIComponent('/#reservas');return;
+        }
+
 
         // --- VALIDACIONES DE CAPACIDAD Y DECORACIONES ---
         const config = roomConfigs[suite];
@@ -744,7 +772,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (spa && spa !== 'Ninguno') {
             // Extraer solo el nombre del servicio eliminando el precio de la etiqueta
-            const spaLabel = spaSelect.options[spaSelect.selectedIndex].textContent.split(' - ')[0];
+            const spaLabel = spaSelect.options[spaSelect.selectedIndex].textContent.split(' — ')[0].split(' - ')[0];
             msg += `💆 *Servicio de Spa:* ${spaLabel}\n`;
         }
         
@@ -762,32 +790,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const numericTotal = parseInt(totalText.replace(/[^0-9]/g, ''), 10) || 0;
 
-        fetch('/api/bookings', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                clienteNombre: name,
-                suite: suite,
-                subplan: subplan || null,
-                numPersonas: parseInt(people, 10),
-                fechaReserva: date,
-                decoracion: decor,
-                spa: spa,
-                esTarifaSemana: Boolean(isWeek),
-                comentarios: notes,
-                precioTotal: numericTotal
-            })
-        }).catch(() => {});
+        // Una solicitud solo se comunica por WhatsApp si fue guardada exitosamente.
+        const submitBtn=document.getElementById('submit-whatsapp');
+        submitBtn.disabled=true;
+        try {
+            const response=await fetch('/api/bookings', {
+                method:'POST', headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({suite,subplan:subplan||null,numPersonas:Number(people),fechaReserva:date,decoracion:decor,spa,comentarios:notes})
+            });
+            const result=await response.json();
+            if(!response.ok){
+                if(response.status===401){window.location.href='/acceso.html?modo=registro&continuar='+encodeURIComponent('/#reservas');return;}
+                alert(result.message||'No se pudo guardar la solicitud.');return;
+            }
+            msg=msg.replace(`👤 *Cliente:* ${name}`,`👤 *Cliente:* ${loggedUser.nombre}`);
+            msg=msg.replace(`💰 *VALOR ESTIMADO:* ${totalText}`,`💰 *VALOR ESTIMADO:* $${Number(result.data.precioTotal).toLocaleString('es-CO')} COP`);
+            msg=msg.replace('SOLICITUD DE RESERVA - DAPA GLAMPING','SOLICITUD #'+result.data.id+' - DAPA GLAMPING');
+            msg+=`\n\n✅ *Solicitud #${result.data.id} guardada en el sistema (pendiente de confirmación).*`;
+            sessionStorage.removeItem('dapa-reserva-borrador');
+        } catch(error) {alert('No se pudo conectar con el servidor. No se guardó la solicitud.');return;}
+        finally { submitBtn.disabled=false; }
 
         // Encode URI and redirect to WhatsApp Web / Mobile App
         const whatsappNumber = '573172309090';
         const encodedMsg = encodeURIComponent(msg);
         const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMsg}`;
 
-        // Open in new tab
-        window.open(whatsappUrl, '_blank');
+        // Navegar tras guardar: abrir una ventana nueva aquí puede ser bloqueado al usar await.
+        window.location.assign(whatsappUrl);
     });
 
     // --- Scroll Reveal Animation with Intersection Observer ---
@@ -917,12 +947,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (match) {
                 const count = (match[0] === '3' || match[0] === 'tres') ? 3 : 4;
                 const extraPeople = count - 2;
-                const extraCost = extraPeople * 30000;
-                return `Para la <strong>Casita Mágica</strong> con <strong>${count} personas</strong>: la base es para 2 personas, y por cada persona adicional se cobra <strong>$30.000 COP</strong> por el ingreso (el excedente total sería de $${extraCost.toLocaleString()} COP). Ten en cuenta que si quieres masajes para los demás, dependerá del paquete que elijas. ¿Te gustaría cotizarlo?`;
+                const extraCost = extraPeople * getRate('casita_extra');
+                return `Para la <strong>Casita Mágica</strong> con <strong>${count} personas</strong>: la base es para 2 personas, y por cada persona adicional se cobra <strong>${window.DapaTarifas.money(getRate('casita_extra'))}</strong> por el ingreso (el excedente total sería de $${extraCost.toLocaleString()} COP). Ten en cuenta que si quieres masajes para los demás, dependerá del paquete que elijas. ¿Te gustaría cotizarlo?`;
             }
             return `Te cuento, la <strong>Casita Mágica</strong> se alquila por bloques de horas para 2 personas:
-- Plan de 4 horas: $200.000 COP.
-- Persona extra: $30.000 COP adicional.
+- Plan de 4 horas: ${window.DapaTarifas.money(getRate('casita_relax'))}.
+- Persona extra: ${window.DapaTarifas.money(getRate('casita_extra'))} adicional.
 - Puedes agregar masajes relajantes si lo deseas.
 ¿Te gustaría reservar algún bloque de horas?`;
         }
@@ -937,9 +967,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (matchGroup && !wantsImages) {
                 const count = parseInt(matchGroup[0]) || (matchGroup[0] === 'cinco' ? 5 : matchGroup[0] === 'seis' ? 6 : matchGroup[0] === 'siete' ? 7 : 8);
                 const extraPeople = count - 4;
-                const extraCost = extraPeople * 160000;
-                return `Para un grupo de <strong>${count} personas</strong>, la mejor opción es la <strong>Suite Eugenias</strong> (capacidad de 2 a 8 personas). La tarifa base cubre 4 personas, y a partir de la 5ª se cobra un adicional de $160.000 COP por persona (el excedente por las ${extraPeople} personas adicionales sería de $${extraCost.toLocaleString()} COP).<br><br>
-                📸 <a href="#" onclick="openLightbox('assets/suite-eugenias.webp'); return false;" class="chat-inline-link">Ver fotos de Suite Eugenias</a><br><br>
+                const extraCost = extraPeople * getRate('eugenias_extra');
+                return `Para un grupo de <strong>${count} personas</strong>, la mejor opción es la <strong>Suite Eugenias</strong> (capacidad de 2 a 8 personas). La tarifa base cubre 4 personas, y a partir de la 5ª se cobra un adicional de ${window.DapaTarifas.money(getRate('eugenias_extra'))} por persona (el excedente por las ${extraPeople} personas adicionales sería de $${extraCost.toLocaleString()} COP).<br><br>
+                📸 <a href="#" onclick="openLightbox('assets/suite_eugenias.webp'); return false;" class="chat-inline-link">Ver fotos de Suite Eugenias</a><br><br>
                 ¿Te gustaría cotizarla con su piscina privada y chimenea?`;
             }
             
@@ -947,15 +977,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `Para grupos de <strong>3 o 4 personas</strong>, las opciones ideales son:
 <br><br>
 • <strong>Suite Orquídeas:</strong> Dos niveles y mallas catamarán (máx 4 personas). <br>👉 <a href="#" onclick="openLightbox('assets/suite-orquideas.webp'); return false;" class="chat-inline-link">Ver foto de Suite Orquídeas</a><br><br>
-• <strong>Suite Eugenias:</strong> Piscina privada y chimenea (base para 4 pers, hasta 8). <br>👉 <a href="#" onclick="openLightbox('assets/suite-eugenias.webp'); return false;" class="chat-inline-link">Ver foto de Suite Eugenias</a><br><br>
+• <strong>Suite Eugenias:</strong> Piscina privada y chimenea (base para 4 pers, hasta 8). <br>👉 <a href="#" onclick="openLightbox('assets/suite_eugenias.webp'); return false;" class="chat-inline-link">Ver foto de Suite Eugenias</a><br><br>
 <em>Nota: Las suites Paraíso y Margaritas son exclusivamente para parejas (máx 2 personas).</em>`;
             }
             
             return `¡Aquí puedes ver las fotos y detalles de cada una de nuestras habitaciones y planes! Toca el enlace para abrir la imagen: <br><br>
 📸 <a href="#" onclick="openLightbox('assets/suite-orquideas.webp'); return false;" class="chat-inline-link">Suite Orquídeas (2 a 4 pers - Dos niveles y mallas)</a> <br>
-📸 <a href="#" onclick="openLightbox('assets/suite-aves-del-paraiso.webp'); return false;" class="chat-inline-link">Suite Aves del Paraíso (Parejas - Jacuzzi privado)</a> <br>
-📸 <a href="#" onclick="openLightbox('assets/suite-margaritas.webp'); return false;" class="chat-inline-link">Suite Margaritas (Parejas - Jacuzzi privado)</a> <br>
-📸 <a href="#" onclick="openLightbox('assets/suite-eugenias.webp'); return false;" class="chat-inline-link">Suite Eugenias (Familiar 2 a 8 pers - Piscina y chimenea)</a> <br>
+📸 <a href="#" onclick="openLightbox('assets/suite_aves_del_paraiso.webp'); return false;" class="chat-inline-link">Suite Aves del Paraíso (Parejas - Jacuzzi privado)</a> <br>
+📸 <a href="#" onclick="openLightbox('assets/suite_margaritas.webp'); return false;" class="chat-inline-link">Suite Margaritas (Parejas - Jacuzzi privado)</a> <br>
+📸 <a href="#" onclick="openLightbox('assets/suite_eugenias.webp'); return false;" class="chat-inline-link">Suite Eugenias (Familiar 2 a 8 pers - Piscina y chimenea)</a> <br>
 📸 <a href="#" onclick="openLightbox('assets/plan-relax-spa.webp'); return false;" class="chat-inline-link">Casita Mágica (Planes por horas Relax / Spa)</a> <br>
 📸 <a href="#" onclick="openLightbox('assets/pasadia.webp'); return false;" class="chat-inline-link">Plan Pasadía (10 am a 5 pm para 2 personas)</a> <br><br>
 ¿Cuál de ellas te gustaría cotizar o reservar?`;
@@ -964,7 +994,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 4. Masajes y Spa
         if (text.includes('masaje') || text.includes('masajes') || text.includes('spa') || text.includes('terapia')) {
             return `Los masajes y servicios de spa los realizamos directamente en tu suite para mayor comodidad (como masajes relajantes o con piedras volcánicas). Las tarifas varían si son individuales o en pareja.<br><br>
-            👉 <a href="#" onclick="openLightbox('assets/spa-services.webp'); return false;" class="chat-inline-link">Ver Folleto de Servicios de Spa</a><br><br>
+            👉 <a href="#" onclick="openLightbox('assets/spa-services.webp'); return false;" class="chat-inline-link">Ver fotografía de Servicios de Spa</a><br><br>
             Si te hospedas en la Suite Eugenias con un grupo grande, podemos coordinar terapeutas para atenderlos a todos allí mismo. 😊`;
         }
 
@@ -972,11 +1002,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (text.includes('decor') || text.includes('celebrar') || text.includes('cumple') || text.includes('aniversario') || text.includes('sorpresa') || text.includes('romantico') || text.includes('romántica')) {
             return `¡Tenemos hermosos sets de decoración para celebrar momentos especiales! 🌹🎈<br><br>
                     <strong>*Importante:*</strong> Las decoraciones se contratan de forma individual y se aplican en <strong>una (1) sola habitación</strong> de tu elección.<br><br>
-                    • <a href="#" onclick="openLightbox('assets/decoracion-elios.webp'); return false;" class="chat-inline-link">Ver Decoración Elios ($180.000 COP)</a> (39 globos, helio, pétalos y 3 pizarras).<br>
-                    • <a href="#" onclick="openLightbox('assets/decoracion-estandar-casita.webp'); return false;" class="chat-inline-link">Ver Estándar Casita Mágica ($59.000 COP)</a>.<br>
-                    • <a href="#" onclick="openLightbox('assets/decoracion-estandar-suites.webp'); return false;" class="chat-inline-link">Ver Estándar Margaritas / Paraíso ($59.000 COP)</a>.<br>
-                    • <a href="#" onclick="openLightbox('assets/decoracion-pizarra.webp'); return false;" class="chat-inline-link">Ver Decoración Pizarra Eugenias ($70.000 COP)</a>.<br><br>
-                    Además, en Margaritas y Paraíso puedes adicionar: Pétalos ($85k), Globos ($125k) o Velas ($136k).`;
+                    • <a href="#" onclick="openLightbox('assets/fotos-sin-tarifas/decor-elios.webp'); return false;" class="chat-inline-link">Ver Decoración Elios (${window.DapaTarifas.money(getRate('decor_elios'))})</a> (39 globos, helio, pétalos y 3 pizarras).<br>
+                    • <a href="#" onclick="openLightbox('assets/fotos-sin-tarifas/decor-estandar-casita.webp'); return false;" class="chat-inline-link">Ver Estándar Casita Mágica (${window.DapaTarifas.money(getRate('decor_estandar'))})</a>.<br>
+                    • <a href="#" onclick="openLightbox('assets/fotos-sin-tarifas/decor-estandar-suites.webp'); return false;" class="chat-inline-link">Ver Estándar Margaritas / Paraíso (${window.DapaTarifas.money(getRate('decor_estandar'))})</a>.<br>
+                    • <a href="#" onclick="openLightbox('assets/fotos-sin-tarifas/decor-pizarra.webp'); return false;" class="chat-inline-link">Ver Decoración Pizarra Eugenias (${window.DapaTarifas.money(getRate('decor_pizarra'))})</a>.<br><br>
+                    Además, en Margaritas y Paraíso puedes adicionar: Pétalos (${window.DapaTarifas.money(getRate('decor_petalos'))}), Globos (${window.DapaTarifas.money(getRate('decor_globos'))}) o Velas (${window.DapaTarifas.money(getRate('decor_velas'))}).`;
         }
 
         // 5. Catálogo

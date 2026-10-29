@@ -1,0 +1,25 @@
+const assert=require('assert');
+const fs=require('fs');
+const {DEFAULT_MAP,DEFAULT_TARIFFS,calculateQuote,isWeekday}=require('../src/domain/pricing');
+const quote=(patch,rate=DEFAULT_MAP)=>calculateQuote({suite:'Suite Orquídeas',numPersonas:2,fechaReserva:'2026-10-27',spa:'Ninguno',decoracion:'Ninguna',...patch},rate);
+let count=0;function test(name,fn){try{fn();count++;console.log('✓',name);}catch(e){console.error('✗',name,e.message);process.exitCode=1;}}
+test('41 tarifas con claves únicas',()=>{assert.equal(DEFAULT_TARIFFS.length,41);assert.equal(new Set(DEFAULT_TARIFFS.map(x=>x.key)).size,41);});
+test('ejemplo de suite Orquídeas y Spa 805.000 COP',()=>assert.equal(quote({numPersonas:3,spa:'Spa Relajante 1p'}).total,805000));
+test('un precio modificado por admin se refleja en el total',()=>assert.equal(quote({spa:'Spa Relajante 1p'},{...DEFAULT_MAP,spa_relajante_1:121000}).total,711000));
+test('se ignora precioTotal falsificado por el cliente',()=>assert.equal(quote({precioTotal:1}).total,590000));
+test('la tarifa del fin de semana se calcula desde la fecha',()=>assert.equal(quote({fechaReserva:'2026-10-31',esTarifaSemana:true}).total,650000));
+test('Pasadía es especial el sábado',()=>assert.equal(quote({suite:'Pasadía',fechaReserva:'2026-10-31'}).total,360000));
+test('Eugenias 8 personas + spa piedras',()=>assert.equal(quote({suite:'Suite Eugenias',numPersonas:8,spa:'Spa Piedras 2p'}).total,1690000));
+test('Elios con precio específico por habitación',()=>assert.equal(quote({suite:'Suite Margaritas',decoracion:'Decoración Elios'}).total,560000));
+test('lunes a jueves son tarifa de semana',()=>assert.equal(isWeekday('2026-10-27','Suite Orquídeas'),true));
+test('no se permite exceder capacidad',()=>assert.throws(()=>quote({numPersonas:9}),/huéspedes/));
+test('no se permite seleccionar decoración inválida',()=>assert.throws(()=>quote({decoracion:'Decoración Pizarra'}),/Decoración/));
+test('no se acepta servicio de spa inexistente',()=>assert.throws(()=>quote({spa:'Spa inventado'}),/spa/));
+test('no se aceptan fechas inválidas',()=>assert.throws(()=>quote({fechaReserva:'2026-02-30'}),/Fecha/));
+test('no se aceptan planes desconocidos',()=>assert.throws(()=>quote({suite:'Casita Mágica',subplan:'Desconocido'}),/plan/));
+test('las tarjetas muestran los folletos oficiales solicitados',()=>{const html=fs.readFileSync('public/index.html','utf8');for(const name of ['plan-relax-spa.webp','suite-orquideas.webp','suite_aves_del_paraiso.webp','suite_margaritas.webp','suite_eugenias.webp','pasadia.webp'])assert.ok(html.includes(`src="assets/${name}"`),`Falta ${name}`);});
+test('migración no borra historial',()=>{const schema=fs.readFileSync('sql/schema.sql','utf8');assert.ok(!/DROP TABLE/i.test(schema));assert.match(schema,/historial_tarifas/);});
+test('registro público solo crea clientes',()=>{const code=fs.readFileSync('src/routes/auth.routes.js','utf8');assert.match(code,/hashPassword\(password\),'cliente'/);});
+test('administrador protegido en el backend',()=>{const code=fs.readFileSync('src/routes/admin.routes.js','utf8');assert.match(code,/router\.use\(requireAuth,requireAdmin\)/);});
+test('el servidor usa cotización propia y rechaza colisiones',()=>{const code=fs.readFileSync('src/routes/booking.routes.js','utf8');assert.match(code,/calculateQuote/);assert.match(code,/pg_advisory_xact_lock/);assert.ok(!/Number\(precioTotal\)/.test(code));});
+console.log(`${count} pruebas adicionales completadas.`);

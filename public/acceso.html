@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ingresar o registrarse | Dapa Glamping</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body class="portal-body">
+  <header class="portal-topbar">
+    <a class="portal-brand" href="/">Dapa Glamping</a>
+    <nav class="portal-nav"><a href="/">Volver a la página</a></nav>
+  </header>
+  <main class="portal-auth">
+    <section class="portal-card">
+      <h1 class="portal-heading" id="auth-title">Bienvenido</h1>
+      <p class="portal-subtitle" id="auth-subtitle">Accede a tus reservas y a tu historial de hospedajes.</p>
+
+      <div class="portal-tabs" role="group" aria-label="Acción">
+        <button class="active" id="mode-login" type="button">Ingresar</button>
+        <button id="mode-register" type="button">Crear cuenta</button>
+      </div>
+
+      <form class="portal-form" id="auth-form">
+        <div id="register-fields" hidden>
+          <label>Nombre completo *
+            <input autocomplete="name" name="nombre" minlength="3" maxlength="150" placeholder="Ej. Juan Pérez">
+          </label>
+          <label>Teléfono WhatsApp
+            <input autocomplete="tel" name="telefono" maxlength="35" placeholder="Ej. +57 300 1234567">
+          </label>
+        </div>
+
+        <label id="identifier-label">Correo electrónico
+          <input type="email" autocomplete="email" id="input-identifier" name="correo" required maxlength="254" placeholder="tu@correo.com">
+        </label>
+
+        <label>Contraseña
+          <input type="password" autocomplete="current-password" name="password" id="input-password" required minlength="1" maxlength="128" placeholder="Escribe tu contraseña">
+        </label>
+
+        <div id="register-terms" hidden class="portal-checkbox-row">
+          <label class="portal-checkbox-label">
+            <input type="checkbox" id="reg-politicas" name="politicas">
+            <span>Acepto las <a href="#politicas" id="btn-show-politicas" class="portal-link">políticas de privacidad</a> y tratamiento de datos personales *</span>
+          </label>
+        </div>
+
+        <button type="submit" id="auth-submit">Iniciar sesión</button>
+      </form>
+
+      <p class="portal-status" id="auth-status" role="alert"></p>
+      <p class="portal-muted" id="auth-footer-note">Los clientes pueden crear cuentas. Las cuentas administrativas las habilita únicamente el responsable del sistema.</p>
+    </section>
+  </main>
+
+  <div id="modal-politicas" class="portal-modal-backdrop" hidden>
+    <div class="portal-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button type="button" class="portal-modal-close" id="btn-close-politicas" aria-label="Cerrar">&times;</button>
+      <h2 id="modal-title">Políticas de Privacidad y Tratamiento de Datos</h2>
+      <p>En cumplimiento de la Ley 1581 de 2012 de la República de Colombia y normas complementarias, Dapa Glamping informa a sus clientes sobre el tratamiento de sus datos personales recolectados a través de este portal.</p>
+      <ul>
+        <li><strong>Finalidad:</strong> gestionar cotizaciones, reservas, servicios adicionales, historial de estancias y comunicaciones asociadas a la atención del huésped.</li>
+        <li><strong>Confidencialidad:</strong> tus datos se almacenan en un entorno seguro y no se comparten, alquilan ni venden a terceros.</li>
+        <li><strong>Derechos del titular:</strong> puedes conocer, actualizar, rectificar o solicitar la supresión de tu información a través de los canales oficiales.</li>
+      </ul>
+      <p>Al marcar la casilla y crear tu cuenta, autorizas de manera previa, expresa e informada a Dapa Glamping para tratar tus datos conforme a los fines aquí descritos.</p>
+      <div class="portal-row end" style="margin-top:20px;">
+        <button type="button" class="portal-btn-primary" id="btn-accept-modal">Estoy de acuerdo</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="acceso.js"></script>
+</body>
+</html>

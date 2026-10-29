@@ -1,0 +1,345 @@
+/* ==========================================================================
+   CARRUSEL DE GASTRONOMÍA Y ALIMENTACIÓN INCLUIDA - DAPA GLAMPING
+   ========================================================================== */
+
+.menu-carousel-section {
+  margin: 30px auto 0;
+  max-width: 1100px;
+  position: relative;
+}
+
+/* Filtros de Categorías */
+.menu-carousel-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.menu-tab-btn {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(198, 162, 96, 0.35);
+  color: var(--dapa-text, #23372d);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu-tab-btn:hover {
+  border-color: var(--dapa-gold, #c6a260);
+  background: #fff;
+  transform: translateY(-2px);
+}
+
+.menu-tab-btn.active {
+  background: var(--dapa-gold, #c6a260);
+  border-color: var(--dapa-gold, #c6a260);
+  color: #17271e;
+  box-shadow: 0 4px 15px rgba(198, 162, 96, 0.3);
+}
+
+/* Contenedor del Carrusel */
+.menu-carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 10px 4px 30px;
+}
+
+.menu-carousel-track {
+  display: flex;
+  gap: 22px;
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* Tarjeta individual de platillo */
+.menu-dish-card {
+  flex: 0 0 calc(33.333% - 15px);
+  min-width: 290px;
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(21, 45, 32, 0.08);
+  border: 1px solid rgba(198, 162, 96, 0.2);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.menu-dish-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 35px rgba(21, 45, 32, 0.14);
+  border-color: rgba(198, 162, 96, 0.5);
+}
+
+.menu-dish-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  background: #f3efe6;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.menu-dish-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.menu-dish-card:hover .menu-dish-img {
+  transform: scale(1.06);
+}
+
+.menu-dish-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(24, 49, 39, 0.88);
+  color: #f7f2df;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.menu-dish-badge-included {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  background: var(--dapa-gold, #c6a260);
+  color: #17271e;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Contenido de la tarjeta */
+.menu-dish-body {
+  padding: 20px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.menu-dish-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dapa-deep, #10231c);
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+
+.menu-dish-desc {
+  font-size: 0.91rem;
+  color: var(--dapa-muted, #55685e);
+  line-height: 1.5;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* Botones de navegación (Flechas) */
+.menu-carousel-arrow {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(198, 162, 96, 0.35);
+  color: var(--dapa-deep, #10231c);
+  font-size: 1.15rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.menu-carousel-arrow:hover:not(:disabled) {
+  background: var(--dapa-gold, #c6a260);
+  color: #17271e;
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 8px 22px rgba(198, 162, 96, 0.4);
+}
+
+.menu-carousel-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: translateY(-50%);
+}
+
+.menu-carousel-arrow.prev {
+  left: -20px;
+}
+
+.menu-carousel-arrow.next {
+  right: -20px;
+}
+
+/* Indicadores / Dots */
+.menu-carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.menu-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #cfd6d1;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+}
+
+.menu-dot.active {
+  width: 24px;
+  border-radius: 10px;
+  background: var(--dapa-gold, #c6a260);
+}
+
+/* Contador y botón de folleto completo */
+.menu-extra-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 26px;
+  flex-wrap: wrap;
+}
+
+.btn-view-flyer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--dapa-gold, #c6a260);
+  color: var(--dapa-deep, #10231c);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-view-flyer:hover {
+  background: #f7f2df;
+  transform: translateY(-2px);
+  color: #10231c;
+}
+
+/* Soporte Tema Oscuro */
+[data-theme="dark"] .menu-dish-card {
+  background: #19251c;
+  border-color: rgba(198, 162, 96, 0.25);
+}
+
+[data-theme="dark"] .menu-dish-title {
+  color: #f7f2df;
+}
+
+[data-theme="dark"] .menu-dish-desc {
+  color: #a8b8ae;
+}
+
+[data-theme="dark"] .menu-tab-btn {
+  background: #142017;
+  color: #f3efe6;
+  border-color: rgba(198, 162, 96, 0.3);
+}
+
+[data-theme="dark"] .menu-carousel-arrow {
+  background: #19251c;
+  color: #f7f2df;
+  border-color: rgba(198, 162, 96, 0.3);
+}
+
+[data-theme="dark"] .btn-view-flyer {
+  background: #19251c;
+  color: #f7f2df;
+}
+
+/* Responsividad */
+@media (max-width: 960px) {
+  .menu-dish-card {
+    flex: 0 0 calc(50% - 11px);
+    min-width: 260px;
+  }
+  .menu-carousel-arrow.prev {
+    left: -10px;
+  }
+  .menu-carousel-arrow.next {
+    right: -10px;
+  }
+}
+
+@media (max-width: 640px) {
+  .menu-dish-card {
+    flex: 0 0 88%;
+    min-width: 250px;
+  }
+  .menu-carousel-arrow {
+    display: none; /* En móvil se desplaza con swipe natural */
+  }
+  .menu-carousel-wrapper {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 16px;
+  }
+  .menu-dish-card {
+    scroll-snap-align: center;
+  }
+}
+/* Imagen de plato completo: evita recortes de los originales cuadrados. */
+.menu-dish-media {
+  aspect-ratio: 1 / 1;
+  background: radial-gradient(circle at center, #fffdf7 0%, #f1eee6 100%);
+  padding: 10px;
+  box-sizing: border-box;
+}
+.menu-dish-img {
+  object-fit: contain;
+  object-position: center;
+}
+.menu-dish-card:hover .menu-dish-img { transform: scale(1.025); }
+.menu-dish-media:focus-visible, .menu-dot:focus-visible,
+.menu-carousel-arrow:focus-visible, .menu-tab-btn:focus-visible {
+  outline: 3px solid #c6a260;
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-carousel-track, .menu-dish-img { transition: none !important; }
+  .menu-dish-card:hover, .menu-dish-card:hover .menu-dish-img { transform: none; }
+}
