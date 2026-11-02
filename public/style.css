@@ -1181,6 +1181,7 @@ img {
 
 .booking-form input[type="text"],
 .booking-form input[type="date"],
+.booking-form input[type="time"],
 .booking-form select,
 .booking-form textarea {
     width: 100%;
@@ -1196,6 +1197,7 @@ img {
 
 .booking-form input[type="text"]:focus,
 .booking-form input[type="date"]:focus,
+.booking-form input[type="time"]:focus,
 .booking-form select:focus,
 .booking-form textarea:focus {
     outline: none;
@@ -2772,3 +2774,11 @@ footer {
 [data-theme="dark"] .chatbot-input-area input {
     color: #e2e8e3;
 }
+
+.booking-form [hidden]{display:none!important}.booking-form .form-row .form-group{min-width:0}.booking-schedule-panel{line-height:1.65;padding:16px;border:1px solid var(--color-gold,#b99c50);border-radius:12px}.booking-schedule-panel:has(p:empty){display:none}.booking-form select{max-width:100%}#availability-notice{font-size:.9rem;line-height:1.5;margin-top:10px}
+/* Fotografías reales de alojamientos, seleccionadas del material del propietario. */
+.suite-img-wrapper.room-photo-media{height:310px;min-height:0;overflow:hidden;background:#173126}.room-photo-open{display:block;width:100%;height:100%;border:0;padding:0;background:transparent;text-align:left;color:inherit;cursor:zoom-in;position:relative}.room-photo-media .room-cover{width:100%;height:100%;object-fit:cover;object-position:center 48%;display:block}.room-photo-open:focus-visible{outline:3px solid #f2d99c;outline-offset:-5px}.room-photo-open:after{content:'';position:absolute;inset:55% 0 0;background:linear-gradient(transparent,#10231c66);pointer-events:none}.room-photo-open .suite-zoom-hint{z-index:2}.suite-actions{flex-wrap:wrap}.room-brochure-link{font:inherit;font-size:.8rem;border:0;background:none;color:var(--color-accent,#bca063);padding:10px 5px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}.lightbox-close{border:0;background:transparent;font-family:inherit;line-height:1}.lightbox-caption{max-width:90vw}.room-photo-open:hover .room-cover{transform:scale(1.035)}
+@media(max-width:767px){.suite-img-wrapper.room-photo-media{height:260px}.room-photo-open .suite-tag{font-size:.7rem}.room-brochure-link{padding:10px 0}}
+@media(prefers-reduced-motion:reduce){.room-photo-open .room-cover{transition:none!important;transform:none!important}}
+
+.holiday-notice{font-size:.85rem;line-height:1.5;color:var(--color-accent);margin-top:10px}.holiday-notice:empty{display:none}

@@ -73,10 +73,8 @@
 <div class="suites-grid">
 <!-- Suite 1: Casita Mágica -->
 <div class="suite-card reveal-on-scroll">
-<div class="suite-img-wrapper brochure-media">
-<img alt="Casita Mágica" class="suite-img brochure-poster" loading="lazy" onclick="openLightbox('assets/plan-relax-spa.webp')" src="assets/plan-relax-spa.webp"/>
-<div class="suite-tag"><i class="fa-regular fa-clock"></i> Planes por Horas</div>
-<div class="suite-zoom-hint" onclick="openLightbox('assets/plan-relax-spa.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver folleto</div>
+<div class="suite-img-wrapper room-photo-media">
+<button type="button" class="room-photo-open" aria-label="Ver fotos de Casita Mágica" onclick="openRoomGallery('casita')"><img alt="Casita Mágica · Jacuzzi y zona de descanso" class="suite-img room-cover" loading="lazy" width="900" height="1000" src="assets/habitaciones/casita/portada.webp"/><div class="suite-tag"><i class="fa-regular fa-clock"></i> Planes por Horas</div><span class="suite-zoom-hint">Ver 3 fotos ↗</span></button>
 </div>
 <div class="suite-details">
 <div class="suite-header-info">
@@ -101,16 +99,14 @@
 <li><i class="fa-solid fa-bell"></i> Servicio a la Habitación</li>
 </ul>
 <div class="suite-actions">
-<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Casita Mágica')">Seleccionar</a>
+<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Casita Mágica')">Seleccionar</a><button type="button" class="room-brochure-link" onclick="openLightbox('assets/plan-relax-spa.webp')">Ver folleto de tarifas</button>
 </div>
 </div>
 </div>
 <!-- Suite 2: Suite Orquídeas -->
 <div class="suite-card reveal-on-scroll">
-<div class="suite-img-wrapper brochure-media">
-<img alt="Suite Orquídeas" class="suite-img brochure-poster" loading="lazy" onclick="openLightbox('assets/suite-orquideas.webp')" src="assets/suite-orquideas.webp"/>
-<div class="suite-tag"><i class="fa-solid fa-users"></i> Hasta 4 Personas</div>
-<div class="suite-zoom-hint" onclick="openLightbox('assets/suite-orquideas.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver folleto</div>
+<div class="suite-img-wrapper room-photo-media">
+<button type="button" class="room-photo-open" aria-label="Ver fotos de Suite Orquídeas" onclick="openRoomGallery('orquideas')"><img alt="Suite Orquídeas · Fachada entre la naturaleza" class="suite-img room-cover" loading="lazy" width="900" height="1000" src="assets/habitaciones/orquideas/portada.webp"/><div class="suite-tag"><i class="fa-solid fa-users"></i> Hasta 4 Personas</div><span class="suite-zoom-hint">Ver 5 fotos ↗</span></button>
 </div>
 <div class="suite-details">
 <div class="suite-header-info">
@@ -120,7 +116,7 @@
 <p class="suite-desc">Amplio y lujoso glamping con dos niveles de mallas catamarán y capacidad para acomodar hasta 4 personas.</p>
 <div class="pricing-tabs">
 <div class="pricing-col">
-<span class="pricing-title">Lunes a Jueves:</span>
+<span class="pricing-title">Domingo a jueves, excepto festivos:</span>
 <div data-rate-template="2 Pers: [[orquideas_semana_2]] | 3 Pers: [[orquideas_semana_3]] | 4 Pers: [[orquideas_semana_4]]">2 Pers: $590k | 3 Pers: $710k | 4 Pers: $810k</div>
 </div>
 <div class="pricing-col">
@@ -139,16 +135,14 @@
 <li><i class="fa-solid fa-square"></i> 2 Mallas de Catamarán</li>
 </ul>
 <div class="suite-actions">
-<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Suite Orquídeas')">Seleccionar</a>
+<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Suite Orquídeas')">Seleccionar</a><button type="button" class="room-brochure-link" onclick="openLightbox('assets/suite-orquideas.webp')">Ver folleto de tarifas</button>
 </div>
 </div>
 </div>
 <!-- Suite 3: Suite Aves del Paraíso -->
 <div class="suite-card reveal-on-scroll">
-<div class="suite-img-wrapper brochure-media">
-<img alt="Suite Aves del Paraíso" class="suite-img brochure-poster" loading="lazy" onclick="openLightbox('assets/suite_aves_del_paraiso.webp')" src="assets/suite_aves_del_paraiso.webp"/>
-<div class="suite-tag"><i class="fa-solid fa-heart"></i> Exclusivo Parejas</div>
-<div class="suite-zoom-hint" onclick="openLightbox('assets/suite_aves_del_paraiso.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver folleto</div>
+<div class="suite-img-wrapper room-photo-media">
+<button type="button" class="room-photo-open" aria-label="Ver fotos de Suite Aves del Paraíso" onclick="openRoomGallery('aves')"><img alt="Suite Aves del Paraíso · Dormitorio y jacuzzi entre plantas" class="suite-img room-cover" loading="lazy" width="900" height="1000" src="assets/habitaciones/aves/portada.webp"/><div class="suite-tag"><i class="fa-solid fa-heart"></i> Exclusivo Parejas</div><span class="suite-zoom-hint">Ver 5 fotos ↗</span></button>
 </div>
 <div class="suite-details">
 <div class="suite-header-info">
@@ -158,7 +152,7 @@
 <p class="suite-desc">Una romántica suite ideal para parejas, rodeada de abundante vegetación y la calma típica del bosque de Dapa.</p>
 <div class="pricing-tabs">
 <div class="pricing-col">
-<span class="pricing-title">Lunes a Jueves:</span>
+<span class="pricing-title">Domingo a jueves, excepto festivos:</span>
 <div data-rate-template="[[aves_semana]] COP (2 personas)">$420,000 COP (2 personas)</div>
 </div>
 <div class="pricing-col">
@@ -177,16 +171,14 @@
 <li><i class="fa-solid fa-fan"></i> Ventilador &amp; Wifi gratis</li>
 </ul>
 <div class="suite-actions">
-<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Suite Aves del Paraíso')">Seleccionar</a>
+<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Suite Aves del Paraíso')">Seleccionar</a><button type="button" class="room-brochure-link" onclick="openLightbox('assets/suite_aves_del_paraiso.webp')">Ver folleto de tarifas</button>
 </div>
 </div>
 </div>
 <!-- Suite 4: Suite Margaritas -->
 <div class="suite-card reveal-on-scroll">
-<div class="suite-img-wrapper brochure-media">
-<img alt="Suite Margaritas" class="suite-img brochure-poster" loading="lazy" onclick="openLightbox('assets/suite_margaritas.webp')" src="assets/suite_margaritas.webp"/>
-<div class="suite-tag"><i class="fa-solid fa-heart"></i> Exclusivo Parejas</div>
-<div class="suite-zoom-hint" onclick="openLightbox('assets/suite_margaritas.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver folleto</div>
+<div class="suite-img-wrapper room-photo-media">
+<button type="button" class="room-photo-open" aria-label="Ver fotos de Suite Margaritas" onclick="openRoomGallery('margaritas')"><img alt="Suite Margaritas · Jacuzzi y dormitorio" class="suite-img room-cover" loading="lazy" width="900" height="1000" src="assets/habitaciones/margaritas/portada.webp"/><div class="suite-tag"><i class="fa-solid fa-heart"></i> Exclusivo Parejas</div><span class="suite-zoom-hint">Ver 4 fotos ↗</span></button>
 </div>
 <div class="suite-details">
 <div class="suite-header-info">
@@ -196,7 +188,7 @@
 <p class="suite-desc">Habitación idéntica a Aves del Paraíso. Un refugio privado con jacuzzi de agua caliente e inigualable confort para dos.</p>
 <div class="pricing-tabs">
 <div class="pricing-col">
-<span class="pricing-title">Lunes a Jueves:</span>
+<span class="pricing-title">Domingo a jueves, excepto festivos:</span>
 <div data-rate-template="[[margaritas_semana]] COP (2 personas)">$420,000 COP (2 personas)</div>
 </div>
 <div class="pricing-col">
@@ -215,16 +207,14 @@
 <li><i class="fa-solid fa-fan"></i> Ventilador &amp; Wifi gratis</li>
 </ul>
 <div class="suite-actions">
-<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Suite Margaritas')">Seleccionar</a>
+<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Suite Margaritas')">Seleccionar</a><button type="button" class="room-brochure-link" onclick="openLightbox('assets/suite_margaritas.webp')">Ver folleto de tarifas</button>
 </div>
 </div>
 </div>
 <!-- Suite 5: Suite Eugenias -->
 <div class="suite-card reveal-on-scroll">
-<div class="suite-img-wrapper brochure-media">
-<img alt="Suite Eugenias" class="suite-img brochure-poster" loading="lazy" onclick="openLightbox('assets/suite_eugenias.webp')" src="assets/suite_eugenias.webp"/>
-<div class="suite-tag"><i class="fa-solid fa-people-roof"></i> Familiar (Hasta 8 pers.)</div>
-<div class="suite-zoom-hint" onclick="openLightbox('assets/suite_eugenias.webp')"><i class="fa-solid fa-magnifying-glass-plus"></i> Ver folleto</div>
+<div class="suite-img-wrapper room-photo-media">
+<button type="button" class="room-photo-open" aria-label="Ver fotos de Suite Eugenias" onclick="openRoomGallery('eugenias')"><img alt="Suite Eugenias · Dormitorio y camas" class="suite-img room-cover" loading="lazy" width="900" height="1000" src="assets/habitaciones/eugenias/portada.webp"/><div class="suite-tag"><i class="fa-solid fa-people-roof"></i> Familiar (Hasta 8 pers.)</div><span class="suite-zoom-hint">Ver 4 fotos ↗</span></button>
 </div>
 <div class="suite-details">
 <div class="suite-header-info">
@@ -234,7 +224,7 @@
 <p class="suite-desc">Nuestra suite más grande y lujosa. Cuenta con piscina privada, chimenea, malla catamarán y espacio para albergar hasta 8 personas.</p>
 <div class="pricing-tabs">
 <div class="pricing-col">
-<span class="pricing-title">Lunes a Jueves:</span>
+<span class="pricing-title">Domingo a jueves, excepto festivos:</span>
 <div data-rate-template="2 Pers: [[eugenias_semana_2]] | 3 Pers: [[eugenias_semana_3]] | 4 Pers: [[eugenias_semana_4]] (+ Extra)">2 Pers: $590k | 3 Pers: $710k | 4 Pers: $810k (+ Extra)</div>
 </div>
 <div class="pricing-col">
@@ -253,7 +243,7 @@
 <li><i class="fa-solid fa-users"></i> Capacidad Máxima: 8 personas</li>
 </ul>
 <div class="suite-actions">
-<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Suite Eugenias')">Seleccionar</a>
+<a class="btn-suite-reserve" href="#reservas" onclick="selectSuite('Suite Eugenias')">Seleccionar</a><button type="button" class="room-brochure-link" onclick="openLightbox('assets/suite_eugenias.webp')">Ver folleto de tarifas</button>
 </div>
 </div>
 </div>
@@ -269,14 +259,14 @@
 <h3>Pasadía</h3>
 <span class="suite-price" data-rate-key="pasadia_semana" data-rate-prefix="Desde " data-rate-suffix=" COP">Desde $320,000 COP</span>
 </div>
-<p class="suite-desc">Disfruta de las instalaciones durante el día. Puedes elegir para tu estadía entre Suite Paraíso y Suite Margaritas.</p>
+<p class="suite-desc">Disfruta de las instalaciones durante el día. Puedes elegir para tu estadía entre Casita Mágica, Suite Paraíso y Suite Margaritas, según disponibilidad.</p>
 <div class="pricing-tabs">
 <div class="pricing-col">
-<span class="pricing-title">Lunes a Viernes y Dom:</span>
+<span class="pricing-title">Domingo a viernes, excepto festivos:</span>
 <div data-rate-template="[[pasadia_semana]] COP (2 personas)">$320,000 COP (2 personas)</div>
 </div>
 <div class="pricing-col">
-<span class="pricing-title">Solo Sábados:</span>
+<span class="pricing-title">Sábados y festivos:</span>
 <div data-rate-template="[[pasadia_sabado]] COP (2 personas)">$360,000 COP (2 personas)</div>
 </div>
 </div>
@@ -932,7 +922,7 @@
 <!-- Video 1 -->
 <div class="video-card reveal-on-scroll">
 <div class="video-wrapper">
-<video class="experiencia-video" controls="" controlslist="nodownload" oncontextmenu="return false;" playsinline="" preload="metadata">
+<video class="experiencia-video" controls="" controlslist="nodownload" oncontextmenu="return false;" playsinline="" preload="none" poster="assets/habitaciones/casita/portada.webp">
 <source src="assets/casa-magica.mp4" type="video/mp4"/>
                             Tu navegador no soporta reproducción de video.
                         </video>
@@ -945,7 +935,7 @@
 <!-- Video 2 -->
 <div class="video-card reveal-on-scroll">
 <div class="video-wrapper">
-<video class="experiencia-video" controls="" controlslist="nodownload" oncontextmenu="return false;" playsinline="" preload="metadata">
+<video class="experiencia-video" controls="" controlslist="nodownload" oncontextmenu="return false;" playsinline="" preload="none" poster="assets/habitaciones/eugenias/portada.webp">
 <source src="assets/suite-eugenia.mp4" type="video/mp4"/>
                             Tu navegador no soporta reproducción de video.
                         </video>
@@ -958,7 +948,7 @@
 <!-- Video 3 -->
 <div class="video-card reveal-on-scroll">
 <div class="video-wrapper">
-<video class="experiencia-video" controls="" controlslist="nodownload" oncontextmenu="return false;" playsinline="" preload="metadata">
+<video class="experiencia-video" controls="" controlslist="nodownload" oncontextmenu="return false;" playsinline="" preload="none" poster="assets/habitaciones/margaritas/portada.webp">
 <source src="assets/suite-margarita.mp4" type="video/mp4"/>
                             Tu navegador no soporta reproducción de video.
                         </video>
@@ -971,7 +961,7 @@
 <!-- Video 4 -->
 <div class="video-card reveal-on-scroll">
 <div class="video-wrapper">
-<video class="experiencia-video" controls="" controlslist="nodownload" oncontextmenu="return false;" playsinline="" preload="metadata">
+<video class="experiencia-video" controls="" controlslist="nodownload" oncontextmenu="return false;" playsinline="" preload="none" poster="assets/habitaciones/aves/portada.webp">
 <source src="assets/suite-paraiso.mp4" type="video/mp4"/>
                             Tu navegador no soporta reproducción de video.
                         </video>
@@ -1085,8 +1075,10 @@
 <div class="form-group">
 <label for="booking-date">Fecha Estimada *</label>
 <input id="booking-date" name="booking-date" required="" type="date"/>
-<span class="inline-error-msg" id="booking-date-error"></span>
-</div>
+<span class="inline-error-msg" id="booking-date-error"></span><p id="holiday-notice" role="status" class="holiday-notice"></p>
+</div></div><div class="form-row"><div class="form-group" id="booking-hour-group" hidden><label for="booking-hour">Hora de entrada a Casita Mágica *</label><input id="booking-hour" type="time"/><p>Entrada libre según disponibilidad. Se reserva una hora de limpieza entre estadías.</p>
+</div><div class="form-group" id="physical-room-group" hidden><label for="physical-room">Habitación para el Pasadía *</label><select id="physical-room"><option value="">Selecciona habitación</option><option>Casita Mágica</option><option>Suite Aves del Paraíso</option><option>Suite Margaritas</option></select>
+</div></div><div class="form-group booking-schedule-panel"><p id="booking-schedule" role="status"></p>
 </div>
 <div class="form-row">
 <div class="form-group">
@@ -1215,8 +1207,8 @@
 </div>
 </footer>
 <!-- Lightbox Modal for Flyer Images with Zoom & Pan Controls -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-<span class="lightbox-close" onclick="closeLightbox()">×</span>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Galería de fotografías" onclick="closeLightbox()">
+<button type="button" class="lightbox-close" aria-label="Cerrar galería" onclick="closeLightbox()">×</button>
 <!-- Zoom toolbar -->
 <div class="lightbox-zoom-toolbar" onclick="event.stopPropagation()">
 <button aria-label="Alejar" class="zoom-btn" id="zoom-out-btn" title="Alejar"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
@@ -1227,7 +1219,7 @@
 <button aria-label="Imagen anterior" class="lightbox-prev" onclick="prevLightbox(event)"><i class="fa-solid fa-chevron-left"></i></button>
 <div class="lightbox-content-wrapper" id="lightbox-wrapper" onclick="event.stopPropagation()">
 <div class="lightbox-img-viewport" id="lightbox-viewport">
-<img alt="Visualización de Folleto" class="lightbox-content" id="lightbox-img"/>
+<img alt="Fotografía ampliada" class="lightbox-content" id="lightbox-img"/>
 </div>
 <div class="lightbox-caption" id="lightbox-caption">Folleto de Servicios</div>
 </div>
@@ -1277,7 +1269,7 @@
 </div>
 </div>
 <!-- Custom JS -->
-<script src="tariffs.js?v=folletos-logo-2"></script><script src="customer-session.js?v=folletos-logo-2"></script><script charset="UTF-8" src="script.js?v=folletos-logo-2"></script>
+<script src="colombia-calendar.js"></script><script src="tariffs.js?v=folletos-logo-2"></script><script src="customer-session.js?v=folletos-logo-2"></script><script charset="UTF-8" src="script.js?v=folletos-logo-2"></script>
 <script src="spa-carousel.js?v=folletos-logo-2"></script>
 <script src="menu-carousel.js?v=folletos-logo-2"></script>
 </body>

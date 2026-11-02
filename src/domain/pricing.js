@@ -1,3 +1,4 @@
+const {isWeekday}=require('../../public/colombia-calendar');
 // Única fuente de los valores predeterminados. Los precios vigentes se leen de PostgreSQL.
 const defaults = [];
 const add = (key, category, label, amount) => defaults.push({ key, category, label, amount });
@@ -8,16 +9,16 @@ add('casita_extra','Extras','Casita Mágica · huésped adicional',30000);
 add('casita_hora_extra','Extras','Casita Mágica · hora adicional (informativo)',30000);
 for(const room of ['orquideas','eugenias']) {
   for(const [kind, amounts] of [['semana',[590000,710000,810000]],['finde',[650000,770000,880000]]]) {
-    [2,3,4].forEach((people,i)=>add(`${room}_${kind}_${people}`,'Alojamiento',`${room==='orquideas'?'Suite Orquídeas':'Suite Eugenias'} · ${kind==='semana'?'Dom–Jue':'Vie–Sáb'} · ${people} personas`,amounts[i]));
+    [2,3,4].forEach((people,i)=>add(`${room}_${kind}_${people}`,'Alojamiento',`${room==='orquideas'?'Suite Orquídeas':'Suite Eugenias'} · ${kind==='semana'?'Dom–Jue, excepto festivos':'Vie–Sáb y festivos'} · ${people} personas`,amounts[i]));
   }
 }
 add('eugenias_extra','Extras','Suite Eugenias · huésped adicional (5 a 8)',160000);
 for(const room of ['aves','margaritas']) {
-  add(`${room}_semana`,'Alojamiento',`${room==='aves'?'Aves del Paraíso':'Margaritas'} · Dom–Jue`,420000);
-  add(`${room}_finde`,'Alojamiento',`${room==='aves'?'Aves del Paraíso':'Margaritas'} · Vie–Sáb`,490000);
+  add(`${room}_semana`,'Alojamiento',`${room==='aves'?'Aves del Paraíso':'Margaritas'} · Dom–Jue, excepto festivos`,420000);
+  add(`${room}_finde`,'Alojamiento',`${room==='aves'?'Aves del Paraíso':'Margaritas'} · Vie–Sáb y festivos`,490000);
 }
-add('pasadia_semana','Alojamiento','Pasadía · excepto sábado',320000);
-add('pasadia_sabado','Alojamiento','Pasadía · sábado',360000);
+add('pasadia_semana','Alojamiento','Pasadía · excepto sábados y festivos',320000);
+add('pasadia_sabado','Alojamiento','Pasadía · sábados y festivos',360000);
 for(const [key,label,price] of [
  ['spa_relajante_1','Spa relajante · 1 persona',95000], ['spa_relajante_2','Spa relajante · 2 personas',165000],
  ['spa_piedras_1','Spa con piedras · 1 persona',140000], ['spa_piedras_2','Spa con piedras · 2 personas',240000]
@@ -48,10 +49,6 @@ function decorationKey(suite, decor) {
   if (decor === 'Ninguna') return null;
   const keys = { 'Decoración Estándar':'decor_estandar', 'Decoración Elios':['Suite Aves del Paraíso','Suite Margaritas'].includes(suite)?'decor_elios_pareja':'decor_elios', 'Decoración Pétalos':'decor_petalos','Decoración Globos':'decor_globos','Decoración Velas':'decor_velas','Decoración Pizarra':'decor_pizarra' };
   return keys[decor];
-}
-function isWeekday(date, suite) {
-  const day = new Date(date+'T12:00:00Z').getUTCDay();
-  return suite === 'Pasadía' ? day!==6 : day<=4;
 }
 function calculateQuote(data, rates) {
   const {suite,subplan,numPersonas,fechaReserva} = data;

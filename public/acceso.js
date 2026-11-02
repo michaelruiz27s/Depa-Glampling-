@@ -50,11 +50,11 @@
  window.addEventListener('keydown',e=>{if(e.key==='Escape' && !modalPoliticas.hidden) closeModal(false);});
 
  const destination=(user,isLogin=true)=>{
-  const requested=qs.get('continuar');
-  if(user.rol==='admin') return '/admin.html';
-  if(isLogin) return '/';
-  if(requested && requested.startsWith('/') && !requested.startsWith('//') && !requested.includes('\\')) return requested;
-  return '/cuenta.html';
+  if(user.rol==='admin')return '/admin.html';const requested=qs.get('continuar');
+  if(requested&&requested.startsWith('/')&&!requested.startsWith('//')&&!requested.includes('\\')&&!/[\u0000-\u0020]/.test(requested)){
+   try{const target=new URL(requested,location.origin);if(target.origin===location.origin&&!['/acceso.html','/admin.html'].includes(target.pathname))return target.pathname+target.search+target.hash;}catch{}
+  }
+  return isLogin?'/':'/cuenta.html';
  };
 
  form.addEventListener('submit',async e=>{

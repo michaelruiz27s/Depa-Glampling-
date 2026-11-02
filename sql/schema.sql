@@ -59,4 +59,13 @@ ALTER TABLE reservas ADD COLUMN IF NOT EXISTS precio_spa NUMERIC(12,2);
 CREATE INDEX IF NOT EXISTS idx_reservas_fecha ON reservas("fechaReserva");
 CREATE INDEX IF NOT EXISTS idx_reservas_usuario ON reservas(usuario_id);
 CREATE INDEX IF NOT EXISTS idx_reservas_estado ON reservas(estado);
+ALTER TABLE reservas ADD COLUMN IF NOT EXISTS habitacion VARCHAR(100);
+ALTER TABLE reservas ADD COLUMN IF NOT EXISTS inicio TIMESTAMPTZ;
+ALTER TABLE reservas ADD COLUMN IF NOT EXISTS fin TIMESTAMPTZ;
+CREATE INDEX IF NOT EXISTS idx_reservas_habitacion_inicio ON reservas(habitacion,inicio);
+ALTER TABLE reservas ADD COLUMN IF NOT EXISTS ingreso_registrado TIMESTAMPTZ;
+CREATE TABLE IF NOT EXISTS historial_reservas (
+ id BIGSERIAL PRIMARY KEY,reserva_id INTEGER REFERENCES reservas(id),usuario_id BIGINT REFERENCES usuarios(id),
+ accion VARCHAR(100) NOT NULL,fecha TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
 COMMIT;

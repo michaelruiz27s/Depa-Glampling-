@@ -17,7 +17,7 @@ test('no se permite seleccionar decoración inválida',()=>assert.throws(()=>quo
 test('no se acepta servicio de spa inexistente',()=>assert.throws(()=>quote({spa:'Spa inventado'}),/spa/));
 test('no se aceptan fechas inválidas',()=>assert.throws(()=>quote({fechaReserva:'2026-02-30'}),/Fecha/));
 test('no se aceptan planes desconocidos',()=>assert.throws(()=>quote({suite:'Casita Mágica',subplan:'Desconocido'}),/plan/));
-test('las tarjetas muestran los folletos oficiales solicitados',()=>{const html=fs.readFileSync('public/index.html','utf8');for(const name of ['plan-relax-spa.webp','suite-orquideas.webp','suite_aves_del_paraiso.webp','suite_margaritas.webp','suite_eugenias.webp','pasadia.webp'])assert.ok(html.includes(`src="assets/${name}"`),`Falta ${name}`);});
+test('los folletos oficiales siguen accesibles desde el catálogo',()=>{const html=fs.readFileSync('public/index.html','utf8');for(const name of ['plan-relax-spa.webp','suite-orquideas.webp','suite_aves_del_paraiso.webp','suite_margaritas.webp','suite_eugenias.webp','pasadia.webp'])assert.ok(html.includes(`assets/${name}`),`Falta ${name}`);});
 test('migración no borra historial',()=>{const schema=fs.readFileSync('sql/schema.sql','utf8');assert.ok(!/DROP TABLE/i.test(schema));assert.match(schema,/historial_tarifas/);});
 test('registro público solo crea clientes',()=>{const code=fs.readFileSync('src/routes/auth.routes.js','utf8');assert.match(code,/hashPassword\(password\),'cliente'/);});
 test('administrador protegido en el backend',()=>{const code=fs.readFileSync('src/routes/admin.routes.js','utf8');assert.match(code,/router\.use\(requireAuth,requireAdmin\)/);});

@@ -6,10 +6,11 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "test": "node tests/test-rates.js && node tests/test-security-pricing.js && node tests/test-smoke.js && node tests/test-static-brochures.js",
+    "test": "node tests/test-rates.js && node tests/test-security-pricing.js && node tests/test-smoke.js && node tests/test-static-brochures.js && node tests/test-booking-workflow.js && node tests/test-availability.js && node tests/test-colombia-holidays.js && node tests/test-input-errors.js",
     "db:init": "node scripts/init-db.js",
     "admin:create": "node scripts/create-admin.js",
-    "db:check": "node scripts/check-setup.js"
+    "db:check": "node scripts/check-setup.js",
+    "test:db": "node tests/test-availability-db.js && node tests/test-occupancy-db.js"
   },
   "keywords": [],
   "author": "",

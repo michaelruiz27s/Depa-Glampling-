@@ -23,12 +23,19 @@ const brochures=[
   assert.match(html,/dapa-version[^>]+folletos-logo-2/);
   checks+=3;
   for(const [name,file] of brochures){
-   assert(html.includes(`src="assets/${file}"`),`No se usa el folleto de ${name}`);
+   assert(html.includes(`assets/${file}`),`No se conserva el folleto de ${name}`);
    const res=await fetch(`${host}/assets/${file}`);
    assert.equal(res.status,200,`${name} no carga`);
    assert.match(res.headers.get('content-type'),/image\/webp/);
    assert((await res.arrayBuffer()).byteLength>20000);
    checks+=4;
+  }
+  const rooms=JSON.parse(fs.readFileSync(path.join(folder,'room-photos.json'),'utf8'));
+  for(const room of Object.values(rooms)){
+   assert(html.includes(room.cover),`Falta portada de ${room.name}`);
+   for(const file of [room.cover,...room.photos.map(photo=>photo.src)]){
+    const response=await fetch(host+'/'+file);assert.equal(response.status,200,file);assert.match(response.headers.get('content-type'),/image\/webp/);assert((await response.arrayBuffer()).byteLength>1000);checks+=3;
+   }
   }
   assert(html.includes('src="assets/logo.png?v=folletos-logo-2"'));
   const logo=await fetch(host+'/assets/logo.png?v=folletos-logo-2');

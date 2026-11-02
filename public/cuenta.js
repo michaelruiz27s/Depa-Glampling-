@@ -1,18 +1,33 @@
 (async()=>{
+ const {el,badge,photo,date,loading}=window.DapaUI,$=id=>document.getElementById(id);
  const money=n=>Number(n).toLocaleString('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0});
- const el=(name,text)=>{const e=document.createElement(name);e.textContent=text??'';return e;};
- async function api(url,opts){const r=await fetch(url,opts),body=await r.json();if(!r.ok)throw new Error(body.message);return body;}
- document.getElementById('logout').onclick=async()=>{try{await api('/api/auth/logout',{method:'POST'});location.href='/';}catch(e){alert(e.message)}};
- try{
-  const auth=await api('/api/auth/me');if(!auth.user){location.replace('/acceso.html');return;}if(auth.user.rol==='admin'){location.replace('/admin.html');return;}
-  document.getElementById('greeting').textContent='Hola, '+auth.user.nombre+'. Este es tu historial personal.';
-  const rows=(await api('/api/bookings/mine')).data;
-  const completed=rows.filter(x=>x.estado==='completada');
-  const stats=[['Solicitudes',rows.length],['Hospedajes realizados',completed.length],['Con spa',completed.filter(x=>x.spa!=='Ninguno').length]];
-  document.getElementById('my-stats').replaceChildren(...stats.map(([label,value])=>{const div=el('div');div.className='portal-kpi';div.append(el('strong',value),el('span',label));return div;}));
-  if(!rows.length){document.getElementById('my-reservations').replaceChildren(el('p','Todavía no tienes reservas.'));return;}
-  const table=el('table');table.className='portal-table';const head=el('thead'),tr=el('tr');['Número','Fecha','Suite','Servicio de spa','Decoración','Precio','Estado'].forEach(t=>tr.append(el('th',t)));head.append(tr);table.append(head);const tbody=el('tbody');
-  for(const r of rows){const tr=el('tr');[r.id,String(r.fechaReserva).slice(0,10),r.suite,r.spa,r.decoracion,money(r.precioTotal),r.estado].forEach(t=>tr.append(el('td',t)));tbody.append(tr);}
-  table.append(tbody);document.getElementById('my-reservations').replaceChildren(table);
- }catch(e){document.getElementById('client-message').textContent=e.message||'No pudimos cargar tus reservas.';}
+ let reservations=[],filter='todas',page=1,summary={solicitudes:0,completadas:0,con_spa:0},nextReservation=null,meta={page:1,pages:1,total:0},requestSequence=0;
+ const paginationHost=el('div');$('my-reservations').after(paginationHost);
+ const state=r=>r.estado==='confirmada'&&r.ingreso_registrado?'ocupada':r.estado;
+ async function api(url,opts){const response=await fetch(url,opts);let body;try{body=await response.json();}catch{throw new Error('No pudimos conectar. Intenta de nuevo.');}if(!response.ok)throw new Error(body.message||'No se pudo completar la acción.');return body;}
+ function timeline(r){const current=state(r),steps=['Solicitud','Confirmación','En curso','Completada'],index={pendiente:0,confirmada:1,ocupada:2,completada:3}[current];
+  if(current==='cancelada')return el('p','Esta solicitud fue cancelada. Puedes elegir una nueva fecha cuando quieras.','portal-muted');
+  const list=el('ol',null,'reservation-timeline');list.setAttribute('aria-label','Seguimiento de la reserva');steps.forEach((label,i)=>{const item=el('li',null,i<=index?'reached':'');if(i===index)item.setAttribute('aria-current','step');item.append(el('span',i<index?'✓':String(i+1),'step-dot'),el('span',label));list.append(item);});return list;
+ }
+ function cancelDialog(r,trigger){const dialog=el('dialog',null,'portal-card confirmation-dialog');dialog.setAttribute('aria-labelledby','cancel-title');const title=el('h2','¿Cancelar la solicitud #'+r.id+'?');title.id='cancel-title';const message=el('p','Se liberará el espacio de tu solicitud pendiente.');const actions=el('div',null,'portal-row');const back=el('button','Conservar solicitud','portal-btn');back.onclick=()=>dialog.close();const confirm=el('button','Sí, cancelar','portal-btn portal-btn-primary');const error=el('p',null,'portal-status');error.setAttribute('role','alert');confirm.onclick=async()=>{confirm.disabled=true;confirm.textContent='Cancelando…';try{await api('/api/bookings/'+r.id+'/cancel',{method:'PATCH'});dialog.close();await loadReservations();$('client-message').textContent='✓ Solicitud #'+r.id+' cancelada.';}catch(e){error.textContent=e.message;confirm.disabled=false;confirm.textContent='Reintentar';}};actions.append(back,confirm);dialog.append(title,message,actions,error);dialog.addEventListener('close',()=>{dialog.remove();if(trigger.isConnected)trigger.focus();});document.body.append(dialog);dialog.showModal();back.focus();}
+ function card(r,featured=false){const article=el('article',null,featured?'featured-reservation':'reservation-card');const media=el('div',null,'reservation-photo');media.append(photo(r.habitacion||r.suite));const content=el('div',null,'reservation-content');const heading=el('div',null,'section-heading');heading.append(el('span',(featured?(state(r)==='ocupada'?'TU ESTADÍA ACTUAL · ':'TU PRÓXIMA ESCAPADA · '):'SOLICITUD ')+'#'+r.id,'portal-eyebrow'),badge(state(r)));content.append(heading,el(featured?'h2':'h3',r.habitacion||r.suite),el('p',r.suite+(r.subplan?' · '+r.subplan:''),'portal-muted'));
+ const facts=el('div',null,'reservation-facts');for(const [label,value] of [['Entrada',r.inicio?date(r.inicio):String(r.fechaReserva).slice(0,10)],['Salida',date(r.fin)],['Huéspedes',r.numPersonas+' personas'],['Total acordado',money(r.precioTotal)]]){const item=el('div');item.append(el('span',label),el('strong',value));facts.append(item);}content.append(facts);if(featured)content.append(timeline(r));
+ const details=el('details',null,'reservation-details');details.append(el('summary','Ver detalles de la reserva'));const info=el('dl',null,'detail-grid');for(const [label,value] of [['Spa',r.spa],['Decoración',r.decoracion],['Observaciones',r.comentarios||'Sin observaciones'],['Alojamiento',r.precio_alojamiento==null?'Sin desglose histórico':money(r.precio_alojamiento)],['Decoración COP',r.precio_decoracion==null?'Sin desglose histórico':money(r.precio_decoracion)],['Spa COP',r.precio_spa==null?'Sin desglose histórico':money(r.precio_spa)]])info.append(el('dt',label),el('dd',value));details.append(info);if(!featured)details.append(timeline(r));content.append(details);
+ if(r.estado==='pendiente'){const cancel=el('button','Cancelar solicitud','portal-btn subtle-btn');cancel.onclick=()=>cancelDialog(r,cancel);content.append(cancel);}article.append(media,content);return article;}
+ function render(){
+ const entries=[['Solicitudes',summary.solicitudes],['Estadías completadas',summary.completadas],['Experiencias con spa',summary.con_spa]];$('my-stats').replaceChildren(...entries.map(([label,value])=>{const item=el('div',null,'portal-kpi');item.append(el('strong',value),el('span',label));return item;}));
+ const empty=el('div',null,'portal-empty empty-experience');empty.append(el('span','❧','empty-leaf'),el('h2',summary.solicitudes?'Tu próxima pausa te espera':'Tu primera escapada comienza aquí'),el('p','Explora nuestros alojamientos y encuentra tu momento de descanso.'));const explore=el('a','Explorar alojamientos →','portal-btn portal-btn-primary');explore.href='/#suites';empty.append(explore);$('next-reservation').replaceChildren(nextReservation?card(nextReservation,true):empty);loading($('next-reservation'),false);
+ $('my-reservations').replaceChildren(...(reservations.length?reservations.map(r=>card(r)):[el('p','No hay reservas en esta categoría.','portal-empty')]));
+ paginationHost.replaceChildren(window.DapaUI.pager(meta,value=>{page=value;loadReservations();},'Páginas de mis reservas'));
+ }
+ async function loadReservations(){const seq=++requestSequence;loading($('my-reservations'),true);
+  try{const result=await api('/api/bookings/mine?'+new URLSearchParams({page,pageSize:12,filter}));if(seq!==requestSequence)return;
+   if(result.pagination.page>result.pagination.pages){page=result.pagination.pages;return loadReservations();}
+   reservations=result.data;summary=result.summary;nextReservation=result.nextReservation;meta=result.pagination;render();
+  }catch(e){if(seq===requestSequence){loading($('next-reservation'),false);$('client-message').textContent=e.message;}}
+  finally{if(seq===requestSequence)loading($('my-reservations'),false);}
+ }
+ document.querySelectorAll('[data-history]').forEach(button=>button.onclick=()=>{filter=button.dataset.history;page=1;document.querySelectorAll('[data-history]').forEach(b=>{b.classList.toggle('active',b===button);b.setAttribute('aria-pressed',String(b===button));});loadReservations();});
+ $('logout').onclick=async()=>{try{await api('/api/auth/logout',{method:'POST'});location.href='/';}catch(e){$('client-message').textContent=e.message;}};
+ try{const {user}=await api('/api/auth/me');if(!user){location.replace('/acceso.html');return;}if(user.rol==='admin'){location.replace('/admin.html');return;}$('greeting').textContent='Hola, '+user.nombre+'. Aquí empieza tu próximo descanso.';await loadReservations();}catch(e){loading($('next-reservation'),false);$('next-reservation').replaceChildren(el('p','No pudimos cargar tus reservas.','portal-empty'));$('my-reservations').textContent='Intenta recargar la página.';$('client-message').textContent=e.message;}
 })();

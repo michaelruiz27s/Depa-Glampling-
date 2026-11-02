@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Restringir selector de fecha para no permitir días pasados
     if (bookingDateInput) {
-        const todayStr = new Date().toISOString().split('T')[0];
+        const todayStr = new Intl.DateTimeFormat('en-CA',{timeZone:'America/Bogota',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
         bookingDateInput.setAttribute('min', todayStr);
     }
 
@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const galleryImages = [
+    const defaultGalleryImages = [
         'assets/plan-relax-spa.webp',
         'assets/suite-orquideas.webp',
         'assets/suite_aves_del_paraiso.webp',
@@ -308,9 +308,15 @@ document.addEventListener('DOMContentLoaded', () => {
         'assets/spa-services.webp',
         'assets/included-menu.webp'
     ];
+    const roomGalleries = {"eugenias": {"name": "Suite Eugenias", "cover": "assets/habitaciones/eugenias/portada.webp", "photos": [{"src": "assets/habitaciones/eugenias/foto-01.webp", "alt": "Suite Eugenias · Dormitorio y camas"}, {"src": "assets/habitaciones/eugenias/foto-02.webp", "alt": "Suite Eugenias · Piscina privada y terraza"}, {"src": "assets/habitaciones/eugenias/foto-03.webp", "alt": "Suite Eugenias · Malla de descanso"}, {"src": "assets/habitaciones/eugenias/foto-04.webp", "alt": "Suite Eugenias · Comedor junto a la piscina"}]}, "orquideas": {"name": "Suite Orquídeas", "cover": "assets/habitaciones/orquideas/portada.webp", "photos": [{"src": "assets/habitaciones/orquideas/foto-01.webp", "alt": "Suite Orquídeas · Fachada entre la naturaleza"}, {"src": "assets/habitaciones/orquideas/foto-02.webp", "alt": "Suite Orquídeas · Dormitorio con vista al bosque"}, {"src": "assets/habitaciones/orquideas/foto-03.webp", "alt": "Suite Orquídeas · Malla y terraza superior"}, {"src": "assets/habitaciones/orquideas/foto-04.webp", "alt": "Suite Orquídeas · Escaleras y sala"}, {"src": "assets/habitaciones/orquideas/foto-05.webp", "alt": "Suite Orquídeas · Sala panorámica"}]}, "aves": {"name": "Suite Aves del Paraíso", "cover": "assets/habitaciones/aves/portada.webp", "photos": [{"src": "assets/habitaciones/aves/foto-01.webp", "alt": "Suite Aves del Paraíso · Dormitorio y jacuzzi entre plantas"}, {"src": "assets/habitaciones/aves/foto-02.webp", "alt": "Suite Aves del Paraíso · Cama y luz cálida"}, {"src": "assets/habitaciones/aves/foto-03.webp", "alt": "Suite Aves del Paraíso · Jacuzzi privado"}, {"src": "assets/habitaciones/aves/foto-04.webp", "alt": "Suite Aves del Paraíso · Ducha rodeada de vegetación"}, {"src": "assets/habitaciones/aves/foto-05.webp", "alt": "Suite Aves del Paraíso · Terraza con vista al jardín"}]}, "margaritas": {"name": "Suite Margaritas", "cover": "assets/habitaciones/margaritas/portada.webp", "photos": [{"src": "assets/habitaciones/margaritas/foto-01.webp", "alt": "Suite Margaritas · Jacuzzi y dormitorio"}, {"src": "assets/habitaciones/margaritas/foto-02.webp", "alt": "Suite Margaritas · Dormitorio"}, {"src": "assets/habitaciones/margaritas/foto-03.webp", "alt": "Suite Margaritas · Baño y ducha"}, {"src": "assets/habitaciones/margaritas/foto-04.webp", "alt": "Suite Margaritas · Vista exterior"}]}, "casita": {"name": "Casita Mágica", "cover": "assets/habitaciones/casita/portada.webp", "photos": [{"src": "assets/habitaciones/casita/foto-01.webp", "alt": "Casita Mágica · Jacuzzi y zona de descanso"}, {"src": "assets/habitaciones/casita/foto-02.webp", "alt": "Casita Mágica · Sofá y terraza"}, {"src": "assets/habitaciones/casita/foto-03.webp", "alt": "Casita Mágica · Ducha entre plantas"}]}};
+    let galleryImages=defaultGalleryImages;
+    let lastGalleryTrigger=null;
+    window.openRoomGallery=(key)=>{const room=roomGalleries[key];if(!room)return;galleryImages=room.photos.map(p=>p.src);window.openLightbox(galleryImages[0],true);};
     let currentGalleryIndex = 0;
 
-    window.openLightbox = (imageSrc) => {
+    window.openLightbox = (imageSrc, keepGroup=false) => {
+        if(!keepGroup)galleryImages=defaultGalleryImages;
+        lastGalleryTrigger=document.activeElement;
         if (!imageSrc) return;
         resetZoom();
 
@@ -333,12 +339,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         lightbox.style.display = 'flex';
         document.body.style.overflow = 'hidden'; // Deshabilitar scroll de página
+        lightbox.querySelector('.lightbox-close').focus();
     };
 
     window.closeLightbox = () => {
         resetZoom();
         lightbox.style.display = 'none';
         document.body.style.overflow = 'auto'; // Habilitar scroll de página
+        if(lastGalleryTrigger?.isConnected)lastGalleryTrigger.focus();
     };
 
     window.prevLightbox = (e) => {
@@ -374,12 +382,16 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (src.includes('spa-services')) caption = "Folleto: Servicios de Spa";
         else if (src.includes('included-menu')) caption = "Detalles: Alimentación Incluida (Desayunos y Almuerzos/Cenas)";
         
+        const photo=Object.values(roomGalleries).flatMap(room=>room.photos).find(photo=>photo.src===src);
+        if(photo)caption=photo.alt+' · '+(currentGalleryIndex+1)+' / '+galleryImages.length;
+        lightboxImg.alt=photo?photo.alt:caption;
         lightboxCaption.textContent = caption;
     }
 
     // Navegación con teclado para Lightbox (+ y - para zoom)
     document.addEventListener('keydown', (e) => {
         if (lightbox && lightbox.style.display === 'flex') {
+            if(e.key==='Tab'){const controls=[...lightbox.querySelectorAll('button,a[href]')].filter(el=>el.getClientRects().length);const first=controls[0],last=controls[controls.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
             if (e.key === 'Escape') {
                 closeLightbox();
             } else if (e.key === 'ArrowLeft') {
@@ -504,7 +516,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const selectedSuite=suiteSelect.value;
         const selectedDecor=decorSelect.value;
+        const selectedPeople=peopleCountSelect.value,selectedPlan=subplanSelect.value;
         if(selectedSuite){suiteSelect.dispatchEvent(new Event('change'));if(Array.from(decorSelect.options).some(o=>o.value===selectedDecor))decorSelect.value=selectedDecor;}
+        if([...peopleCountSelect.options].some(o=>o.value===selectedPeople))peopleCountSelect.value=selectedPeople;
+        if([...subplanSelect.options].some(o=>o.value===selectedPlan))subplanSelect.value=selectedPlan;
         updatePriceCalculator();syncSpaSelection();
     });
 
@@ -596,32 +611,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     weekdayPromoCheckbox.addEventListener('change', updatePriceCalculator);
 
-    // Check if the selected date falls on a weekday (Sunday to Thursday)
+    // Misma regla de días y festivos que utiliza el servidor.
     function checkWeekdayStatus() {
-        const dateVal = bookingDateInput.value;
-        if (!dateVal) return;
-
-        const dateObj = new Date(dateVal + 'T00:00:00'); // Prevent timezone shift
-        const day = dateObj.getDay(); // 0 = Sunday, 1 = Monday, ..., 5 = Friday, 6 = Saturday
-
-        const suite = suiteSelect.value;
-
-        if (suite === 'Pasadía') {
-            // For Pasadía, "weekday" applies Monday to Friday and Sunday
-            // Saturday is the only "Saturday" rate
-            if (day === 6) { // Saturday
-                weekdayPromoCheckbox.checked = false;
-            } else {
-                weekdayPromoCheckbox.checked = true;
-            }
-        } else {
-            // For general suites, weekday rates apply Sunday to Thursday (0 to 4)
-            if (day >= 0 && day <= 4) {
-                weekdayPromoCheckbox.checked = true;
-            } else {
-                weekdayPromoCheckbox.checked = false;
-            }
-        }
+        const date=bookingDateInput.value,suite=suiteSelect.value;
+        const notice=document.getElementById('holiday-notice');
+        if(!date){if(notice)notice.textContent='';return;}
+        weekdayPromoCheckbox.checked=window.DapaCalendar.isWeekday(date,suite);
+        const holiday=window.DapaCalendar.holidayName(date);
+        if(notice)notice.textContent=holiday?'Festivo en Colombia: '+holiday+'. '+(suite==='Casita Mágica'?'Los planes de Casita mantienen su precio por duración.':suite==='Pasadía'?'Aplica la tarifa de sábados y festivos: '+window.DapaTarifas.money(getRate('pasadia_sabado'))+'.':'Aplica la tarifa de fin de semana y festivos.'):'Fecha sin festivo nacional de Colombia.';
     }
 
     // Main calculator logic
@@ -697,6 +694,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const spa = spaSelect.value;
         const isWeek = weekdayPromoCheckbox.checked;
         const notes = extraCommentsTextarea.value.trim();
+        const horaEntrada=document.getElementById('booking-hour').value,habitacion=document.getElementById('physical-room').value;
+        const saveDraft=()=>sessionStorage.setItem('dapa-reserva-borrador',JSON.stringify({name,suite,subplan,people,date,decor,spa,notes,horaEntrada,habitacion}));
 
         const totalText = calcTotal.textContent;
 
@@ -726,7 +725,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let loggedUser;
         try { const auth=await fetch('/api/auth/me'); loggedUser=(await auth.json()).user; }catch{alert('No se pudo verificar tu sesión.');return;}
         if(!loggedUser){
-            sessionStorage.setItem('dapa-reserva-borrador',JSON.stringify({name,suite,subplan,people,date,decor,spa,notes}));
+            saveDraft();
             window.location.href='/acceso.html?modo=registro&continuar='+encodeURIComponent('/#reservas');return;
         }
 
@@ -749,6 +748,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        if(loggedUser.rol!=='cliente'){alert('Para reservar utiliza una cuenta de cliente. Gestiona las solicitudes desde Administración.');return;}
         // Format date beautifully
         const dateObj = new Date(date + 'T00:00:00');
         const formattedDate = dateObj.toLocaleDateString('es-ES', {
@@ -796,16 +796,17 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response=await fetch('/api/bookings', {
                 method:'POST', headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({suite,subplan:subplan||null,numPersonas:Number(people),fechaReserva:date,decoracion:decor,spa,comentarios:notes})
+                body:JSON.stringify({suite,subplan:subplan||null,numPersonas:Number(people),fechaReserva:date,horaEntrada:document.getElementById('booking-hour').value,habitacion:document.getElementById('physical-room').value,decoracion:decor,spa,comentarios:notes})
             });
             const result=await response.json();
             if(!response.ok){
-                if(response.status===401){window.location.href='/acceso.html?modo=registro&continuar='+encodeURIComponent('/#reservas');return;}
+                if(response.status===401){saveDraft();window.location.href='/acceso.html?modo=registro&continuar='+encodeURIComponent('/#reservas');return;}
                 alert(result.message||'No se pudo guardar la solicitud.');return;
             }
             msg=msg.replace(`👤 *Cliente:* ${name}`,`👤 *Cliente:* ${loggedUser.nombre}`);
             msg=msg.replace(`💰 *VALOR ESTIMADO:* ${totalText}`,`💰 *VALOR ESTIMADO:* $${Number(result.data.precioTotal).toLocaleString('es-CO')} COP`);
             msg=msg.replace('SOLICITUD DE RESERVA - DAPA GLAMPING','SOLICITUD #'+result.data.id+' - DAPA GLAMPING');
+            msg+=`\n🏠 *Habitación:* ${result.data.habitacion}\n🕒 *Entrada:* ${new Date(result.data.inicio).toLocaleString('es-CO',{timeZone:'America/Bogota'})}\n🕒 *Salida:* ${new Date(result.data.fin).toLocaleString('es-CO',{timeZone:'America/Bogota'})}`;
             msg+=`\n\n✅ *Solicitud #${result.data.id} guardada en el sistema (pendiente de confirmación).*`;
             sessionStorage.removeItem('dapa-reserva-borrador');
         } catch(error) {alert('No se pudo conectar con el servidor. No se guardó la solicitud.');return;}
@@ -919,6 +920,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             const clientName = extractedName ? extractedName : "Interesado";
+            const escapedName=clientName.replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
             const whatsappNumber = '573172309090';
             const msg = `Hola! Me gustar\u00EDa recibir informaci\u00F3n. Mi nombre es *${clientName}* y mi celular es *${phone}*. \u00BFMe podr\u00EDan contactar porfa para cotizar habitaciones y planes? Gracias!`;
             const encodedMsg = encodeURIComponent(msg);
@@ -929,7 +931,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.open(whatsappUrl, '_blank');
             }, 1500);
 
-            return `Listo, ya anot\u00E9 tus datos (Nombre: ${clientName}, Tel\u00E9fono: ${phone}). Te estoy redirigiendo a nuestro WhatsApp de reservas. Si no abre autom\u00E1ticamente, haz clic aqu\u00ED porfa: <br>
+            return `Listo, ya anot\u00E9 tus datos (Nombre: ${escapedName}, Tel\u00E9fono: ${phone}). Te estoy redirigiendo a nuestro WhatsApp de reservas. Si no abre autom\u00E1ticamente, haz clic aqu\u00ED porfa: <br>
                     👉 <a href="${whatsappUrl}" target="_blank" rel="noopener" class="chat-inline-link">Abrir WhatsApp de Reservas</a>`;
         }
 

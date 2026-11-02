@@ -1,0 +1,116 @@
+{
+  "eugenias": {
+    "name": "Suite Eugenias",
+    "cover": "assets/habitaciones/eugenias/portada.webp",
+    "photos": [
+      {
+        "src": "assets/habitaciones/eugenias/foto-01.webp",
+        "alt": "Suite Eugenias · Dormitorio y camas"
+      },
+      {
+        "src": "assets/habitaciones/eugenias/foto-02.webp",
+        "alt": "Suite Eugenias · Piscina privada y terraza"
+      },
+      {
+        "src": "assets/habitaciones/eugenias/foto-03.webp",
+        "alt": "Suite Eugenias · Malla de descanso"
+      },
+      {
+        "src": "assets/habitaciones/eugenias/foto-04.webp",
+        "alt": "Suite Eugenias · Comedor junto a la piscina"
+      }
+    ]
+  },
+  "orquideas": {
+    "name": "Suite Orquídeas",
+    "cover": "assets/habitaciones/orquideas/portada.webp",
+    "photos": [
+      {
+        "src": "assets/habitaciones/orquideas/foto-01.webp",
+        "alt": "Suite Orquídeas · Fachada entre la naturaleza"
+      },
+      {
+        "src": "assets/habitaciones/orquideas/foto-02.webp",
+        "alt": "Suite Orquídeas · Dormitorio con vista al bosque"
+      },
+      {
+        "src": "assets/habitaciones/orquideas/foto-03.webp",
+        "alt": "Suite Orquídeas · Malla y terraza superior"
+      },
+      {
+        "src": "assets/habitaciones/orquideas/foto-04.webp",
+        "alt": "Suite Orquídeas · Escaleras y sala"
+      },
+      {
+        "src": "assets/habitaciones/orquideas/foto-05.webp",
+        "alt": "Suite Orquídeas · Sala panorámica"
+      }
+    ]
+  },
+  "aves": {
+    "name": "Suite Aves del Paraíso",
+    "cover": "assets/habitaciones/aves/portada.webp",
+    "photos": [
+      {
+        "src": "assets/habitaciones/aves/foto-01.webp",
+        "alt": "Suite Aves del Paraíso · Dormitorio y jacuzzi entre plantas"
+      },
+      {
+        "src": "assets/habitaciones/aves/foto-02.webp",
+        "alt": "Suite Aves del Paraíso · Cama y luz cálida"
+      },
+      {
+        "src": "assets/habitaciones/aves/foto-03.webp",
+        "alt": "Suite Aves del Paraíso · Jacuzzi privado"
+      },
+      {
+        "src": "assets/habitaciones/aves/foto-04.webp",
+        "alt": "Suite Aves del Paraíso · Ducha rodeada de vegetación"
+      },
+      {
+        "src": "assets/habitaciones/aves/foto-05.webp",
+        "alt": "Suite Aves del Paraíso · Terraza con vista al jardín"
+      }
+    ]
+  },
+  "margaritas": {
+    "name": "Suite Margaritas",
+    "cover": "assets/habitaciones/margaritas/portada.webp",
+    "photos": [
+      {
+        "src": "assets/habitaciones/margaritas/foto-01.webp",
+        "alt": "Suite Margaritas · Jacuzzi y dormitorio"
+      },
+      {
+        "src": "assets/habitaciones/margaritas/foto-02.webp",
+        "alt": "Suite Margaritas · Dormitorio"
+      },
+      {
+        "src": "assets/habitaciones/margaritas/foto-03.webp",
+        "alt": "Suite Margaritas · Baño y ducha"
+      },
+      {
+        "src": "assets/habitaciones/margaritas/foto-04.webp",
+        "alt": "Suite Margaritas · Vista exterior"
+      }
+    ]
+  },
+  "casita": {
+    "name": "Casita Mágica",
+    "cover": "assets/habitaciones/casita/portada.webp",
+    "photos": [
+      {
+        "src": "assets/habitaciones/casita/foto-01.webp",
+        "alt": "Casita Mágica · Jacuzzi y zona de descanso"
+      },
+      {
+        "src": "assets/habitaciones/casita/foto-02.webp",
+        "alt": "Casita Mágica · Sofá y terraza"
+      },
+      {
+        "src": "assets/habitaciones/casita/foto-03.webp",
+        "alt": "Casita Mágica · Ducha entre plantas"
+      }
+    ]
+  }
+}
