@@ -8,11 +8,11 @@ if(connectionString){
   remote=!['localhost','127.0.0.1','::1','[::1]'].includes(host);
  }catch{throw new Error('DATABASE_URL no tiene un formato válido.');}
 }
-// Para conexiones remotas, verificar por defecto el certificado TLS del servidor.
-// Instalar los certificados de la autoridad emisora cuando lo requiera el proveedor.
+// Para conexiones remotas (Render, etc.), aceptar el certificado TLS del servidor
+// aunque sea autofirmado — necesario en servicios que usan SSL interno.
 const pool=new Pool({
  connectionString,
- ssl:remote?{rejectUnauthorized:true}:false,
+ ssl:remote?{rejectUnauthorized:false}:false,
  max:10,
  idleTimeoutMillis:30000,
  connectionTimeoutMillis:5000

@@ -8,14 +8,19 @@
  if(qs.get('modo')==='registro' || qs.get('mode')==='register' || qs.get('registro')==='1') mode='register';
 
  function redraw(){
+  const registering=mode==='register';
   $('mode-login').classList.toggle('active',mode==='login');
   $('mode-register').classList.toggle('active',mode==='register');
   $('register-fields').hidden=mode!=='register';
   $('register-terms').hidden=mode!=='register';
-  form.elements.nombre.required=mode==='register';
+  for(const field of ['nombre','telefono','politicas']) form.elements[field].disabled=!registering;
+  form.elements.nombre.required=registering;
   form.elements.password.autocomplete=mode==='login'?'current-password':'new-password';
-  form.elements.password.minLength=mode==='register'?10:1;
-  if(form.elements.politicas) form.elements.politicas.required=mode==='register';
+  form.elements.password.minLength=registering?8:1;
+  form.elements.politicas.required=registering;
+  $('password-hint').hidden=!registering;
+  form.noValidate=registering;
+  form.querySelector('[aria-invalid]')?.removeAttribute('aria-invalid');
 
   if(mode==='register'){
    $('auth-title').textContent='Crear cuenta';
@@ -33,6 +38,7 @@
 
   $('auth-submit').textContent=mode==='login'?'Iniciar sesión':'Crear cuenta';
   status.textContent='';
+  form.after(status);
  }
 
  $('mode-login').onclick=()=>{mode='login';redraw();};
@@ -57,29 +63,71 @@
   return isLogin?'/':'/cuenta.html';
  };
 
+ function showFieldError(field,message){
+  const input=form.elements[field];
+  if(input){
+   const fieldContainer=field==='politicas'?$('register-terms'):input.closest('label');
+   fieldContainer.after(status);
+   input.setAttribute('aria-invalid','true');
+   status.textContent=message;
+   input.focus();
+  }else status.textContent=message;
+ }
+
+ // --- Validación en tiempo real: bloquear caracteres no permitidos ---
+ // Nombre: solo letras, espacios, acentos, apóstrofes, puntos y guiones (sin números)
+ const nombreInput=form.elements.nombre;
+ nombreInput.addEventListener('input',()=>{
+  nombreInput.value=nombreInput.value.replace(/[0-9]/g,'');
+ });
+ nombreInput.addEventListener('keydown',e=>{
+  if(e.key.length===1 && /[0-9]/.test(e.key)){e.preventDefault();}
+ });
+
+ // Teléfono: solo números, +, espacios, guiones y paréntesis (bloquea cualquier letra o símbolo no válido)
+ const telefonoInput=form.elements.telefono;
+ telefonoInput.addEventListener('input',()=>{
+  telefonoInput.value=telefonoInput.value.replace(/[^\d\s+\-()]/g,'');
+ });
+ telefonoInput.addEventListener('keydown',e=>{
+  if(e.key.length===1 && !/[\d\s+\-()]/.test(e.key)){e.preventDefault();}
+ });
+
+ form.addEventListener('input',e=>{
+  if(e.target.hasAttribute('aria-invalid')){
+   e.target.removeAttribute('aria-invalid');
+   status.textContent='';
+  }
+ });
+
  form.addEventListener('submit',async e=>{
   e.preventDefault();
   status.textContent='';
   const btn=$('auth-submit');
-  btn.disabled=true;
-  const data={correo:form.elements.correo.value.trim(),password:form.elements.password.value};
-  if(mode==='register'){
-   if(!form.elements.politicas?.checked){
-    status.textContent='Debes aceptar las políticas de privacidad para continuar.';
-    btn.disabled=false;
-    return;
-   }
-   data.nombre=form.elements.nombre.value.trim();
-   data.telefono=form.elements.telefono.value.trim();
+  if(btn.disabled)return;
+  form.after(status);
+  form.querySelector('[aria-invalid]')?.removeAttribute('aria-invalid');
+  const registering=mode==='register';
+  let data={correo:form.elements.correo.value.trim(),password:form.elements.password.value};
+  if(registering){
+   data=globalThis.validateRegistration({
+    ...data,
+    nombre:form.elements.nombre.value,
+    telefono:form.elements.telefono.value,
+    politicas:form.elements.politicas.checked
+   });
+   if(data.field)return showFieldError(data.field,data.message);
    data.politicas=true;
   }
+  btn.disabled=true;
   try{
-   const res=await fetch(mode==='register'?'/api/auth/register':'/api/auth/login',{
+   const res=await fetch(registering?'/api/auth/register':'/api/auth/login',{
     method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)
    });
    const payload=await res.json();
+   if(!res.ok&&registering&&mode==='register'&&payload.field)return showFieldError(payload.field,payload.message);
    if(!res.ok) throw new Error(payload.message||'No se pudo completar la operación.');
-   location.assign(destination(payload.user,mode==='login'));
+   location.assign(destination(payload.user,!registering));
   }catch(err){
    status.textContent=err.message;
   }finally{

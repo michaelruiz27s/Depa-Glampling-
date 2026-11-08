@@ -72,7 +72,7 @@
  async function loadRates(){
   const rates=(await api('/api/admin/tarifas')).data;
   const rows=rates.map(r=>{
-   const input=node('input');input.type='number';input.min='0';input.max='1000000000';input.step='1';input.value=Number(r.valor);input.setAttribute('aria-label','Nuevo precio '+r.descripcion);
+   const input=node('input');input.type='number';input.min='0';input.max='1000000000';input.step='1';input.value=Number(r.valor);input.setAttribute('aria-label','Nuevo precio '+r.descripcion);input.addEventListener('keydown',e=>{if(['e','E','+','-','.'].includes(e.key))e.preventDefault();});input.addEventListener('input',()=>{input.value=input.value.replace(/\D/g,'');});
    const save=btn('Guardar',async()=>{
     const value=Number(input.value);
     if(!Number.isSafeInteger(value)||value<0||value>1e9){status('Introduce un precio entero válido en COP.');return;}
@@ -126,11 +126,21 @@
  }
  $('generate-report').onclick=loadReport;
  $('print-report').onclick=()=>{if(!report)return status('Genera primero el informe.');window.print();};
- $('export-report').onclick=()=>{
+ $('export-report').onclick=async()=>{
   if(!report)return status('Genera primero el informe.');
-  const lines=[['Informe semanal Dapa Glamping'],['Inicio',report.inicio],['Fin (exclusivo)',report.finExclusivo],['Total reservas',report.resumen.reservas],['Importe',report.resumen.ingresos],[],['Habitación','Reservas','Importe'],...report.habitaciones.map(r=>[r.suite,r.reservas,r.ingresos]),[],['Día ISO','Reservas'],...report.dias.map(r=>[r.dia,r.reservas]),[],['Spa','Reservas'],...report.serviciosSpa.map(r=>[r.spa,r.reservas])];
-  const csv='\ufeff'+lines.map(row=>row.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(';')).join('\r\n');
-  const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=node('a');a.href=url;a.download='dapa-reporte-'+report.inicio+'.csv';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);
+  const start=report.inicio,button=$('export-report');
+  button.disabled=true;
+  try{
+   const response=await fetch('/api/admin/reportes/semana?'+new URLSearchParams({inicio:start,formato:'xlsx'}));
+   if(!response.ok){
+    const error=await response.json().catch(()=>null);
+    throw new Error(error?.message||'No se pudo descargar el informe en Excel.');
+   }
+   const url=URL.createObjectURL(await response.blob());
+   const link=node('a');link.href=url;link.download='dapa-reporte-'+start+'.xlsx';
+   document.body.append(link);link.click();link.remove();
+   setTimeout(()=>URL.revokeObjectURL(url),1200);
+  }catch(e){status(e.message);}finally{button.disabled=false;}
  };
  const sectionNames={inicio:'Inicio',calendario:'Calendario',reservas:'Reservas',tarifas:'Tarifas',clientes:'Clientes',reportes:'Informes'};
  function openSection(key){document.querySelectorAll('[data-tab]').forEach(button=>{const active=button.dataset.tab===key;button.classList.toggle('active',active);if(active)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');});document.querySelectorAll('.portal-section').forEach(section=>section.hidden=section.id!=='tab-'+key);$('section-title').textContent=sectionNames[key];$('section-title').focus({preventScroll:true});status('');}

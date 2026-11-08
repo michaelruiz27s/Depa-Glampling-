@@ -28,7 +28,8 @@
             <input autocomplete="name" name="nombre" minlength="3" maxlength="150" placeholder="Ej. Juan Pérez">
           </label>
           <label>Teléfono WhatsApp
-            <input autocomplete="tel" name="telefono" maxlength="35" placeholder="Ej. +57 300 1234567">
+            <input type="tel" autocomplete="tel" name="telefono" maxlength="35" placeholder="Ej. +505 8888 1234" aria-describedby="phone-hint">
+            <span id="phone-hint" class="portal-muted">Opcional. Puedes usar el código de tu país, como +57, +505 o +1.</span>
           </label>
         </div>
 
@@ -37,7 +38,8 @@
         </label>
 
         <label>Contraseña
-          <input type="password" autocomplete="current-password" name="password" id="input-password" required minlength="1" maxlength="128" placeholder="Escribe tu contraseña">
+          <input type="password" autocomplete="current-password" name="password" id="input-password" required minlength="1" maxlength="128" placeholder="Escribe tu contraseña" aria-describedby="password-hint">
+          <span id="password-hint" class="portal-muted" hidden>Usa al menos 8 caracteres.</span>
         </label>
 
         <div id="register-terms" hidden class="portal-checkbox-row">
@@ -72,6 +74,7 @@
     </div>
   </div>
 
+  <script src="registration-validation.js"></script>
   <script src="acceso.js"></script>
 </body>
 </html>

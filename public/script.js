@@ -434,7 +434,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Clear errors on user input
-    if (clientNameInput) clientNameInput.addEventListener('input', () => clearError(clientNameInput, clientNameError));
+    // Clear errors on user input & validacion de nombre (bloquear numeros en tiempo real)
+    if (clientNameInput) {
+        clientNameInput.addEventListener('keydown', (e) => {
+            if (e.key.length === 1 && /[0-9]/.test(e.key)) {
+                e.preventDefault();
+            }
+        });
+        clientNameInput.addEventListener('input', () => {
+            clientNameInput.value = clientNameInput.value.replace(/[0-9]/g, '');
+            clearError(clientNameInput, clientNameError);
+        });
+    }
     if (suiteSelect) suiteSelect.addEventListener('change', () => clearError(suiteSelect, suiteSelectError));
     if (peopleCountSelect) peopleCountSelect.addEventListener('change', () => clearError(peopleCountSelect, peopleCountError));
     if (bookingDateInput) bookingDateInput.addEventListener('change', () => clearError(bookingDateInput, bookingDateError));
@@ -709,6 +720,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!name) {
             showError(clientNameInput, clientNameError, 'Por favor, ingresa tu nombre completo.');
+            hasError = true;
+        } else if (/\d/.test(name) || name.length < 3) {
+            showError(clientNameInput, clientNameError, 'Por favor, ingresa un nombre valido (minimo 3 letras, sin numeros).');
             hasError = true;
         }
         if (!suite) {

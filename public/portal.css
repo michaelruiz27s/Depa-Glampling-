@@ -32,6 +32,7 @@
 .portal-form{display:grid;gap:15px}
 .portal-form label{display:grid;gap:6px;font-weight:600}
 .portal-form input{width:100%;box-sizing:border-box}
+.portal-form input[aria-invalid="true"]{outline:2px solid #a12a24;outline-offset:2px}
 .portal-auth{max-width:475px;margin:50px auto;padding:0 18px}
 .portal-auth .portal-card{padding:30px}
 .portal-auth select{width:100%}

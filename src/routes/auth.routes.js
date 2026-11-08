@@ -1,6 +1,7 @@
 const router=require('express').Router();
 const crypto=require('crypto');
 const db=require('../config/db');
+const validateRegistration=require('../../public/registration-validation');
 const {hashPassword,verifyPassword,tokenHash,setSessionCookie,clearSessionCookie,SESSION_DAYS}=require('../middleware/auth');
 const email=value=>String(value||'').trim().toLowerCase();
 const throttle=(req,res,next)=>{
@@ -20,29 +21,28 @@ const throttle=(req,res,next)=>{
 
 router.post('/register',throttle,async(req,res,next)=>{
  try{
-  const body=req.body||{};
-  const nombre=String(body.nombre||'').trim();
-  const correo=email(body.correo);
-  const telefono=String(body.telefono||'').trim();
-  const password=body.password;
-  const politicasAceptadas=body.politicas===true;
-  if(!politicasAceptadas)
-   return res.status(400).json({message:'Debes aceptar las políticas de privacidad y tratamiento de datos para crear tu cuenta.'});
-  if(nombre.length<3||nombre.length>150||!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo))||correo.length>254||telefono.length>35||typeof password!=='string'||password.length<10||password.length>128)
-   return res.status(400).json({message:'Revisa nombre, correo y contraseña (mínimo 10 caracteres).'});
-  const {rows}=await db.query(
-   'INSERT INTO usuarios (nombre,correo,telefono,password_hash,rol,politicas_aceptadas_en,politicas_version) VALUES ($1,$2,$3,$4,$5,NOW(),$6) RETURNING id,nombre,correo,telefono,rol',
-   [nombre,correo,telefono,hashPassword(password),'cliente','2026-10-v1']
-  );
+  const registration=validateRegistration(req.body||{});
+  if(registration.field)return res.status(400).json(registration);
+  const {nombre,correo,telefono,password}=registration;
   const token=crypto.randomBytes(32).toString('hex');
-  await db.query(
-   "INSERT INTO sesiones(token_hash,usuario_id,expira_en) VALUES($1,$2,NOW()+($3*INTERVAL '1 day'))",
-   [tokenHash(token),rows[0].id,SESSION_DAYS]
+  const {rows}=await db.query(
+   `WITH nuevo_usuario AS (
+     INSERT INTO usuarios (nombre,correo,telefono,password_hash,rol,politicas_aceptadas_en,politicas_version)
+     VALUES ($1,$2,$3,$4,$5,NOW(),$6)
+     RETURNING id,nombre,correo,telefono,rol
+   ), nueva_sesion AS (
+     INSERT INTO sesiones (token_hash,usuario_id,expira_en)
+     SELECT $7,id,NOW()+($8*INTERVAL '1 day') FROM nuevo_usuario
+     RETURNING usuario_id
+   )
+   SELECT u.* FROM nuevo_usuario u JOIN nueva_sesion s ON s.usuario_id=u.id`,
+   [nombre,correo,telefono,hashPassword(password),'cliente','2026-10-v1',tokenHash(token),SESSION_DAYS]
   );
   setSessionCookie(res,req,token);
   res.status(201).json({user:rows[0]});
  }catch(err){
-  if(err.code==='23505')return res.status(409).json({message:'Ya existe una cuenta con ese correo.'});
+  if(err.code==='23505'&&err.constraint==='usuarios_correo_key')
+   return res.status(409).json({field:'correo',message:'Ya existe una cuenta con ese correo. Puedes iniciar sesión.'});
   next(err);
  }
 });

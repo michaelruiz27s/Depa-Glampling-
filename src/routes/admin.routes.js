@@ -2,6 +2,7 @@ const express=require('express');const db=require('../config/db');
 const {requireAuth,requireAdmin}=require('../middleware/auth');
 const {dateValid,dayReservations}=require('../domain/availability');
 const {DEFAULT_MAP,DEFAULT_TARIFFS}=require('../domain/pricing');
+const reportWorkbook=require('../domain/report-workbook');
 const tariffLabels=Object.fromEntries(DEFAULT_TARIFFS.map(t=>[t.key,t.label]));
 const {pagination,metadata,validId,search,STATES,bad}=require('../domain/listing');
 const router=express.Router();router.use(requireAuth,requireAdmin);
@@ -89,7 +90,9 @@ router.get('/reportes/semana',async(req,res,next)=>{
    db.query(`SELECT EXTRACT(ISODOW FROM "fechaReserva")::int AS dia,COUNT(*)::int AS reservas FROM reservas WHERE ${where} GROUP BY dia ORDER BY dia`,values),
    db.query(`SELECT spa,COUNT(*)::int AS reservas FROM reservas WHERE ${where} GROUP BY spa ORDER BY reservas DESC`,values)
   ]);
-  res.json({inicio:start,finExclusivo:new Date(Date.parse(start)+7*86400000).toISOString().slice(0,10),resumen:summary.rows[0],habitaciones:suites.rows,dias:days.rows,serviciosSpa:services.rows});
+  const report={inicio:start,finExclusivo:new Date(Date.parse(start)+7*86400000).toISOString().slice(0,10),resumen:summary.rows[0],habitaciones:suites.rows,dias:days.rows,serviciosSpa:services.rows};
+  if(req.query.formato==='xlsx')return res.attachment('dapa-reporte-'+start+'.xlsx').send(reportWorkbook(report));
+  res.json(report);
  }catch(e){next(e);}
 });
 module.exports=router;
